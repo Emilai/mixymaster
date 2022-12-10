@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "mixymasterlatam"
+  },
+  "targets": {
+    "mixymasterlatam": {
+      "hosting": {
+        "MixyMaster": [
+          "mixymasterlatam"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<div class="aboutDiv">
+  <div class="container">
+<h2 class="title">Quienes Somos?</h2>
+
+  <p class="parag">Somos un colectivo de técnicos latinoamericanos de gran trayectoria apasionados por el audio y sobre
+    todo por la música.
+    <br>
+    Juntos totalizamos mas de 10.000 producciones, y prestigiosos galardones como Grammys, Latin Grammys, Graffitis, Gardel, y otros.<br>
+    Vivimos y respiramos música. Hablamos tu idioma.<br>
+    Somos accesibles, queremos conocerte, disfrutar tu música y ayudar a los demás a hacerlo.</p>
+
+  </div>
+  
+
+  <div class="container">
+
+    <div class="row" *ngIf="cards">
+
+      <div class="col-md-3 col-sm-12 cardDiv" *ngFor="let card of cards">
+        <a class="alink">
+          <mat-card class="card" (click)="openModal(card)">
+            <mat-card-header class="polariod">
+                        <img mat-card-image src={{card.img}} alt="" class="imgCard">
+            </mat-card-header>
+
+          <mat-card-header class="cardHeader">
+            <mat-card-title>{{card.nombre}}</mat-card-title>
+            <mat-card-subtitle>{{card.pais}} (bandera)</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+<!-- chips con artistas? -->
+          </mat-card-content>
+        </mat-card>
+        </a>
+        
+      </div>
+    </div>
+
+      <p class="parag">Trabajamos con muchos artistas de primera linea, estamos seguros que bailaste, te enamoraste, soñaste o hasta lloraste con alguna de las músicas que hemos producido, pero queremos creer que somos mucho mas que un crédito en un disco.
+    <br>
+    Preferimos contarte quienes somos para que nos conozcas. Disfrutamos y tenemos acceso a tecnología increíble. Nos encantan los fierros, los plugins, y todo lo que sirva a aumentar nuestra paleta sonora. Pero sin dudarlo somos mucho mas que meros usuarios de tecnología.<br>
+  </p>
+
+  </div>
+    <!-- <img src="../../../assets/img/map.png" alt="latam map" class="map"> -->
+
+
+  <!-- <div class="rectangle-1"></div>
+  <div class="rectangle-2"></div>
+  <div class="rectangle-transparent-1"></div>
+  <div class="rectangle-transparent-2"></div> -->
+
+  </div>

@@ -1,0 +1,106 @@
+<div class="loginDiv">
+
+  <mat-card class="card">
+    <div>
+
+      <button mat-button mat-dialog-close class="closeBtn">x</button>
+      <mat-tab-group class="matTab" *ngIf="!forgot">
+        <mat-tab label="Ingresar">
+
+          <mat-card-title class="title">Login</mat-card-title>
+          <mat-card-content>
+            <form [formGroup]="formLog" (ngSubmit)="login()">
+              <p>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="email" formControlName="email" required>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                </mat-form-field>
+              </p>
+
+              <a (click)="forgotChange()">Recuperar Contraseña</a>
+
+              <div class="button">
+                <button type="submit" mat-button>Ingresar</button>
+              </div>
+
+            </form>
+          </mat-card-content>
+        </mat-tab>
+
+
+        <mat-tab label="Registrarse">
+          <mat-card-title class="title">Registro</mat-card-title>
+          <mat-card-content>
+
+
+            <form [formGroup]="formReg" (ngSubmit)="register()">
+
+              <p>
+                <mat-form-field class="">
+                  <mat-label>Nombre</mat-label>
+                  <input type="text" matInput placeholder="Ingrese su Nombre" formControlName="nombre" required>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Apellido</mat-label>
+                  <input type="text" matInput placeholder="Ingrese su Apellido" formControlName="apellido" required>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="email" formControlName="email" required>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                </mat-form-field>
+              </p>
+
+              <div class="button">
+                <button type="submit" mat-button>Registrar Cuenta</button>
+              </div>
+
+            </form>
+          </mat-card-content>
+
+        </mat-tab>
+
+
+      </mat-tab-group>
+    </div>
+
+
+
+    <mat-card-title class="title2" *ngIf="forgot">Recuperar Contraseña</mat-card-title>
+    <mat-card-content>
+
+
+      <form *ngIf="forgot">
+
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="email" [(ngModel)]="recEmail" required>
+          </mat-form-field>
+        </p>
+
+        <a (click)="forgotChange()" class="title">Volver al Login</a>
+        <div class="button">
+          <button (click)="resetPass()" mat-button>Recuperar Contraseña</button>
+        </div>
+      </form>
+    </mat-card-content>
+
+
+  </mat-card>
+
+</div>

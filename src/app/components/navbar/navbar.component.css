@@ -1,0 +1,93 @@
+a {
+  text-decoration: none;
+}
+
+li {
+  text-decoration: none;
+  display: inline;
+}
+
+.navBarLogo {
+  position: relative;
+  width: 150px;
+  height: auto;
+  padding-left: 30px;
+  float: left;
+}
+
+.navBtn {
+  color: #fff;
+  padding: 8px;
+}
+
+.navBtn2 {
+  color: rgb(168, 167, 167);
+  padding: 8px;
+  margin-left: 30px;
+  text-decoration: none;
+}
+
+.navBtn:hover {
+  color: #c2b9b9;
+}
+
+.navBtn2:hover {
+  color: #fff;
+}
+
+.links {
+  text-align: right;
+  padding-right: 50px;
+  padding-top: 25px;
+}
+
+.navBar {
+  background-color: rgba(0,0,0,0.5);
+  height: 75px;
+  position: relative;
+  display: block;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); }
+
+  mat-toolbar {
+    background: #002b5c;
+    color: white;
+}
+
+mat-sidenav {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    padding: 0;
+    text-align: center;
+}
+
+.content {
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 65px);
+}
+
+mat-icon {
+  margin-right: 5px;
+}
+
+.divider{
+  height: 40px;
+}
+
+.logo {
+  width: 100% !important;
+  padding: 10px;
+  margin: 0 !important;
+  margin-bottom: 40px !important;
+  margin-top: 20px !important;
+}

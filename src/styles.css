@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+h1, h2, h3, h4, h5, p, a {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-dialog-container {
+    width: 70rem !important; 
+    padding: 5px !important;
+}
+
+.cdk-overlay-pane {
+  max-width: 95% !important;
+}
+
+.mat-vertical-stepper-header {
+    height: 5px !important;
+    padding: 15px 24px !important;
+}
+
+.mat-vertical-content {
+    padding: 0 24px !important;
+}
+
+.mat-card-header-text {
+  margin: 0 !important;
+}

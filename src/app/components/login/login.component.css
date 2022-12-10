@@ -1,0 +1,53 @@
+.closeBtn {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  border: 0;
+  background-color: none;
+  border-radius: 25%;
+}
+
+.matTab {
+  margin-top: 25px;
+}
+
+.loginDiv {
+  height: fit-content;
+  width: 95%;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+.title2 {
+      margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card {
+    width: 100%;
+}

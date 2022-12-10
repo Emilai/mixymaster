@@ -1,0 +1,71 @@
+.cardContainer {
+  margin-top: 50px;
+}
+
+.cardTitle {
+  margin-bottom: 30px;
+}
+
+.cardParag {
+  font-weight: lighter;
+}
+
+.col-4 {
+  margin-top: 20px;
+  max-width: 400px;
+}
+
+.cardContainer2 {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.material-icons {
+  font-size: 40px;
+}
+
+.cardHeader {
+  text-align: center;
+  display: block;
+}
+
+.cardDiv {
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.card1 {
+  background-color: #E6B325;
+    height: 100%;
+}
+
+.card2 {
+  background-color: #FFF9CA;
+  height: 100%;
+}
+
+.card3 {
+  background-color: #A5C9CA;
+  height: 100%;
+}
+
+.card {
+  background-color: #FCF8E8;
+  height: 100%;
+}
+
+.cardBtn{
+  /* margin: 20px !important;
+  position: absolute;
+  bottom: 0;
+  right: 50%; */
+}
+
+mat-card-content {
+  text-align: center;
+}
+
+p {
+  text-align: justify;
+}

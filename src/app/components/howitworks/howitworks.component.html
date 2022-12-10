@@ -1,0 +1,71 @@
+<div class="container how">
+<h2 class="title">Como funciona?</h2>
+
+<mat-vertical-stepper [linear]="isLinear" #stepper class="steper">
+
+  <mat-step>
+    <ng-template matStepLabel>Registro</ng-template>
+    <p class="parag">Completa tu registro para crear tu cuenta en MixyMaster</p>
+    <!-- <div>
+      <button mat-button matStepperNext>Next</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Servicio</ng-template>
+    <p class="parag">Seleccionas el servicio para tu produccion.</p>
+    <!-- <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Material</ng-template>
+    <p class="parag">Llenas el formulario, preparas el material y lo subis al servidor de mixymaster.</p>
+    <!-- <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Propuesta</ng-template>
+    <p class="parag">Segun el servicio seleccionado recibiras una propuesta para tu produccion.</p>
+    <!-- <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Correciones</ng-template>
+    <p class="parag">Nos das tu feedback y realizamos las correcciones pertinentes.</p>
+    <!-- <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Archivo</ng-template>
+    <p class="parag">Tu produccion siempre quedara archivada en caso de que precises copias o versiones en el futuro.</p>
+    <!-- <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+    </div> -->
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Listo</ng-template>
+    <p class="parag">Enviamos tu material en alta calidad para que tengas tu música mezclada y masterizada por los técnicos mas
+      experientes de Latinoamerica.</p>
+    <!-- <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div> -->
+  </mat-step>
+</mat-vertical-stepper>
+
+</div>
+

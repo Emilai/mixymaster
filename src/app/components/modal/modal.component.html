@@ -1,0 +1,49 @@
+<div class="modalDiv">
+
+  <mat-card class="card">
+    <button mat-button mat-dialog-close class="closeBtn">x</button>
+    <div class="imgDiv">
+      <img class="img" src="{{card.img}}" alt="">
+    </div>
+
+
+    <mat-card-title>{{card.nombre}}</mat-card-title>
+    <mat-card-subtitle>{{card.sub}}</mat-card-subtitle>
+    <mat-card-content class="content">
+      <mat-tab-group mat-align-tabs="start">
+
+        <mat-tab label="Bio" class="matTab">
+          <div class="div1">
+            <h5>Biografía</h5>
+            <p>{{card.bio}}</p>
+            <hr>
+            <h5>Créditos</h5>
+            <p>{{card.creditos.toUpperCase()}}</p>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Producciones" class="matTab">
+          <div *ngFor="let vid of card.vids" class="videoContainer">
+            <iframe width="100%" [src]="vid | safe: 'resourceUrl'" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+              class="videos"></iframe>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Galería" class="matTab">
+          <div *ngFor="let img of card.imagenes" class="carouselContainer">
+            <img src="{{img}}" alt="" class="imgs" >
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+
+    <!-- <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions> -->
+
+  </mat-card>
+</div>

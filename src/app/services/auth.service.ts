@@ -1,0 +1,77 @@
+import { Injectable } from '@angular/core';
+import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  userAuthData: any;
+  userInfo: any;
+  userInfox: any;
+
+  // private user: Observable<firebase.User | null>;
+
+  constructor( public auth: Auth,
+    private firestore: AngularFirestore) {
+
+
+     }
+
+  async register({ email, password }: any) {
+    try {
+      const user = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.userAuthData = user;
+      return user;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async login({ email, password }: any) {
+    try {
+      const user = await signInWithEmailAndPassword(this.auth, email, password);
+      this.userAuthData = user;
+      return user;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
+  createUser(data: any, path: string, id: string) {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const collection = this.firestore.collection(path);
+    return collection.doc(id).set(data);
+  }
+
+  logout() {
+    return signOut(this.auth);
+  }
+
+  async forgotPass(email: string) {
+
+    try {
+      return sendPasswordResetEmail(this.auth, email).then(() => {
+        console.log('Password Reset send');
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async userData() {
+    try {
+      const userInf= await this.firestore.collection('usuarios').doc(this.auth.currentUser?.uid).get();
+      this.userInfo = userInf.subscribe((userdata => {
+        this.userInfox = userdata.data()
+      }));
+      return userInf;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

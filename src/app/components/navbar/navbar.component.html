@@ -1,0 +1,68 @@
+<!-- <div class="navBar" *ngIf="pc">
+  <img class="navBarLogo" src="../../../assets/img/logowhite.png" alt="mixymaster logo">
+  <ul class="links">
+    <li><a class="navBtn" href="">Inicio</a></li>
+    <li><a class="navBtn" href="">Sobre Nosotros</a></li>
+    <li><a class="navBtn" href="">Contacto</a></li>
+    <li *ngIf="!userInfo"><a class="navBtn2" (click)="loginModal()">Ingresar/Registrarse</a></li>
+    <li *ngIf="userInfo"><a class="navBtn2" (click)="logout()">Salir</a></li>
+
+  </ul>
+  </div> -->
+
+<mat-toolbar>
+  <button mat-icon-button color="white" extended aria-label="menu" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+    Menú
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+  <mat-sidenav class=" sideNav mat-elevation-z8">
+
+    <img mat-card-image src="../../../assets/img/logowhite.png" alt="MixyMaster Logo" class="logo">
+
+    <div>
+      <button mat-button class="menu-button" (click)="main()">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </button>
+
+      <button mat-button class="menu-button" (click)="logged()" *ngIf="authService.userInfox">
+        <mat-icon>person</mat-icon>
+        <span>Panel de Usuario</span>
+      </button>
+
+      <button mat-button class="menu-button" (click)="cloud()" *ngIf="authService.userInfox">
+        <mat-icon>cloud_download</mat-icon>
+        <span>Carpeta Personal</span>
+      </button>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <button mat-button class="menu-button">
+        <mat-icon>info</mat-icon>
+        <span>Contacto</span>
+      </button>
+
+      <button *ngIf="!authService.userInfox" mat-button class="menu-button" (click)="loginModal()">
+        <mat-icon>help</mat-icon>
+        <span>Ingresar/Registro</span>
+      </button>
+
+      <button *ngIf="authService.userInfox" mat-button class="menu-button" (click)="logout()">
+        <mat-icon>home</mat-icon>
+        <span>Salir</span>
+      </button>
+
+    </div>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

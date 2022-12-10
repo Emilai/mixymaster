@@ -1,0 +1,22 @@
+h3 {
+    font-size: 20px;
+}
+
+.email {
+    font-size: 16px;
+}
+
+.userCard{
+    margin-bottom: 30px;
+}
+
+.prodTitle{
+    margin-left: 16px;
+}
+.prodSubtitle {
+    font-weight: bold;
+}
+
+.prods{
+    margin-top: 5px;
+}
