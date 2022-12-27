@@ -9,3 +9,19 @@
 .parag {
     font-size: 15px;
 }
+
+.img {
+      object-fit: cover;
+  height: 150px;
+  width: 150px;
+  margin: 0;
+}
+
+.matDiv {
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.matDiv:hover {
+    transform: scale(1.1);
+}

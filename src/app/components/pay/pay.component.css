@@ -1,0 +1,71 @@
+
+.paypalBtnContainer {
+  max-width: 450px;
+  display: inline-block;
+}
+
+.payDinamic {
+  display: none;
+}
+
+.payDinamic2 {
+  display: inline-block;
+}
+
+.formulario {
+    margin-top: 50px;
+}
+
+.slideBtn {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    align-items: center;
+}
+
+.paypalcontent {
+  display: flex;
+  justify-content: center;
+}
+
+.radioGroup {
+ text-align: center;
+}
+
+.cotiBtn{
+width: 150px;
+border-radius: 15px;
+height: auto;
+margin: 30px;
+}
+
+.mat-slider {
+    display: block;
+    max-width: 350px;
+    margin: auto;
+}
+
+.gralContainer {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
+
+.cotiCard {
+    text-align: center;
+    margin: 30px;
+    margin-top: 30px;
+}
+
+mat-card-header{
+    flex-direction: column;
+}
+
+.duracionDiv{
+    margin-bottom: 40px;
+}
+
+.garantia{
+  color: #908f8f;
+}
+

@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { CardsService } from 'src/app/services/cards.service';
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Virtual } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
 
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Virtual]);
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
+
 export class ModalComponent implements OnInit {
 
   card: any;
@@ -17,7 +21,8 @@ export class ModalComponent implements OnInit {
   controls = true;
 
   constructor( private cardService: CardsService,
-    private safePipe: SafePipe, private domSanitizer: DomSanitizer) { }
+    private safePipe: SafePipe, private domSanitizer: DomSanitizer,
+    public swiper: SwiperModule) { }
 
   ngOnInit(): void {
     this.card = this.cardService.cardInfo;
@@ -63,4 +68,11 @@ export class ModalComponent implements OnInit {
       this.selectedVideoIndex++;
     }
   }
+
+  // slideNext() {
+  //   this.swiper.swiperRef.slideNext(100);
+  // }
+  // slidePrev() {
+  //   this.swiper.swiperRef.slidePrev(100);
+  // }
 }

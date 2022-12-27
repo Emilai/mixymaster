@@ -6,7 +6,6 @@
       <img class="img" src="{{card.img}}" alt="">
     </div>
 
-
     <mat-card-title>{{card.nombre}}</mat-card-title>
     <mat-card-subtitle>{{card.sub}}</mat-card-subtitle>
     <mat-card-content class="content">
@@ -33,9 +32,24 @@
         </mat-tab>
 
         <mat-tab label="Galería" class="matTab">
+
+
           <div *ngFor="let img of card.imagenes" class="carouselContainer">
-            <img src="{{img}}" alt="" class="imgs" >
+            <img src="{{img}}" alt="" class="imgs">
           </div>
+
+          <!-- <swiper [slidesPerView]="1" [autoplay]="true" [keyboard]="true" [pagination]="true" [zoom]="false">
+
+            <ng-template swiperSlide *ngFor="let img of card.imagenes">
+              <img src="{{img}}" alt="" class="imgs">
+            </ng-template>
+
+
+            <button (click)="slideNext()">Next slide</button>
+    <button (click)="slidePrev()">Prev slide</button>
+
+          </swiper> -->
+
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>

@@ -18,6 +18,7 @@ import {
 } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
+import { LoginerrorComponent } from '../loginerror/loginerror.component';
 
 @Component({
   selector: 'app-login',
@@ -84,7 +85,7 @@ export class LoginComponent implements OnInit {
       });
       this.dialog.closeAll();
     } else {
-      console.log('Error');
+      this.errorLogin();
     }
   }
 
@@ -136,4 +137,7 @@ export class LoginComponent implements OnInit {
     alert('Se ha enviado un mail al correo ingresado');
   }
   
+  errorLogin(): void {
+    this.dialog.open(LoginerrorComponent);
+  }
 }

@@ -35,6 +35,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
+import { SwiperModule } from 'swiper/angular';
+import { PayComponent } from './components/pay/pay.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { SuccesspayComponent } from './components/successpay/successpay.component';
+import { WrongpayComponent } from './components/wrongpay/wrongpay.component';
+import { LoginerrorComponent } from './components/loginerror/loginerror.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FaqComponent } from './components/faq/faq.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -49,7 +62,12 @@ import { MatButtonModule } from '@angular/material/button';
     ModalComponent,
     ContactComponent,
     LoginComponent,
+    SuccesspayComponent,
+    WrongpayComponent,
     LoggedComponent,
+    FaqComponent,
+    LoginerrorComponent,
+    PayComponent,
     MainComponent,
     SafePipe
   ],
@@ -64,10 +82,18 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    SwiperModule,
     MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSliderModule,
     MatTabsModule,
     MatDialogModule,
+    MatExpansionModule,
+    MatTooltipModule,
     LayoutModule,
+    MatSlideToggleModule,
     MatSidenavModule,
     MatToolbarModule,
     MatDividerModule,

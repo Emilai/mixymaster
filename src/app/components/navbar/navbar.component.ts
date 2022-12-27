@@ -78,4 +78,16 @@ export class NavbarComponent implements OnInit {
   cloud() {
     window.open(this.authService.userInfox.drop);
   }
+
+  pay() {
+    this.router.navigateByUrl('pay', {
+      replaceUrl: true
+    });
+  }
+
+  faq() {
+    this.router.navigateByUrl('faq', {
+      replaceUrl: true
+    });
+  }
 }

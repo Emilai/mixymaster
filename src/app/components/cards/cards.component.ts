@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -13,7 +14,8 @@ export class CardsComponent implements OnInit {
 
   userInfo: any;
 
-  constructor(public authService: AuthService, private dialog: MatDialog) { }
+  constructor(public authService: AuthService, private dialog: MatDialog,
+    private router: Router) { }
 
   async ngOnInit() {
     (await this.authService.userData())?.subscribe((async userData => {
@@ -26,7 +28,7 @@ export class CardsComponent implements OnInit {
   service() {
 
     if (this.userInfo) {
-      alert("Aqui se inicia el flujo de pago")
+      this.router.navigateByUrl('/pay');
     } else {
       this.loginModal();
     }

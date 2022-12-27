@@ -1,71 +1,57 @@
 <div class="container how">
-<h2 class="title">Como funciona?</h2>
+  <h2 class="title">Como funciona?</h2>
 
-<mat-vertical-stepper [linear]="isLinear" #stepper class="steper">
+  <div class="row">
 
-  <mat-step>
-    <ng-template matStepLabel>Registro</ng-template>
-    <p class="parag">Completa tu registro para crear tu cuenta en MixyMaster</p>
-    <!-- <div>
-      <button mat-button matStepperNext>Next</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Registrate en nuestra plataforma!">
+        <img src="../../../assets/img/1.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Servicio</ng-template>
-    <p class="parag">Seleccionas el servicio para tu produccion.</p>
-    <!-- <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button matStepperNext>Siguiente</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Selecciona el servicio que te interesa!">
+        <img src="../../../assets/img/2.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Material</ng-template>
-    <p class="parag">Llenas el formulario, preparas el material y lo subis al servidor de mixymaster.</p>
-    <!-- <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button matStepperNext>Siguiente</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Completa el formulario, para poder cotizar el costo de tu producción!">
+        <img src="../../../assets/img/3.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Propuesta</ng-template>
-    <p class="parag">Segun el servicio seleccionado recibiras una propuesta para tu produccion.</p>
-    <!-- <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button matStepperNext>Siguiente</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Completa el proceso de pago!">
+        <img src="../../../assets/img/4.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Correciones</ng-template>
-    <p class="parag">Nos das tu feedback y realizamos las correcciones pertinentes.</p>
-    <!-- <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button matStepperNext>Siguiente</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Luego de enviarnos los archivos, comenzaremos con nuestro trabajo!">
+        <img src="../../../assets/img/5.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Archivo</ng-template>
-    <p class="parag">Tu produccion siempre quedara archivada en caso de que precises copias o versiones en el futuro.</p>
-    <!-- <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button matStepperNext>Siguiente</button>
-    </div> -->
-  </mat-step>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Podrás hacer las correcciones necesarias hasta obtener el resultado esperado!">
+        <img src="../../../assets/img/6.png" alt="" class="img">
+      </mat-card>
+    </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Listo</ng-template>
-    <p class="parag">Enviamos tu material en alta calidad para que tengas tu música mezclada y masterizada por los técnicos mas
-      experientes de Latinoamerica.</p>
-    <!-- <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div> -->
-  </mat-step>
-</mat-vertical-stepper>
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="Una vez finalizado, te enviamos el archivo final en su máxima calidad.">
+        <img src="../../../assets/img/7.png" alt="" class="img">
+      </mat-card>
+    </div>
+
+    <div class="col-md-3 col-sm-12 matDiv">
+      <mat-card matTooltip="De manera opcional puedes contratar tambien el respaldo de tu trabajo!">
+        <img src="../../../assets/img/8.png" alt="" class="img">
+      </mat-card>
+    </div>
+
+  </div>
+
 
 </div>
-
