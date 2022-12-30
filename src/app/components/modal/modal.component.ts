@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { CardsService } from 'src/app/services/cards.service';
+import swiper, { Navigation } from 'swiper';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Virtual } from 'swiper';
-import { SwiperModule } from 'swiper/angular';
+import { SwiperModule, SwiperComponent } from 'swiper/angular';
+import 'swiper/css';
 
-SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Virtual]);
+
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Virtual, Navigation]);
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -20,9 +23,19 @@ export class ModalComponent implements OnInit {
   indicators = true;
   controls = true;
 
+  @ViewChild('swiper', { static: false })
+  swiper!: SwiperComponent;
+
+  slideNext() {
+    this.swiper.swiperRef.slideNext(100);
+  }
+  slidePrev() {
+    this.swiper.swiperRef.slidePrev(100);
+  }
+  
+
   constructor( private cardService: CardsService,
-    private safePipe: SafePipe, private domSanitizer: DomSanitizer,
-    public swiper: SwiperModule) { }
+    private safePipe: SafePipe, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.card = this.cardService.cardInfo;
@@ -69,10 +82,4 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  // slideNext() {
-  //   this.swiper.swiperRef.slideNext(100);
-  // }
-  // slidePrev() {
-  //   this.swiper.swiperRef.slidePrev(100);
-  // }
 }

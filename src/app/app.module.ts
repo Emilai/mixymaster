@@ -48,6 +48,10 @@ import { LoginerrorComponent } from './components/loginerror/loginerror.componen
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FaqComponent } from './components/faq/faq.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { RegistererrorComponent } from './components/registererror/registererror.component';
+import { RegistersuccessComponent } from './components/registersuccess/registersuccess.component';
+
+
 
 
 
@@ -64,6 +68,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     LoginComponent,
     SuccesspayComponent,
     WrongpayComponent,
+    RegistererrorComponent,
+    RegistersuccessComponent,
     LoggedComponent,
     FaqComponent,
     LoginerrorComponent,

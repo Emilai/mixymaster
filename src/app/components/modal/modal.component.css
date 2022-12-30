@@ -20,7 +20,7 @@
   width: 100%;
   align-content: center;
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 60px;
 }
 
 .content {
@@ -34,12 +34,15 @@
 .imgs {
   border-radius: 15px;
   margin-top: 20px;
-  height: auto;
-  width: 100%;
-  max-width: 700px;
   background-size: cover;
   border-radius: 10px;
   align-self: center;
+    height: 500px;
+  object-fit: cover;
+}
+
+.swiper {
+  text-align: center;
 }
 
 .videos {
@@ -53,14 +56,6 @@
   align-self: center;
 }
 
-.carouselContainer {
-  position: relative;
-  margin: auto;
-  text-align: center;
-  width: 700px;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px #dce1e1;
-}
 
 .matTab {
   font-size: 14px
@@ -78,18 +73,45 @@
   background-color: none;
   border-radius: 25%;
 }
+
+.flag{
+    position: absolute;
+    right: 7%;
+    top: 280px;
+    border: solid;
+    border-color: rgba(0, 0, 0, 0.451);
+    border-radius: 15px;
+}
+
 /* --------------- Mobile ------------ */
 
 @media (min-width: 320px) and (max-width: 1060px) {
 
-.carouselContainer {
-  position: relative;
-  margin: auto;
-  text-align: center;
-  width: auto;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px #dce1e1;
+.imgs {
+    height: 250px;
 }
 
+.img {
+  width: 250px;
 }
 
+.flag{
+    top: 160px;
+    height: 80px;
+}
+}
+
+@media (min-width: 120px) and (max-width: 319px) {
+
+.imgs {
+    height: 150px;
+}
+
+.img {
+  width: 150px;
+}
+
+.flag{
+display: none;
+}
+}

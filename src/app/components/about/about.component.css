@@ -115,6 +115,10 @@
 transform: scale(1.1);
 }
 
+.flag {
+  height: 15px;
+}
+
 @media (max-width: 580px) {
   .rectangle-1 {
     display: none;

@@ -4,6 +4,7 @@
     <button mat-button mat-dialog-close class="closeBtn">x</button>
     <div class="imgDiv">
       <img class="img" src="{{card.img}}" alt="">
+      <img class="flag" *ngIf="card.flag" src="{{card.flag}}" alt="Bandera">
     </div>
 
     <mat-card-title>{{card.nombre}}</mat-card-title>
@@ -17,7 +18,7 @@
             <p>{{card.bio}}</p>
             <hr>
             <h5>Créditos</h5>
-            <p>{{card.creditos.toUpperCase()}}</p>
+            <p>{{card.creditos}}</p>
           </div>
 
         </mat-tab>
@@ -34,21 +35,17 @@
         <mat-tab label="Galería" class="matTab">
 
 
-          <div *ngFor="let img of card.imagenes" class="carouselContainer">
-            <img src="{{img}}" alt="" class="imgs">
-          </div>
+          <swiper #swiper [slidesPerView]="1" [autoplay]="true" [keyboard]="true" [navigation]="true" [pagination]="true" [zoom]="false" class="swiper">
 
-          <!-- <swiper [slidesPerView]="1" [autoplay]="true" [keyboard]="true" [pagination]="true" [zoom]="false">
-
-            <ng-template swiperSlide *ngFor="let img of card.imagenes">
+            <ng-template swiperSlide *ngFor="let img of card.imagenes" class="swiper-slide">
               <img src="{{img}}" alt="" class="imgs">
             </ng-template>
-
+<!-- 
 
             <button (click)="slideNext()">Next slide</button>
-    <button (click)="slidePrev()">Prev slide</button>
+    <button (click)="slidePrev()">Prev slide</button> -->
 
-          </swiper> -->
+          </swiper>
 
         </mat-tab>
       </mat-tab-group>

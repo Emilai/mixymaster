@@ -9,9 +9,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <h3>Grupos: </h3>
-    <p *ngFor="let grupo of userInfo.grupos">{{grupo}}</p>
-    <p>Work in progress?: {{userInfo.wip}}</p>
+    <p *ngIf="!userInfo.wip">Aún no tiene ningún trabajo en progreso</p>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>

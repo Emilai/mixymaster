@@ -8,7 +8,7 @@ import {
 import {
   FormGroup,
   FormControl,
-  FormBuilder
+  FormBuilder, Validators
 } from '@angular/forms';
 import {
   AuthService
@@ -19,6 +19,8 @@ import {
 
 import { MatDialog } from '@angular/material/dialog';
 import { LoginerrorComponent } from '../loginerror/loginerror.component';
+import { RegistererrorComponent } from '../registererror/registererror.component';
+import { RegistersuccessComponent } from '../registersuccess/registersuccess.component';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +28,8 @@ import { LoginerrorComponent } from '../loginerror/loginerror.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  hide = true;
 
   formReg: FormGroup;
   formLog: FormGroup;
@@ -47,8 +51,8 @@ export class LoginComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.formReg = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       nombre: new FormControl(),
       apellido: new FormControl(),
     });
@@ -61,10 +65,13 @@ export class LoginComponent implements OnInit {
     this.passReset = new FormGroup({
       email: new FormControl()
     });
+
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
 
   submit() {
@@ -73,7 +80,9 @@ export class LoginComponent implements OnInit {
         console.log(response);
         this.router.navigate(['']);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   async login() {
@@ -121,9 +130,9 @@ export class LoginComponent implements OnInit {
         replaceUrl: true
       });
       this.dialog.closeAll();
-      alert('Cuenta creada con exito');
+      this.successRegister();
     } else {
-      alert('Registro fallido');
+      this.errorRegister();
     }
   }
 
@@ -140,4 +149,13 @@ export class LoginComponent implements OnInit {
   errorLogin(): void {
     this.dialog.open(LoginerrorComponent);
   }
+
+  errorRegister(): void {
+    this.dialog.open(RegistererrorComponent);
+  }
+
+  successRegister(): void {
+    this.dialog.open(RegistersuccessComponent);
+  }
+
 }

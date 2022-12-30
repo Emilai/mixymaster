@@ -1,6 +1,7 @@
 {
   "hosting": [
     {
+      "target": "MixyMaster",
       "public": "dist/mixy-master",
       "ignore": [
         "firebase.json",

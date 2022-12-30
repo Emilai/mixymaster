@@ -3,6 +3,8 @@ import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWit
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistererrorComponent } from '../components/registererror/registererror.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class AuthService {
   // private user: Observable<firebase.User | null>;
 
   constructor( public auth: Auth,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore,
+    private dialog: MatDialog) {
 
 
      }
@@ -27,6 +30,8 @@ export class AuthService {
       this.userAuthData = user;
       return user;
     } catch (e) {
+      console.log('este es el error');
+      this.errorRegister();
       return null;
     }
   }
@@ -74,4 +79,8 @@ export class AuthService {
       console.log(error);
     }
   };
+
+  errorRegister(): void {
+    this.dialog.open(RegistererrorComponent);
+  }
 }

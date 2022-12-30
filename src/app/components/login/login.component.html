@@ -18,7 +18,12 @@
 
               <p>
                 <mat-form-field>
-                  <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                  <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña"
+                    formControlName="password" required>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
                 </mat-form-field>
               </p>
 
@@ -57,17 +62,34 @@
               <p>
                 <mat-form-field>
                   <input type="text" matInput placeholder="email" formControlName="email" required>
+                  <mat-error *ngIf="formReg.addAsyncValidators">Ingrese un email válido</mat-error>
                 </mat-form-field>
               </p>
 
               <p>
                 <mat-form-field>
-                  <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                  <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña"
+                    formControlName="password" required #pw>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="formReg.addAsyncValidators">Su contraseña debe tener 8 carácteres como mínimo
+                  </mat-error>
                 </mat-form-field>
               </p>
 
+              <!-- <p>
+                <mat-form-field>
+                  <input [type]="hide ? 'password' : 'text'" matInput placeholder="Repetir contraseña"
+                    formControlName="password2" required #pw2>
+                  <mat-error *ngIf="pw !== pw2">Sus contraseñas no coinciden
+                  </mat-error>
+                </mat-form-field>
+              </p> -->
+
               <div class="button">
-                <button type="submit" mat-button>Registrar Cuenta</button>
+                <button type="submit" mat-button *ngIf="formReg.valid">Registrar Cuenta</button>
               </div>
 
             </form>
