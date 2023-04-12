@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistererrorComponent } from '../components/registererror/registererror.component';
+import { emailVerified } from '@angular/fire/auth-guard'
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,7 @@ export class AuthService {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       this.userAuthData = user;
+
       return user;
     } catch (e) {
       console.log(e);
@@ -68,11 +70,24 @@ export class AuthService {
     }
   }
 
+  async emailVerification() {
+    if (this.auth.currentUser){
+      try {
+        sendEmailVerification(this.auth.currentUser);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log('No hay usuario registrado');
+    }
+  }
+
   async userData() {
     try {
       const userInf= await this.firestore.collection('usuarios').doc(this.auth.currentUser?.uid).get();
       this.userInfo = userInf.subscribe((userdata => {
         this.userInfox = userdata.data()
+        console.log(this.userInfox);
       }));
       return userInf;
     } catch (error) {

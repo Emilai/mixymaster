@@ -5,9 +5,10 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   providedIn: 'root'
 })
 export class CardsService {
-
+  servicios: any;
   cards: any;
   cardInfo:any;
+  serviceInfo: any;
   productions: any;
 
   constructor( private firestore: AngularFirestore) { }
@@ -18,6 +19,20 @@ export class CardsService {
       const tecnicos = await this.firestore.collection('tecnicos').snapshotChanges();
       this.cards = tecnicos;
       return tecnicos;
+
+
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
+  async getServices() {
+    // console.log(this.code);
+    try {
+      const services = await this.firestore.collection('servicios').snapshotChanges();
+      this.servicios = services;
+      return services;
 
 
     } catch (error) {

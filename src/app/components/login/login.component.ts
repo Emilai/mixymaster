@@ -18,9 +18,14 @@ import {
 } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+
 import { LoginerrorComponent } from '../loginerror/loginerror.component';
 import { RegistererrorComponent } from '../registererror/registererror.component';
 import { RegistersuccessComponent } from '../registersuccess/registersuccess.component';
+import { RegistererrormailComponent } from '../registererrormail/registererrormail.component';
+import { RegisterduplicatedmailComponent } from '../registerduplicatedmail/registerduplicatedmail.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +40,9 @@ export class LoginComponent implements OnInit {
   formLog: FormGroup;
   passReset: FormGroup;
   recEmail = '';
+  email = '';
+  email2 = '';
+  loading = false;
 
   userInfo = {
     nombre: '',
@@ -48,13 +56,15 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private afAuth: AngularFireAuth
   ) {
     this.formReg = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       nombre: new FormControl(),
       apellido: new FormControl(),
+      email2: new FormControl(),
     });
 
     this.formLog = new FormGroup({
@@ -99,41 +109,53 @@ export class LoginComponent implements OnInit {
   }
 
   async register() {
+    this.loading = true;
 
     const regData = {
       'email': this.formReg.value.email,
       'password': this.formReg.value.password
     }
+    this.email = this.formReg.value.email;
+    this.email2 = this.formReg.value.email2;
 
-    const user = await this.authService.register(regData);
-    this.user = user;
-
-
-    const usuario = {
-      id: this.user.user.uid,
-      nombre: this.formReg.value.nombre,
-      apellido: this.formReg.value.apellido,
-      email: this.user.user.email,
-      grupos: ['General'],
-      wip: false,
-      drop: '',
-    };
-
-    const path = 'usuarios';
-    const id = this.user.user.uid;
-
-// console.log(regData);
-    await this.authService.createUser(usuario, path, id);
-
-    if (this.user) {
-      this.router.navigateByUrl('logged', {
-        replaceUrl: true
-      });
-      this.dialog.closeAll();
-      this.successRegister();
+    if (this.email !== this.email2) {
+      this.loading = false;
+      this.errorRegisterMail();
     } else {
-      this.errorRegister();
+
+      const user = await this.authService.register(regData);
+      this.user = user;
+
+
+      const usuario = {
+        id: this.user.user.uid,
+        nombre: this.formReg.value.nombre,
+        apellido: this.formReg.value.apellido,
+        email: this.user.user.email,
+        grupos: ['General'],
+        wip: false,
+        drop: '',
+      };
+
+      const path = 'usuarios';
+      const id = this.user.user.uid;
+
+      // console.log(regData);
+      if (this.user) {
+        await this.authService.createUser(usuario, path, id);
+        await this.authService.emailVerification();
+        this.router.navigateByUrl('logged', {
+          replaceUrl: true
+        });
+        this.dialog.closeAll();
+        this.successRegister();
+      } else {
+        this.loading = false;
+        this.dialog.closeAll();
+        this.errorRegister();
+      }
     }
+
   }
 
   forgotChange() {
@@ -153,9 +175,16 @@ export class LoginComponent implements OnInit {
   errorRegister(): void {
     this.dialog.open(RegistererrorComponent);
   }
+  errorRegisterMail(): void {
+    this.dialog.open(RegistererrormailComponent);
+  }
 
   successRegister(): void {
     this.dialog.open(RegistersuccessComponent);
+  }
+
+  errorRegisterRepeated() {
+    this.dialog.open(RegisterduplicatedmailComponent);
   }
 
 }

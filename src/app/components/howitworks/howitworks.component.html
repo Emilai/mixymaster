@@ -3,53 +3,78 @@
 
   <div class="row">
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Registrate en nuestra plataforma!">
+
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mreg">
+      <mat-card>
         <img src="../../../assets/img/1.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mreg="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Registrate en nuestra plataforma!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Selecciona el servicio que te interesa!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mselec">
+      <mat-card>
         <img src="../../../assets/img/2.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mselec="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Selecciona el servicio que te interesa!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Completa el formulario, para poder cotizar el costo de tu producción!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mform">
+      <mat-card>
         <img src="../../../assets/img/3.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mform="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Completa el formulario, para poder cotizar el costo de tu producción!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Completa el proceso de pago!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mpay">
+      <mat-card>
         <img src="../../../assets/img/4.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mpay="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Completa el proceso de pago!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Luego de enviarnos los archivos, comenzaremos con nuestro trabajo!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="msend">
+      <mat-card>
         <img src="../../../assets/img/5.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #msend="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Luego de enviarnos los archivos, comenzaremos con nuestro trabajo!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Podrás hacer las correcciones necesarias hasta obtener el resultado esperado!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mcorrect">
+      <mat-card>
         <img src="../../../assets/img/6.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mcorrect="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Podrás hacer las correcciones necesarias hasta obtener el resultado esperado!</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="Una vez finalizado, te enviamos el archivo final en su máxima calidad.">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mfin">
+      <mat-card>
         <img src="../../../assets/img/7.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mfin="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>Una vez finalizado, te enviamos el archivo final en su máxima calidad.</p>
+    </mat-menu>
 
-    <div class="col-md-3 col-sm-12 matDiv">
-      <mat-card matTooltip="De manera opcional puedes contratar tambien el respaldo de tu trabajo!">
+    <div class="col-md-3 col-sm-12 matDiv" [matMenuTriggerFor]="mrespaldo">
+      <mat-card>
         <img src="../../../assets/img/8.png" alt="" class="img">
       </mat-card>
     </div>
+    <mat-menu #mrespaldo="matMenu" class="matmenu">
+      <p class="pmenu" mat-menu-item>De manera opcional puedes contratar tambien el respaldo de tu trabajo!</p>
+    </mat-menu>
 
   </div>
 

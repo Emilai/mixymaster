@@ -4,7 +4,10 @@
     <div>
 
       <button mat-button mat-dialog-close class="closeBtn">x</button>
-      <mat-tab-group class="matTab" *ngIf="!forgot">
+
+      <mat-spinner *ngIf="loading" color="primary" class="spinner"></mat-spinner>
+
+      <mat-tab-group class="matTab" *ngIf="!forgot && !loading">
         <mat-tab label="Ingresar">
 
           <mat-card-title class="title">Login</mat-card-title>
@@ -15,6 +18,7 @@
                   <input type="text" matInput placeholder="email" formControlName="email" required>
                 </mat-form-field>
               </p>
+
 
               <p>
                 <mat-form-field>
@@ -38,7 +42,7 @@
         </mat-tab>
 
 
-        <mat-tab label="Registrarse">
+        <mat-tab label="Registrarse" *ngIf="!loading">
           <mat-card-title class="title">Registro</mat-card-title>
           <mat-card-content>
 
@@ -61,7 +65,14 @@
 
               <p>
                 <mat-form-field>
-                  <input type="text" matInput placeholder="email" formControlName="email" required>
+                  <input type="text" matInput placeholder="email" formControlName="email" [(ngModel)]="email" required>
+                  <mat-error *ngIf="formReg.addAsyncValidators">Ingrese un email válido</mat-error>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Repita su email" formControlName="email2" [(ngModel)]="email2" required>
                   <mat-error *ngIf="formReg.addAsyncValidators">Ingrese un email válido</mat-error>
                 </mat-form-field>
               </p>
@@ -79,15 +90,6 @@
                 </mat-form-field>
               </p>
 
-              <!-- <p>
-                <mat-form-field>
-                  <input [type]="hide ? 'password' : 'text'" matInput placeholder="Repetir contraseña"
-                    formControlName="password2" required #pw2>
-                  <mat-error *ngIf="pw !== pw2">Sus contraseñas no coinciden
-                  </mat-error>
-                </mat-form-field>
-              </p> -->
-
               <div class="button">
                 <button type="submit" mat-button *ngIf="formReg.valid">Registrar Cuenta</button>
               </div>
@@ -100,7 +102,6 @@
 
       </mat-tab-group>
     </div>
-
 
 
     <mat-card-title class="title2" *ngIf="forgot">Recuperar Contraseña</mat-card-title>

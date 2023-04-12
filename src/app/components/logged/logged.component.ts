@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CardsService } from 'src/app/services/cards.service';
@@ -15,6 +16,7 @@ export class LoggedComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private auth: Auth,
     private cardService: CardsService,
     private router: Router
   ) { }
@@ -35,6 +37,14 @@ export class LoggedComponent implements OnInit {
         });
       });
     }));
+
+    if (this.auth.currentUser?.emailVerified) {
+      console.log('El usuario ESTA VERIFICADO')
+
+    } else {
+      console.log('El usuario NOOO ESTA VERIFICADO')
+      this.router.navigateByUrl('/verificacion');
+    }
     return;
   }
 

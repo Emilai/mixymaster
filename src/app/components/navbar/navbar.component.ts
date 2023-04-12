@@ -11,6 +11,8 @@ import {
   BreakpointState
 } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -23,11 +25,16 @@ export class NavbarComponent implements OnInit {
   sidenav!: MatSidenav;
 
   userInfo: any;
+  userInfox: any;
 
   constructor(private dialog: MatDialog,
     public authService: AuthService,
+    public auth: Auth,
     private router: Router,
-    private observer: BreakpointObserver) { }
+    private firestore: AngularFirestore,
+    private observer: BreakpointObserver) { 
+  
+    }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -42,10 +49,17 @@ export class NavbarComponent implements OnInit {
   }
 
   async ngOnInit() {
-
-    await this.authService.userData();
-    console.log(this.authService.userInfox);
-
+    try {
+      const userInf = await this.firestore.collection('usuarios').doc(this.auth.currentUser?.uid).get().toPromise();
+      if (userInf && userInf.exists) {
+        this.userInfo = userInf.data()!;
+        console.log(this.userInfo);
+      } else {
+        console.log("El documento no existe");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   loginModal(): void {
@@ -89,5 +103,13 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('faq', {
       replaceUrl: true
     });
+  }
+
+  test() {
+    console.log(this.userInfox);
+  }
+
+  async testing() {
+    await this.authService.emailVerification();
   }
 }

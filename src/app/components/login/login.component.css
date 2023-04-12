@@ -51,3 +51,8 @@ mat-card-content {
 .card {
     width: 100%;
 }
+
+.spinner {
+  align-self: center;
+  margin: auto;
+}

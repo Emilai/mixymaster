@@ -30,6 +30,7 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   openModal(card: any){
     this.dialog.open(ModalComponent);
     this.cardService.cardInfo = card;

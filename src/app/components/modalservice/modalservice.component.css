@@ -1,0 +1,24 @@
+.closeBtn {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  border: 0;
+  background-color: none;
+  border-radius: 25%;
+}
+
+.content{
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+}
+
+mat-card-header{
+    flex-direction: column!important;
+}

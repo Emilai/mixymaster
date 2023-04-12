@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { Router } from '@angular/router';
@@ -92,9 +93,17 @@ export class PayComponent implements OnInit {
   conforme=false;
 
   constructor( private dialog: MatDialog,
+    private auth: Auth,
     private router: Router ) { }
 
   ngOnInit(): void {
+    if (this.auth.currentUser?.emailVerified) {
+      console.log('El usuario ESTA VERIFICADO')
+
+    } else {
+      console.log('El usuario NOOO ESTA VERIFICADO')
+      this.router.navigateByUrl('/verificacion');
+    }
   }
 
   coti() {

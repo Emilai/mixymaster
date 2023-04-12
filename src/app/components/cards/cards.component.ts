@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CardsService } from 'src/app/services/cards.service';
 import { LoginComponent } from '../login/login.component';
+import { ModalserviceComponent } from '../modalservice/modalservice.component';
 
 
 @Component({
@@ -13,9 +15,22 @@ import { LoginComponent } from '../login/login.component';
 export class CardsComponent implements OnInit {
 
   userInfo: any;
+  services: any;
 
-  constructor(public authService: AuthService, private dialog: MatDialog,
-    private router: Router) { }
+  constructor(private cardService: CardsService, public authService: AuthService, private dialog: MatDialog,
+    private router: Router) { 
+    this.cardService.getServices().then(cards => {
+      if (cards != undefined) {
+        cards.subscribe(card => {
+          this.services = card.map(cardRef => {
+            const data = cardRef.payload.doc.data();
+            return data;
+          });
+        });
+      }
+
+    });
+    }
 
   async ngOnInit() {
     (await this.authService.userData())?.subscribe((async userData => {
@@ -25,13 +40,15 @@ export class CardsComponent implements OnInit {
     return;
   }
 
-  service() {
+  info(data: any) {
 
-    if (this.userInfo) {
-      this.router.navigateByUrl('/pay');
-    } else {
-      this.loginModal();
-    }
+    // if (this.userInfo) {
+    //   console.log(data);
+    // } else {
+    //   this.loginModal();
+    // }
+    this.dialog.open(ModalserviceComponent);
+    this.cardService.serviceInfo = data;
   }
 
   loginModal(): void {
@@ -40,4 +57,10 @@ export class CardsComponent implements OnInit {
       width: '600px',
     });
   }
+
+  serviceModal(): void {
+    
+  }
+
+
 }

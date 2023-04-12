@@ -30,3 +30,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-card-header-text {
   margin: 0 !important;
 }
+
+.mat-menu-panel {
+    max-width: fit-content !important;
+}

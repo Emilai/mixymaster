@@ -2,7 +2,7 @@
 
   <div *ngIf="preCoti">
 
-    <h1>Cotizar Servicio</h1>
+    <h1>Nueva Solicitud / Cotizar producción</h1>
 
     <div class="formulario">
 
@@ -10,14 +10,14 @@
       <section class="servicio">
         <!-- <h4>Servicio</h4> -->
         <mat-form-field>
-          <mat-label>Selecciona un servicio</mat-label>
+          <mat-label>Selecione un Servicio</mat-label>
           <mat-select class="radioGroup" [(ngModel)]="cotizacion.servicio">
             <mat-option class="slideBtn radios" value="premium">Premium</mat-option>
             <mat-option class="slideBtn radios" value="gold">Gold</mat-option>
             <mat-option class="slideBtn radios" value="platinum">Platinum</mat-option>
             <mat-option class="slideBtn radios" value="coaching">Coaching</mat-option>
             <mat-option class="slideBtn radios" value="inmersivo">Inmersivo</mat-option>
-            <mat-option class="slideBtn radios" value="asisstant">Asisstant</mat-option>
+            <mat-option class="slideBtn radios" value="asisstant">Assistant</mat-option>
             <mat-option class="slideBtn radios" value="mixymaster2">Mixymaster<sup>2</sup></mat-option>
           </mat-select>
 
@@ -28,7 +28,7 @@
 
       <div class="duracionDiv"
         *ngIf="cotizacion.servicio === 'premium' || cotizacion.servicio === 'gold' || cotizacion.servicio === 'platinum'">
-        <h4>Duración</h4>
+        <h4>Cuanto dura la canción que quiere mezclar?</h4>
         <mat-slider min="0" max='5.5' thumbLabel="true" step="0.5" value="cotizacion.duracion"
           [(ngModel)]="cotizacion.duracion">
           <input matSliderThum>
@@ -39,12 +39,12 @@
 
 
       <div *ngIf="cotizacion.duracion">
-        <h4>Cantidad de Pistas</h4>
+        <h4>Cual es la cantidad de pistas?</h4>
         <mat-slider min="01" max='121' discrete="true" step="1" value="cotizacion.pistas"
           [(ngModel)]="cotizacion.pistas" thumbLabel="true">
           <input matSliderThum>
         </mat-slider>
-        <label>Pistas: <span *ngIf="cotizacion.pistas <= 120">{{cotizacion.pistas}}</span> <span
+        <label>Pistas: <span *ngIf="cotizacion.pistas <= 120">{{cotizacion.pistas}} (+ / - 5 pistas)</span> <span
             *ngIf="cotizacion.pistas > 120"> Más de 120</span></label>
       </div>
 
@@ -94,16 +94,20 @@
       <div
         *ngIf="cotizacion.servicio === 'premium' || cotizacion.servicio === 'gold' || cotizacion.servicio === 'platinum'">
         <section *ngIf="cotizacion.pistas">
-          <h4>Modo Obsesivo</h4>
+          <h4>Activamos el modo Obsesivo?</h4>
           <mat-slide-toggle [(ngModel)]="cotizacion.obsesivo">Modo Obsesivo</mat-slide-toggle>
+          <br>
+          <label *ngIf="cotizacion.obsesivo">Autotune, Edicion rítmica, Drum Replacement, Revisiones adicionales</label>
+
         </section>
 
 
         <section *ngIf="cotizacion.pistas">
           <hr>
           <form class="form-horizontal">
-            <h4>Entregas adicionales</h4>
-            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.noVox">No Vocals
+            <h4>El servicio seleccionado incluye la mezcla masterizada. Deseas entregas adicionales?</h4>
+
+            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.noVox">Mezcla Instrumental (sin vocales)
             </mat-slide-toggle>
             <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.capella">A Capella
             </mat-slide-toggle>
@@ -112,20 +116,20 @@
             <div *ngIf="cotizacion.stems">
               <hr>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.drums">Batería</mat-slide-toggle>
-              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.perc">Percución</mat-slide-toggle>
+              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.perc">Percusión</mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.guit">Guitarras</mat-slide-toggle>
-              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bass">Bajos</mat-slide-toggle>
+              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bass">Bajo</mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.keys">Teclados</mat-slide-toggle>
-              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bkgVoice">Voces extra
-              </mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.mainVoice">Voz Principal
+              </mat-slide-toggle>
+              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bkgVoice">Coros
               </mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.others">Otros</mat-slide-toggle>
               <hr>
             </div>
-            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.noMaster">NoMaster
+            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.noMaster">Mezcla sin Masterizar
             </mat-slide-toggle>
-            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.atmos">Atmos
+            <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.atmos">Mezcla Inmersiva (Dolby Atmos)
             </mat-slide-toggle>
           </form>
 
@@ -261,14 +265,18 @@
 
       <mat-card-subtitle>GARANTIA DE CONFORMIDAD</mat-card-subtitle>
 
-    <p class="garantia">
-      En mixymaster estas protegido. La cotizacion de este servicio por mixymaster y el pago por el usuario queda sujeto a la revision una vez subidos los archivos.
-      En caso de encontrarse una discrepancia, el usuario sera notificado ya sea para abonar la diferencia o procesar el rembolso (menos gastos operativos)
-    </p>
+      <p class="garantia">
+        En mixymaster estas protegido. La cotizacion de este servicio por mixymaster y el pago por el usuario queda
+        sujeto a la revision una vez subidos los archivos.
+        En caso de encontrarse una discrepancia, el usuario sera notificado ya sea para abonar la diferencia o procesar
+        el rembolso (menos gastos operativos)
+      </p>
 
-    <p><mat-checkbox [(ngModel)]="conforme">Estoy de acuerdo con la cotización y condiciones.</mat-checkbox></p>
+      <p>
+        <mat-checkbox [(ngModel)]="conforme">Estoy de acuerdo con la cotización y condiciones.</mat-checkbox>
+      </p>
     </mat-card-content>
-    
+
   </mat-card>
 
 
@@ -276,11 +284,11 @@
     'payDinamic': conforme === false,
    'payDinamic2': conforme === true
   }">
-<h4 *ngIf="cotiCard">Contratar Servicio</h4>
-  <div class="paypalcontent">
-    <div #paypal class="paypalBtnContainer"></div>
+    <h4 *ngIf="cotiCard">Contratar Servicio</h4>
+    <div class="paypalcontent">
+      <div #paypal class="paypalBtnContainer"></div>
+    </div>
   </div>
-  </div>
-  
+
 
 </div>

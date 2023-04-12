@@ -8,7 +8,29 @@
 
   <div class="row">
 
-    <div class="col-md-4 col-sm-12 cardDiv">
+    <div class="col-md-4 col-sm-12 cardDiv" *ngFor="let service of services">
+
+      <mat-card class="{{service.class}}">
+        <mat-card-header class="cardHeader">
+          <mat-card-subtitle><span class="material-icons">
+              {{service.icon}}
+            </span></mat-card-subtitle>
+          <mat-card-title>{{service.title}}</mat-card-title>
+          <mat-card-subtitle>{{service.subtitle}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{service.text1}}<br>{{service.text2}}<br>{{service.text3}}
+          </p>
+          <button mat-raised-button class="cardBtn" (click)="info(service)">Más Info...</button>
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+
+
+    <!-- <div class="col-md-4 col-sm-12 cardDiv">
       <mat-card class="card1">
         <mat-card-header class="cardHeader">
           <mat-card-subtitle><span class="material-icons">
@@ -29,9 +51,9 @@
         </mat-card-content>
 
       </mat-card>
-    </div>
+    </div> -->
 
-    <div class="col-md-4 col-sm-12 cardDiv">
+    <!-- <div class="col-md-4 col-sm-12 cardDiv">
       <mat-card class="card2">
         <mat-card-header class="cardHeader">
           <mat-card-subtitle><span class="material-icons">
@@ -50,9 +72,9 @@
           <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
         </mat-card-content>
       </mat-card>
-    </div>
+    </div> -->
 
-    <div class="col-md-4 col-sm-12 cardDiv">
+    <!-- <div class="col-md-4 col-sm-12 cardDiv">
       <mat-card class="card3">
         <mat-card-header class="cardHeader">
           <mat-card-subtitle><span class="material-icons">
@@ -65,17 +87,15 @@
 
         <mat-card-content>
           <p>
-            El ingeniero de mezcla de tu elección atenderá tu música en una sesión agendada contigo. Podrás asistir al
-            proceso de tu mezcla remotamente desde tu casa. Obtendrás tu mezcla masterizada en el plazo mas breve.
-            <br>Incluye hasta 4 correcciones sin cargo
-            adicional.
+            El ingeniero de mezcla de tu elección atenderá tu música en una sesión agendada contigo. Podrás asistir al proceso de tu mezcla remotamente desde tu casa. Obtendrás tu mezcla masterizada en el plazo mas breve.
+            <br>Incluye hasta 4 correcciones sin cargo adicional.
           </p>
           <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
         </mat-card-content>
       </mat-card>
-    </div>
+    </div> -->
 
-    <div class="col-md-4 col-sm-12 cardDiv">
+    <!-- <div class="col-md-4 col-sm-12 cardDiv">
       <mat-card class="card">
         <mat-card-header class="cardHeader">
           <mat-card-subtitle><span class="material-icons">
@@ -89,19 +109,16 @@
 
         <mat-card-content>
           <p>
-            Tienes una mezcla en proceso y no sabes cómo mejorar algún aspecto en particular? Te gustaría llevar tu
-            mezcla a otro nivel? Necesitas una opinión experta, detallada y objetiva sobre tu producción? Podemos
-            ayudarte! Los ingenieros de Mixymaster están disponibles para agendar una sesión remota contigo, donde desde
-            tu estudio, con la sesión abierta en tu DAW, con tus plug-ins, recibirás feedback de tu
-            trabajo, y respuestas a tus preguntas prácticas en una sesión que seguro será muy enriquecedora. Agenda una
-            sesión!
+            Tienes una mezcla en proceso y no sabes cómo mejorar algún aspecto en particular? Te gustaría llevar tu mezcla a otro nivel? Necesitas una opinión experta, detallada y objetiva sobre tu producción? Podemos ayudarte! 
+            Los ingenieros de Mixymaster están disponibles para agendar una sesión remota contigo, donde desde tu estudio, con la sesión abierta en tu DAW, con tus plug-ins, recibirás feedback de tu trabajo, y respuestas a tus preguntas prácticas en una sesión que seguro será muy enriquecedora. 
+            Agenda una sesión!
           </p>
           <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
         </mat-card-content>
       </mat-card>
-    </div>
+    </div> -->
 
-    <div class="col-md-4 col-sm-12">
+    <!-- <div class="col-md-4 col-sm-12">
       <div class="row">
 
         <div class="cardDiv">
@@ -111,7 +128,7 @@
                   <span class="material-symbols-outlined">
                     headphones
                   </span>
-                  <!-- poner auricular inmersivo Dolby -->
+                 
                 </span></mat-card-subtitle>
               <mat-card-title>Mixymaster Inmersivo</mat-card-title>
               <mat-card-subtitle>Dolby Atmos</mat-card-subtitle>
@@ -119,14 +136,9 @@
 
             <mat-card-content>
               <p>
-                En mixymaster creemos que el audio inmersivo, ya sea dolby atmos music (el líder actual),
-                u otros formatos espaciales aumenta la experiencia y el disfrute de la música. Es nuestra convicción que
-                estos formatos
-                vinieron para quedarse, y que, aunque incipientes, no son el futuro sino el presente en la producción
-                musical. Nos consideraríamos retrógrados si no contempláramos y abrazáramos estos formatos, y es
-                por ello que disponemos de propuestas de mezcla, remezcla de stems y mastering en estos formatos para
-                ofrecerle a tu
-                audiencia una experiencia novedosa y llena de emociones.
+                En mixymaster creemos que el audio inmersivo, ya sea dolby atmos music (el líder actual), u otros formatos espaciales aumenta la experiencia y el disfrute de la música. 
+                Es nuestra convicción que estos formatos vinieron para quedarse, y que, aunque incipientes, no son el futuro sino el presente en la producción musical. 
+                Nos consideraríamos retrógrados si no contempláramos y abrazáramos estos formatos, y es por ello que disponemos de propuestas de mezcla, remezcla de stems y mastering en estos formatos para ofrecerle a tu audiencia una experiencia novedosa y llena de emociones.
               </p>
               <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
             </mat-card-content>
@@ -140,7 +152,7 @@
                   <span class="material-symbols-outlined">
                     equalizer
                   </span>
-                  <!-- poner auricular inmersivo Dolby -->
+
                 </span></mat-card-subtitle>
               <mat-card-title>MixyMaster<sup>2</sup></mat-card-title>
               <mat-card-subtitle>El toque final</mat-card-subtitle>
@@ -148,24 +160,21 @@
 
             <mat-card-content>
               <p>
-                Si ya tienes tu mezcla pronta y solo necesitas el toque final para hacerla competitiva, podemos
-                ayudarte.
-                En mixymaster tenemos ingenieros especializados en este proceso, ya sea para las plataformas de
-                streaming, CD o vinilo a incluso mastering para formatos inmersivos.
-                No hay inteligencia artificial, ni algoritmos, solo ingenieros competetentes y comprometidos con llevar
-                tu musica al maximo potencial.
+                Si ya tienes tu mezcla pronta y solo necesitas el toque final para hacerla competitiva, podemos ayudarte.
+                En mixymaster tenemos ingenieros especializados en este proceso, ya sea para las plataformas de streaming, CD o vinilo a incluso mastering para formatos inmersivos.
+                No hay inteligencia artificial, ni algoritmos, solo ingenieros competetentes y comprometidos con llevar tu musica al maximo potencial.
               </p>
               <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
             </mat-card-content>
           </mat-card>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 
 
-    <div class="col-md-4 col-sm-12 cardDiv">
+    <!-- <div class="col-md-4 col-sm-12 cardDiv">
       <mat-card class="card">
         <mat-card-header class="cardHeader">
           <mat-card-subtitle><span class="material-icons">
@@ -179,19 +188,17 @@
 
         <mat-card-content>
           <p>
-            Encuentras dificultades en tu producción? En mixymaster contamos con un equipo de asistentes talentosos con
-            sofisticadas
-            herramientas, y la paciencia que se requiere para resolver los problemas frecuentes que pueden ocurrir en
-            toda producción: <br> - Afinación de voces, bronces, maderas,
-            cuerdas, edición rítmica para darle un amarre extra que hará groovear tus baterías, percusiones y bajos.
-            Estos procesos, aparte de la dedicación y paciencia, requieren de entrenamiento y de un oido musical,
-            creemos que el resultado del humano, siempre entrega mejor resultado que el mero uso de algoritmos
-            automáticos. También podemos ayudarte en problemas de configuraciones de software / hardware de tu DAW y de
-            tu sistema de monitoreo. Plantéanos tu problema, seguro podemos ayudarte.
+            Encuentras dificultades en tu producción? En mixymaster contamos con un equipo de asistentes talentosos con sofisticadas herramientas, y la paciencia que se requiere para resolver los problemas frecuentes que pueden ocurrir en toda producción: 
+            <br> - Afinación de voces, bronces, maderas, cuerdas, edición rítmica para darle un amarre extra que hará groovear tus baterías, percusiones y bajos.
+            Estos procesos, aparte de la dedicación y paciencia, requieren de entrenamiento y de un oido musical, creemos que el resultado del humano, siempre entrega mejor resultado que el mero uso de algoritmos automáticos. También podemos ayudarte en problemas de configuraciones de software / hardware de tu DAW y de tu sistema de monitoreo. Plantéanos tu problema, seguro podemos ayudarte.
           </p>
           <button mat-raised-button class="cardBtn" (click)="service()">Más Info...</button>
         </mat-card-content>
       </mat-card>
+    </div> -->
+
+    <div class="col-md-8 col-sm-12 cardDiv">
+        <img src="https://lacarnemagazine.com/wp-content/uploads/2020/06/home-studio.jpg" alt="" class="cardImg">
     </div>
 
 

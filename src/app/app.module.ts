@@ -50,6 +50,12 @@ import { FaqComponent } from './components/faq/faq.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RegistererrorComponent } from './components/registererror/registererror.component';
 import { RegistersuccessComponent } from './components/registersuccess/registersuccess.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { ModalserviceComponent } from './components/modalservice/modalservice.component';
+import { RegistererrormailComponent } from './components/registererrormail/registererrormail.component';
+import { RegisterduplicatedmailComponent } from './components/registerduplicatedmail/registerduplicatedmail.component';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { VerificacionComponent } from './components/verificacion/verificacion.component';
 
 
 
@@ -69,12 +75,16 @@ import { RegistersuccessComponent } from './components/registersuccess/registers
     SuccesspayComponent,
     WrongpayComponent,
     RegistererrorComponent,
+    RegistererrormailComponent,
+    RegisterduplicatedmailComponent,
     RegistersuccessComponent,
+    VerificacionComponent,
     LoggedComponent,
     FaqComponent,
     LoginerrorComponent,
     PayComponent,
     MainComponent,
+    ModalserviceComponent,
     SafePipe
   ],
   imports: [
@@ -95,8 +105,10 @@ import { RegistersuccessComponent } from './components/registersuccess/registers
     MatCheckboxModule,
     MatSliderModule,
     MatTabsModule,
+    MatMenuModule,
     MatDialogModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
     MatTooltipModule,
     LayoutModule,
     MatSlideToggleModule,
