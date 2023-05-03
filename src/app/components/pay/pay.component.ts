@@ -106,7 +106,8 @@ export class PayComponent implements OnInit {
     data: {},
     fecha: '',
     precio: 0,
-    estado: ''
+    estado: '',
+    validDate: {},
   }
 
   constructor( private dialog: MatDialog,
@@ -403,6 +404,7 @@ export class PayComponent implements OnInit {
     this.cotizacion.servicio = this.cotizacion.servicio.toUpperCase();
     this.produccion.data = this.cotizacion;
     this.produccion.precio = this.orden.precio;
+    this.produccion.validDate = await this.addDate(this.myDate, 7);
     this.produccion.estado = 'Cotizado';
     const userId = this.auth.currentUser?.uid
 
@@ -425,7 +427,14 @@ export class PayComponent implements OnInit {
     this.dialog.open(ContactComponent);
   }
 
-  probar() {
-    console.log(this.fecha);
-  }
+  addDate(date: string | number | Date, days: number) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      console.log('Fecha resultante: ',result);
+      return result;
+    }
+
+    probar() {
+      this.addDate(this.myDate, 7)
+    }
 }

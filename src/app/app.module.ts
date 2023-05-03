@@ -58,6 +58,8 @@ import { RegisterduplicatedmailComponent } from './components/registerduplicated
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { MatTableModule } from '@angular/material/table'
+import { OrderPipe } from 'ngx-order-pipe';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -102,6 +104,7 @@ import { MatTableModule } from '@angular/material/table'
     SwiperModule,
     MatButtonModule,
     MatSelectModule,
+    MatChipsModule,
     MatRadioModule,
     MatCheckboxModule,
     MatSliderModule,
@@ -123,7 +126,7 @@ import { MatTableModule } from '@angular/material/table'
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [AngularFireModule, SafePipe, DatePipe],
+  providers: [AngularFireModule, SafePipe, DatePipe, OrderPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

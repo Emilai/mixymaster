@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { OrderPipe } from 'ngx-order-pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CardsService } from 'src/app/services/cards.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PayComponent } from '../pay/pay.component';
 
 @Component({
   selector: 'app-logged',
@@ -14,14 +17,16 @@ export class LoggedComponent implements OnInit {
   userInfo: any;
   productions: any = [];
   preProductions: any = [];
-  displayedColumns: string[] = ['fecha', 'nombre', 'servicio', 'precio'];
+  displayedColumns: string[] = ['fecha', 'nombre', 'servicio', 'precio', 'pagar'];
   displayedProductionColumns: string[] = ['fecha', 'nombre', 'servicio', 'estado'];
 
   constructor(
     public authService: AuthService,
     private auth: Auth,
     private cardService: CardsService,
-    private router: Router
+    private router: Router,
+    private orderPipe: OrderPipe,
+    private dialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -36,7 +41,7 @@ export class LoggedComponent implements OnInit {
             console.log('prods: ',this.productions);
             return data;
           });
-
+          this.productions = this.orderPipe.transform(this.productions, 'fecha', true);
         });
       });
 
@@ -47,6 +52,7 @@ export class LoggedComponent implements OnInit {
             return data;
           });
           console.log('preProds: ', this.preProductions);
+          this.preProductions = this.orderPipe.transform(this.preProductions, 'fecha', true);
         });
       });
     }));
@@ -63,5 +69,10 @@ export class LoggedComponent implements OnInit {
 
   pay() {
     this.router.navigateByUrl('/pay');
+  }
+
+  test(coti: any) {
+    console.log(coti);
+    this.dialog.open(PayComponent);
   }
 }

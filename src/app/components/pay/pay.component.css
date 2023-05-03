@@ -114,3 +114,11 @@ mat-card-header{
 .colorBtn:hover, .colorBtn2:hover, .colorBtn3:hover, .colorBtn4:hover {
   background-color: #ffc107;
 }
+
+.preCotibtn {
+  margin-bottom: 30px;
+}
+
+.preCotiTxt {
+  margin-top: 50px;
+}
