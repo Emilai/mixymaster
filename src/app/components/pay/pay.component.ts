@@ -5,6 +5,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { Router } from '@angular/router';
 import { SuccesspayComponent } from '../successpay/successpay.component';
 import { WrongpayComponent } from '../wrongpay/wrongpay.component';
+import { PreprodService } from 'src/app/services/preprod.service';
+import { ContactComponent } from '../contact/contact.component';
+import { DatePipe } from '@angular/common';
 
 declare var paypal:any ;
 
@@ -18,6 +21,7 @@ export class PayComponent implements OnInit {
   @ViewChild('paypal', { static: true })
   paypalElement!: ElementRef;
 
+  precioObsesivo = 0;
   cotizacion = {
     servicio: '',
     precioServicio: 0,
@@ -34,6 +38,7 @@ export class PayComponent implements OnInit {
       bass: false,
       keys: false,
       bkgVoice: false,
+      bronces: false,
       mainVoice: false,
       others: false
     },
@@ -67,6 +72,7 @@ export class PayComponent implements OnInit {
       bass: 0,
       keys: 0,
       bkgVoice: 0,
+      bronces: 0,
       mainVoice: 0,
       others: 0
     },
@@ -91,14 +97,30 @@ export class PayComponent implements OnInit {
   cotiCard = false;
   preCoti = true;
   conforme=false;
+  myDate = new Date();
+  fecha: any;
+
+  produccion = {
+    nombre: '',
+    descripcion: '',
+    data: {},
+    fecha: '',
+    precio: 0,
+    estado: ''
+  }
 
   constructor( private dialog: MatDialog,
     private auth: Auth,
-    private router: Router ) { }
+    private router: Router,
+    private preprod: PreprodService,
+    public datePipe: DatePipe ) {
+    this.fecha = this.datePipe.transform(this.myDate, 'yyyy/MM/dd, HH:mm')
+     }
 
   ngOnInit(): void {
     if (this.auth.currentUser?.emailVerified) {
       console.log('El usuario ESTA VERIFICADO')
+      this.produccion.fecha = this.fecha;
 
     } else {
       console.log('El usuario NOOO ESTA VERIFICADO')
@@ -153,102 +175,128 @@ export class PayComponent implements OnInit {
   priceCalculator(){
 
     if(this.cotizacion.servicio === 'premium') {
-      this.price.servicio = 5;
-      if (this.cotizacion.pistas < 25) {
+      this.price.servicio = 99;
+      if (this.cotizacion.pistas < 21) {
         this.price.pistas = 0;
         console.log('menos de 25 pistas')
       } else {
         const pistasExtra = this.cotizacion.pistas - 24;
         console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 5;
+        this.price.pistas = pistasExtra * 4.25;
         console.log( 'precio de las pistas $', this.price.pistas);
       }
+      if (this.cotizacion.duracion < 3.6) {
+        this.price.duracion = 0;
+        console.log('duracion menor a 3 minutos, sin costo extra');
+      } else if (this.cotizacion.duracion > 5) {
+        console.log('duracion mayor a 5 minutos, cotizar manualmente');
+      } else {
+        const duracionExtra = this.cotizacion.duracion - 3;
+        console.log('duracion extra = ', duracionExtra);
+        this.price.duracion = duracionExtra * 30;
+        console.log('precio duracion $', this.price.duracion);
+      };
     };
 
     if (this.cotizacion.servicio === 'gold') {
-      this.price.servicio = 15;
+      this.price.servicio = 180;
       if (this.cotizacion.pistas < 41) {
         this.price.pistas = 0;
         console.log('menos de 40 pistas')
       } else {
         const pistasExtra = this.cotizacion.pistas - 40;
         console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 7;
+        this.price.pistas = pistasExtra * 6.25;
         console.log('precio de las pistas $', this.price.pistas);
       }
+      if (this.cotizacion.duracion < 3.6) {
+        this.price.duracion = 0;
+        console.log('duracion menor a 3 minutos, sin costo extra');
+      } else if (this.cotizacion.duracion > 5) {
+        console.log('duracion mayor a 5 minutos, cotizar manualmente');
+      } else {
+        const duracionExtra = this.cotizacion.duracion - 3;
+        console.log('duracion extra = ', duracionExtra);
+        this.price.duracion = duracionExtra * 35;
+        console.log('precio duracion $', this.price.duracion);
+      };
     };
 
     if (this.cotizacion.servicio === 'platinum') {
-      this.price.servicio = 35;
-      if (this.cotizacion.pistas < 122) {
+      this.price.servicio = 250;
+      if (this.cotizacion.pistas < 101) {
         this.price.pistas = 0;
         console.log('menos de 120 pistas')
       } else {
-        const pistasExtra = this.cotizacion.pistas - 120;
+        const pistasExtra = this.cotizacion.pistas - 100;
         console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 20;
+        this.price.pistas = pistasExtra * 6.25;
         console.log('precio de las pistas $', this.price.pistas);
       }
-    };
+      if (this.cotizacion.duracion < 3.6) {
+        this.price.duracion = 0;
+        console.log('duracion menor a 3 minutos, sin costo extra');
+      } else if (this.cotizacion.duracion > 5) {
+        console.log('duracion mayor a 5 minutos, cotizar manualmente');
+      } else {
+        const duracionExtra = this.cotizacion.duracion - 3;
+        console.log('duracion extra = ', duracionExtra);
+        this.price.duracion = duracionExtra * 40;
+        console.log('precio duracion $', this.price.duracion);
+      };
 
-    if(this.cotizacion.duracion < 3.1) {
-      this.price.duracion = 0;
-      console.log('duracion menor a 3 minutos, sin costo extra');
-    } else if (this.cotizacion.duracion > 5) { 
-      console.log('duracion mayor a 5 minutos, cotizar manualmente');
-    } else {
-      const duracionExtra = this.cotizacion.duracion -3;
-      console.log('duracion extra = ', duracionExtra);
-      this.price.duracion = duracionExtra * 20;
-      console.log('precio duracion $', this.price.duracion);
     };
 
     if (this.cotizacion.noVox) {
-      this.price.noVox = 20;
+      this.price.noVox = 10;
     };
 
     if (this.cotizacion.capella) {
-      this.price.capella = 20;
+      this.price.capella = 10;
     };
 
     if (this.cotizacion.noMaster) {
-      this.price.noMaster = 20;
+      this.price.noMaster = 50;
     };
 
     if (this.cotizacion.atmos) {
-      this.price.atmos = 150;
+      this.price.atmos = 250;
     };
 
     if (this.cotizacion.stemsDetail.drums) {
-      this.price.stemsDetail.drums = 40;
+      this.price.stemsDetail.drums = 10;
     };
 
     if (this.cotizacion.stemsDetail.perc) {
-      this.price.stemsDetail.perc = 40;
+      this.price.stemsDetail.perc = 10;
     };
 
     if (this.cotizacion.stemsDetail.guit) {
-      this.price.stemsDetail.guit = 40;
+      this.price.stemsDetail.guit = 10;
     };
 
     if (this.cotizacion.stemsDetail.bass) {
-      this.price.stemsDetail.bass = 40;
+      this.price.stemsDetail.bass = 10;
     };
 
     if (this.cotizacion.stemsDetail.keys) {
-      this.price.stemsDetail.keys = 40;
+      this.price.stemsDetail.keys = 10;
+    };
+
+    if (this.cotizacion.stemsDetail.bronces) {
+      this.price.stemsDetail.bronces = 10;
     };
 
     if (this.cotizacion.stemsDetail.bkgVoice) {
-      this.price.stemsDetail.bkgVoice = 40;
+      this.price.stemsDetail.bkgVoice = 10;
     };
 
     if (this.cotizacion.stemsDetail.mainVoice) {
-      this.price.stemsDetail.mainVoice = 40;
+      this.price.stemsDetail.mainVoice = 10;
     };
 
     if (this.cotizacion.stemsDetail.others) {
-      this.price.stemsDetail.others = 40;
+      this.price.stemsDetail.others = 10;
     };
 
     this.price.stems =
@@ -258,6 +306,7 @@ export class PayComponent implements OnInit {
       this.price.stemsDetail.bass +
       this.price.stemsDetail.keys +
       this.price.stemsDetail.bkgVoice +
+      this.price.stemsDetail.bronces +
       this.price.stemsDetail.mainVoice +
       this.price.stemsDetail.others;
 
@@ -273,7 +322,8 @@ export class PayComponent implements OnInit {
     this.price.atmos;
 
     if (this.cotizacion.obsesivo) {
-      this.price.total = this.price.total *1.3;
+      this.precioObsesivo = this.price.total * 0.5;
+      this.price.total = this.price.total *1.5;
     };
 
     console.log('el precio final es $', this.price.total);
@@ -340,11 +390,42 @@ export class PayComponent implements OnInit {
 
 
 
-  successPay(): void {
+  async successPay(): Promise<void> {
+    await this.setProduction();
     this.dialog.open(SuccesspayComponent);
   }
 
   wrongPay(): void {
     this.dialog.open(WrongpayComponent);
+  }
+
+  async setPreProduction() {
+    this.cotizacion.servicio = this.cotizacion.servicio.toUpperCase();
+    this.produccion.data = this.cotizacion;
+    this.produccion.precio = this.orden.precio;
+    this.produccion.estado = 'Cotizado';
+    const userId = this.auth.currentUser?.uid
+
+    await this.preprod.setPreProductions(userId, this.produccion);
+    this.router.navigateByUrl('/logged');
+  }
+
+  async setProduction() {
+    this.cotizacion.servicio = this.cotizacion.servicio.toUpperCase();
+    this.produccion.data = this.cotizacion;
+    this.produccion.precio = this.orden.precio;
+    this.produccion.estado = 'Inicial';
+    const userId = this.auth.currentUser?.uid
+
+    await this.preprod.setProductions(userId, this.produccion);
+    this.router.navigateByUrl('/logged');
+  }
+
+  cotiPersonalizada() {
+    this.dialog.open(ContactComponent);
+  }
+
+  probar() {
+    console.log(this.fecha);
   }
 }

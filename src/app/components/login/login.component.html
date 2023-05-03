@@ -1,7 +1,7 @@
 <div class="loginDiv">
 
   <mat-card class="card">
-    <div>
+    <div class="divSize">
 
       <button mat-button mat-dialog-close class="closeBtn">x</button>
 
@@ -72,7 +72,8 @@
 
               <p>
                 <mat-form-field>
-                  <input type="text" matInput placeholder="Repita su email" formControlName="email2" [(ngModel)]="email2" required>
+                  <input type="text" matInput placeholder="email (verificación)" formControlName="email2"
+                    [(ngModel)]="email2" required>
                   <mat-error *ngIf="formReg.addAsyncValidators">Ingrese un email válido</mat-error>
                 </mat-form-field>
               </p>
@@ -80,16 +81,119 @@
               <p>
                 <mat-form-field>
                   <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña"
-                    formControlName="password" required #pw>
+                    formControlName="password" [(ngModel)]="password" required #pw>
                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
+                  <mat-hint>La contraseña debe tener mas de 8 caracteres.</mat-hint>
                   <mat-error *ngIf="formReg.addAsyncValidators">Su contraseña debe tener 8 carácteres como mínimo
                   </mat-error>
                 </mat-form-field>
               </p>
 
+
+              <p class="noBotPad">
+                <mat-form-field>
+                  <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña (verificación)"
+                    formControlName="password2" [(ngModel)]="password2" required #pw>
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </p>
+
+              <p *ngIf="password && password2">
+                <label *ngIf="password !== password2" class="label">La contraseña ingresada no coincide en ambos campos
+                </label></p>
+
+              <mat-divider></mat-divider>
+
+              <h6 class="h6">Para producir mi música uso:</h6>
+              <!-- <img class="equipoImg">{{equipoImg[equipoValue -1]}}</img> -->
+              <img src="{{equipoImg[equipoValue -1]}}" alt="" class="equipoImg">
+              <p>
+                <label> <span *ngIf="equipoValue === 3">De igual manera</span>
+                  <span *ngIf="equipoValue === 2">Mucho mas</span>
+                  <span *ngIf="equipoValue === 1">Solamente</span>
+                  <span *ngIf="equipoValue === 4">Mucho menos</span>
+                  <span *ngIf="equipoValue === 5">No uso</span> Monitores </label>
+                <mat-slider min='1' max='5' step="1" formControlName="equipo" [(ngModel)]="equipoValue">
+                  <input matSliderThum>
+                </mat-slider>
+                <label> <span *ngIf="equipoValue === 3 ||equipoValue === 2 ||equipoValue === 4">que</span>
+                  <span *ngIf="equipoValue === 1">y no</span>
+                  <span *ngIf="equipoValue === 5">solo uso</span> Auriculares</label>
+              </p>
+
+              <img src="{{platformImg[platformValue -1]}}" alt="" class="equipoImg">
+              <p>
+                <label> <span *ngIf="platformValue === 3">De igual manera</span>
+                  <span *ngIf="platformValue === 2">Mucho mas</span>
+                  <span *ngIf="platformValue === 1">Solamente</span>
+                  <span *ngIf="platformValue === 4">Mucho menos</span>
+                  <span *ngIf="platformValue === 5">No uso</span> Windows </label>
+                <mat-slider min='1' max='5' step="1" formControlName="platform" [(ngModel)]="platformValue">
+                  <input matSliderThum>
+                </mat-slider>
+                <label> <span *ngIf="platformValue === 3 ||platformValue === 2 ||platformValue === 4">que</span>
+                  <span *ngIf="platformValue === 1">y no</span>
+                  <span *ngIf="platformValue === 5">solo uso</span> MacOS</label>
+              </p>
+
+              <!-- <p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Plataforma de producción preferida?</mat-label>
+                  <mat-select formControlName="platform" multiple>
+                    <mat-option *ngFor="let sel of platformList" [value]="sel">{{sel}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p> -->
+
+              <p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Soy (marcar todas las que correspondan)</mat-label>
+                  <mat-select formControlName="soy" multiple>
+                    <mat-option *ngFor="let sel of soyList" [value]="sel">{{sel}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Que redes sociales utilizas?</mat-label>
+                  <mat-select formControlName="redes" multiple>
+                    <mat-option *ngFor="let sel of redesList" [value]="sel">{{sel}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+
+              <p>
+
+                  <mat-label>Que DAWs utilizas?</mat-label>
+                  <br>
+                    <mat-checkbox formControlName="daw" class="example-radio-button" *ngFor="let sel of dawList" [value]="sel">
+                      {{sel}}
+                    </mat-checkbox>
+
+              </p>
+
+              <!-- <p *ngIf="formReg.value.daw.includes('Otros')">
+                <mat-form-field class="">
+                  <mat-label>Puedes indicarnos cuales?</mat-label>
+                  <input type="text" matInput placeholder="DAWs:" formControlName="otherDaws">
+                </mat-form-field>
+              </p> -->
+
+
+
+              <p>
+                <mat-checkbox [(ngModel)]="checked" formControlName="conforme">Estoy de acuerdo con los terminos y
+                  condiciones.</mat-checkbox>
+              </p>
+
+              <!-- <p>{{checked}}</p> -->
               <div class="button">
                 <button type="submit" mat-button *ngIf="formReg.valid">Registrar Cuenta</button>
               </div>

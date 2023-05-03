@@ -20,3 +20,16 @@ h3 {
 .prods{
     margin-top: 5px;
 }
+
+table {
+  width: 100%;
+}
+
+.prodTable {
+    margin-bottom: 30px;
+}
+
+.cardTableTitle {
+    box-shadow: none;
+    padding-bottom: 0;
+}

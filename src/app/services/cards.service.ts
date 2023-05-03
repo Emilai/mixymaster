@@ -10,6 +10,7 @@ export class CardsService {
   cardInfo:any;
   serviceInfo: any;
   productions: any;
+  preProductions: any;
 
   constructor( private firestore: AngularFirestore) { }
 
@@ -46,6 +47,18 @@ export class CardsService {
       const prods = await this.firestore.collection('usuarios').doc(id).collection('productions').snapshotChanges();
       this.productions = prods;
       return prods;
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async getPreProductions(id: string) {
+    try {
+      const preprods = await this.firestore.collection('usuarios').doc(id).collection('preProductions').snapshotChanges();
+      this.preProductions = preprods;
+      return preprods;
 
 
     } catch (error) {

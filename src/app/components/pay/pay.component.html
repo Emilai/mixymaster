@@ -2,23 +2,36 @@
 
   <div *ngIf="preCoti">
 
-    <h1>Nueva Solicitud / Cotizar producción</h1>
+    <h1 class="titulo">Nueva Solicitud / Cotizar producción</h1>
+    <mat-icon class="handshake">handshake</mat-icon>
 
     <div class="formulario">
 
-
+<button mat-raised-button color="primary" (click)="probar()">Prueba</button>
       <section class="servicio">
         <!-- <h4>Servicio</h4> -->
-        <mat-form-field>
+
+          <mat-form-field class="example-full-width">
+    <mat-label>Como se llama tu produccion</mat-label>
+    <input matInput placeholder="Ejemplo: El chinito loco" [(ngModel)]="produccion.nombre">
+  </mat-form-field>
+<br>
+  <mat-form-field class="example-full-width">
+    <mat-label>Cuentanos algo acerca de tu música</mat-label>
+    <textarea matInput placeholder="Ejemplo: Es una pieza de bossa and metal indie" [(ngModel)]="produccion.descripcion"></textarea>
+  </mat-form-field>
+<br>
+        <mat-form-field class="example-full-width">
+
           <mat-label>Selecione un Servicio</mat-label>
           <mat-select class="radioGroup" [(ngModel)]="cotizacion.servicio">
-            <mat-option class="slideBtn radios" value="premium">Premium</mat-option>
-            <mat-option class="slideBtn radios" value="gold">Gold</mat-option>
-            <mat-option class="slideBtn radios" value="platinum">Platinum</mat-option>
-            <mat-option class="slideBtn radios" value="coaching">Coaching</mat-option>
-            <mat-option class="slideBtn radios" value="inmersivo">Inmersivo</mat-option>
-            <mat-option class="slideBtn radios" value="asisstant">Assistant</mat-option>
-            <mat-option class="slideBtn radios" value="mixymaster2">Mixymaster<sup>2</sup></mat-option>
+            <mat-option class="slideBtn radios colorBtn" value="premium">MixyMaster Premium</mat-option>
+            <mat-option class="slideBtn radios colorBtn2" value="gold">MixyMaster Gold</mat-option>
+            <mat-option class="slideBtn radios colorBtn3" value="platinum">MixyMaster Platinum</mat-option>
+            <mat-option class="slideBtn radios colorBtn4" value="coaching">MixyMaster Coaching</mat-option>
+            <mat-option class="slideBtn radios colorBtn4" value="inmersivo">MixyMaster Inmersivo</mat-option>
+            <mat-option class="slideBtn radios colorBtn4" value="asisstant">MixyMaster Assistant</mat-option>
+            <mat-option class="slideBtn radios colorBtn4" value="mixymaster2">Mixymaster<sup>2</sup></mat-option>
           </mat-select>
 
         </mat-form-field>
@@ -26,26 +39,32 @@
       </section>
 
 
-      <div class="duracionDiv"
+      <div class="duracionDiv example-full-width"
         *ngIf="cotizacion.servicio === 'premium' || cotizacion.servicio === 'gold' || cotizacion.servicio === 'platinum'">
         <h4>Cuanto dura la canción que quiere mezclar?</h4>
-        <mat-slider min="0" max='5.5' thumbLabel="true" step="0.5" value="cotizacion.duracion"
+        <mat-slider min="3" max='5.5' thumbLabel="{{cotizacion.duracion > 5 ? 'false' : 'true'}}" step="0.5" value="cotizacion.duracion"
           [(ngModel)]="cotizacion.duracion">
           <input matSliderThum>
         </mat-slider>
-        <label>Duración: <span *ngIf="cotizacion.duracion <= 5">{{cotizacion.duracion}}</span> <span
-            *ngIf="cotizacion.duracion > 5"> Más de 5</span> minutos</label>
+        <label> 
+          <span *ngIf="cotizacion.duracion === 3">Duración: aproximadamente 3 minutos</span>
+          <span *ngIf="cotizacion.duracion === 3.5">Duración: aproximadamente 3 minutos y medio</span>
+          <span *ngIf="cotizacion.duracion === 4">Duración: aproximadamente 4 minutos</span>
+          <span *ngIf="cotizacion.duracion === 4.5">Duración: aproximadamente 4 minutos y medio</span>
+          <span *ngIf="cotizacion.duracion === 5">Duración: aproximadamente 5 minutos</span>
+          <span *ngIf="cotizacion.duracion === 5.5">Duración: más de 5 minutos. Solicite cotización personalizada </span>
+        </label>
       </div>
 
 
       <div *ngIf="cotizacion.duracion">
         <h4>Cual es la cantidad de pistas?</h4>
         <mat-slider min="01" max='121' discrete="true" step="1" value="cotizacion.pistas"
-          [(ngModel)]="cotizacion.pistas" thumbLabel="true">
+          [(ngModel)]="cotizacion.pistas" thumbLabel="{{cotizacion.pistas > 120 ? 'false' : 'true'}}">
           <input matSliderThum>
         </mat-slider>
-        <label>Pistas: <span *ngIf="cotizacion.pistas <= 120">{{cotizacion.pistas}} (+ / - 5 pistas)</span> <span
-            *ngIf="cotizacion.pistas > 120"> Más de 120</span></label>
+        <label>Pistas: <span *ngIf="cotizacion.pistas <= 120">aproximadamente {{cotizacion.pistas}} (+ / - 5 pistas)</span> <span
+            *ngIf="cotizacion.pistas > 120"> Más de 120. Solicite cotización personalizada.</span></label>
       </div>
 
       <hr>
@@ -97,7 +116,7 @@
           <h4>Activamos el modo Obsesivo?</h4>
           <mat-slide-toggle [(ngModel)]="cotizacion.obsesivo">Modo Obsesivo</mat-slide-toggle>
           <br>
-          <label *ngIf="cotizacion.obsesivo">Autotune, Edicion rítmica, Drum Replacement, Revisiones adicionales</label>
+          <label *ngIf="cotizacion.obsesivo" class="lowlabel">Autotune, Edicion rítmica, Drum Replacement, Revisiones adicionales</label>
 
         </section>
 
@@ -120,6 +139,7 @@
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.guit">Guitarras</mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bass">Bajo</mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.keys">Teclados</mat-slide-toggle>
+              <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bronces">Bronces</mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.mainVoice">Voz Principal
               </mat-slide-toggle>
               <mat-slide-toggle class="slideBtn" [(ngModel)]="cotizacion.stemsDetail.bkgVoice">Coros
@@ -133,10 +153,17 @@
             </mat-slide-toggle>
           </form>
 
-          <div class="example-button-row">
+          <div class="example-button-row" *ngIf="cotizacion.pistas <= 120 && cotizacion.duracion <= 5">
             <button mat-raised-button color="accent" class="cotiBtn" (click)="coti()">
               <mat-icon>payments</mat-icon>
               Cotizar
+            </button>
+          </div>
+
+          <div class="example-button-row" *ngIf="cotizacion.pistas > 120 || cotizacion.duracion > 5">
+            <button mat-raised-button color="accent" class="cotiBtn2" (click)="cotiPersonalizada()">
+              <mat-icon>payments</mat-icon>
+              Solicitar Cotización personalizada
             </button>
           </div>
 
@@ -202,37 +229,37 @@
         <span *ngIf="cotizacion.servicio ==='premium'">Premium</span>
         <span *ngIf="cotizacion.servicio ==='gold'">Gold</span>
         <span *ngIf="cotizacion.servicio ==='platinum'">Platinum</span>
-        : u$s {{price.servicio}}
+        : USD {{price.servicio}}
       </mat-card-subtitle>
 
       <mat-card-subtitle
         *ngIf="cotizacion.servicio ==='coaching' || cotizacion.servicio ==='inmersivo' || cotizacion.servicio ==='asisstant' || cotizacion.servicio ==='mixymaster2'">
-        <span *ngIf="cotizacion.servicio ==='coaching'">Coaching: u$s {{coachingId.precio}}</span>
+        <span *ngIf="cotizacion.servicio ==='coaching'">Coaching: USD {{coachingId.precio}}</span>
         <span *ngIf="cotizacion.servicio ==='inmersivo'">Inmersivo: {{inmersiv.mje}}</span>
-        <span *ngIf="cotizacion.servicio ==='asisstant'">Asisstant: u$s {{asisstant.precio}}</span>
+        <span *ngIf="cotizacion.servicio ==='asisstant'">Asisstant: USD {{asisstant.precio}}</span>
         <span *ngIf="cotizacion.servicio ==='mixymaster2'">MixyMaster<sup>2</sup></span>
       </mat-card-subtitle>
 
-      <mat-card-subtitle *ngIf="price.duracion">Duración (mayor a 3 minutos): u$s {{price.duracion}}
+      <mat-card-subtitle *ngIf="price.duracion">Duración (mayor a 3 minutos): + USD {{price.duracion}}
       </mat-card-subtitle>
 
-      <mat-card-subtitle *ngIf="cotizacion.pistas">Cantidad de Pistas
+      <mat-card-subtitle *ngIf="cotizacion.pistas">Adicional por cantidad de Pistas
         <span *ngIf="cotizacion.servicio ==='premium'">(hasta 24 sin costo extra)</span>
         <span *ngIf="cotizacion.servicio ==='gold'">(hasta 40 sin costo extra)</span>
         <span *ngIf="cotizacion.servicio ==='platinum'">(hasta 120 sin costo extra)</span>
-        : u$s {{price.pistas}}
+        : + USD {{price.pistas}}
       </mat-card-subtitle>
-      <mat-card-subtitle *ngIf="cotizacion.obsesivo">Modo Obsesivo: + 30%</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="cotizacion.obsesivo">Modo Obsesivo: + USD {{precioObsesivo}}</mat-card-subtitle>
 
       <mat-card-header>
         <mat-card-subtitle
           *ngIf="cotizacion.noVox || cotizacion.capella || cotizacion.stems|| cotizacion.noMaster || cotizacion.atmos">
           Adicionales</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.noVox">No Vocals: u$s {{price.noVox}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.capella">A Capella: u$s {{price.capella}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.stems">Stems: u$s {{price.stems}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.noMaster">No Mastering: u$s {{price.noMaster}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.atmos">Atmos: u$s {{price.atmos}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.noVox">No Vocals: + USD {{price.noVox}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.capella">A Capella: + USD {{price.capella}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.stems">Stems: + USD {{price.stems}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.noMaster">No Mastering: + USD {{price.noMaster}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.atmos">Atmos: + USD {{price.atmos}}</mat-card-subtitle>
       </mat-card-header>
 
 
@@ -241,11 +268,11 @@
     <mat-card-header>
       <mat-card-title
         *ngIf="cotizacion.servicio ==='premium' || cotizacion.servicio ==='gold' || cotizacion.servicio ==='platinum'">
-        Precio final: u$s {{price.total}}
+        Precio final: USD {{price.total}}
       </mat-card-title>
 
       <mat-card-title *ngIf="cotizacion.servicio ==='coaching'">
-        Precio final: u$s {{coachingId.precio}}
+        Precio final: USD {{coachingId.precio}}
       </mat-card-title>
 
       <mat-card-title *ngIf="cotizacion.servicio ==='inmersivo'">
@@ -266,10 +293,11 @@
       <mat-card-subtitle>GARANTIA DE CONFORMIDAD</mat-card-subtitle>
 
       <p class="garantia">
-        En mixymaster estas protegido. La cotizacion de este servicio por mixymaster y el pago por el usuario queda
-        sujeto a la revision una vez subidos los archivos.
-        En caso de encontrarse una discrepancia, el usuario sera notificado ya sea para abonar la diferencia o procesar
-        el rembolso (menos gastos operativos)
+        <strong>En mixymaster estas protegido.</strong>
+         La cotización de este servicio y el pago por el usuario quedan
+        sujetos a revisión una vez subidos los archivos.
+        En caso de encontrarse una discrepancia, el usuario será notificado ya sea para procesar
+        el rembolso (menos los gastos operativos), o abonar la diferencia que correspondiere.
       </p>
 
       <p>
@@ -288,6 +316,9 @@
     <div class="paypalcontent">
       <div #paypal class="paypalBtnContainer"></div>
     </div>
+
+    <h4>Necesito pensarlo mejor...</h4>
+    <button mat-raised-button color="primary" (click)="setPreProduction()">Guardar Cotización</button>
   </div>
 
 

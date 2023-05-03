@@ -7,6 +7,10 @@
   border-radius: 25%;
 }
 
+.divSize {
+  size: 100%
+}
+
 .matTab {
   margin-top: 25px;
 }
@@ -55,4 +59,24 @@ mat-card-content {
 .spinner {
   align-self: center;
   margin: auto;
+}
+
+.label {
+      color: red;
+    font-size: 12px;
+}
+
+.noBotPad{
+  margin-bottom: 0;
+}
+
+.h6 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.equipoImg {
+    object-fit: cover;
+  height: 140px;
+  width: 140px;
 }

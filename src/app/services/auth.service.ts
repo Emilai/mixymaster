@@ -87,7 +87,7 @@ export class AuthService {
       const userInf= await this.firestore.collection('usuarios').doc(this.auth.currentUser?.uid).get();
       this.userInfo = userInf.subscribe((userdata => {
         this.userInfox = userdata.data()
-        console.log(this.userInfox);
+        console.log('esta es la info: ', this.userInfox);
       }));
       return userInf;
     } catch (error) {

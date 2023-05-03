@@ -24,7 +24,7 @@
     <img mat-card-image src="../../../assets/img/logowhite.png" alt="MixyMaster Logo" class="logo">
 
     <div>
-      <p *ngIf="authService.userInfox">{{authService.userInfox.nombre}}</p>
+      <p *ngIf="authService.userInfox">Hola <strong>{{authService.userInfox.nombre}}</strong></p>
       <!-- <button mat-button class="menu-button" (click)="testing()">
         <mat-icon>home</mat-icon>
         <span>Test</span>

@@ -13,6 +13,9 @@ export class LoggedComponent implements OnInit {
 
   userInfo: any;
   productions: any = [];
+  preProductions: any = [];
+  displayedColumns: string[] = ['fecha', 'nombre', 'servicio', 'precio'];
+  displayedProductionColumns: string[] = ['fecha', 'nombre', 'servicio', 'estado'];
 
   constructor(
     public authService: AuthService,
@@ -30,10 +33,20 @@ export class LoggedComponent implements OnInit {
         cards?.subscribe(card => {
           this.productions = card.map(cardRef => {
             const data = cardRef.payload.doc.data();
-            console.log(this.productions);
+            console.log('prods: ',this.productions);
             return data;
           });
 
+        });
+      });
+
+      await this.cardService.getPreProductions(this.userInfo.id).then(cards => {
+        cards?.subscribe(card => {
+          this.preProductions = card.map(cardRef => {
+            const data = cardRef.payload.doc.data();
+            return data;
+          });
+          console.log('preProds: ', this.preProductions);
         });
       });
     }));

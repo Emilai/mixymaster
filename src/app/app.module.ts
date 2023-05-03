@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +57,7 @@ import { RegistererrormailComponent } from './components/registererrormail/regis
 import { RegisterduplicatedmailComponent } from './components/registerduplicatedmail/registerduplicatedmail.component';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
-
+import { MatTableModule } from '@angular/material/table'
 
 
 
@@ -107,6 +108,7 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
     MatTabsModule,
     MatMenuModule,
     MatDialogModule,
+    MatTableModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
@@ -121,7 +123,7 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [AngularFireModule, SafePipe],
+  providers: [AngularFireModule, SafePipe, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

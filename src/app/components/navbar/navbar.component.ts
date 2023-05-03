@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
         this.userInfo = userInf.data()!;
         console.log(this.userInfo);
       } else {
-        console.log("El documento no existe");
+        console.log("El usuario aun no se ha cargado");
       }
     } catch (error) {
       console.log(error);
