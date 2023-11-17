@@ -78,5 +78,14 @@ mat-card-content {
 .equipoImg {
     object-fit: cover;
   height: 140px;
-  width: 140px;
+  width: 370px;
+}
+
+.toCenter{
+  text-align: center;
+}
+
+.labelMargin{
+  margin-left: 10px;
+  margin-right: 10px;
 }

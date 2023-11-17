@@ -16,7 +16,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HowitworksComponent } from './components/howitworks/howitworks.component';
@@ -60,6 +60,11 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
 import { MatTableModule } from '@angular/material/table'
 import { OrderPipe } from 'ngx-order-pipe';
 import { MatChipsModule } from '@angular/material/chips';
+import { ModalproductionComponent } from './components/modalproduction/modalproduction.component';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ModalpaypreprodComponent } from './components/modalpaypreprod/modalpaypreprod.component';
+
 
 
 
@@ -86,8 +91,10 @@ import { MatChipsModule } from '@angular/material/chips';
     FaqComponent,
     LoginerrorComponent,
     PayComponent,
+    ModalproductionComponent,
     MainComponent,
     ModalserviceComponent,
+    ModalpaypreprodComponent,
     SafePipe
   ],
   imports: [
@@ -106,6 +113,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatChipsModule,
     MatRadioModule,
+    MatSnackBarModule,
     MatCheckboxModule,
     MatSliderModule,
     MatTabsModule,
@@ -122,9 +130,11 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDividerModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [AngularFireModule, SafePipe, DatePipe, OrderPipe],
   bootstrap: [AppComponent]

@@ -50,19 +50,19 @@ export class LoginComponent implements OnInit {
   equipoValue = 3;
   platformValue = 3;
   equipoImg = [
-    'https://ar.xprostore.com/image/cache/data/imagenesweb/rp103g4-650x650.jpg',
-    'https://d3ugyf2ht6aenh.cloudfront.net/stores/969/083/products/d_856526-mla32804495770_112019-o-5a7970a342c51600b815992429419298-640-0.webp',
-    'https://manualguitarraelectrica.com/wp-content/uploads/2021/06/Monitores-y-Auriculares-de-Estudio.jpg',
-    'https://djpmusicschool.com/wp-content/uploads/auriculares-estudio-djp-music-school.png',
-    'https://musicmakers.pro/wp-content/uploads/2021/01/mejores-auriculares-de-estudio.jpg'
+    '../../../assets/100monitores.png',
+    '../../../assets/70monitores.png',
+    '../../../assets/50monitores.png',
+    '../../../assets/70phones.png',
+    '../../../assets/100phones.png'
   ];
 
   platformImg = [
-    'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2021/11/win7.png?fit=2400%2C1400&quality=50&strip=all&ssl=1',
-    'https://media.kasperskydaily.com/wp-content/uploads/sites/87/2021/04/27103205/Windows_7.jpg',
-    'https://descubrecomohacerlo.com/wp-content/uploads/mch/logos-windows-macos_4403.jpg',
-    'https://www.apple.com/v/mac-mini/r/images/meta/mac-mini_specs__cpcpy3ivxfqu_og.jpg',
-    'https://www.apple.com/newsroom/images/product/imac/standard/Apple_imac-magickeyboardnum-magicmouse2-macos-wallpaper_08042020.jpg.og.jpg?202303302223'
+    '../../../assets/100monitores.png',
+    '../../../assets/100monitores.png',
+    '../../../assets/100monitores.png',
+    '../../../assets/100monitores.png',
+    '../../../assets/100monitores.png'
   ]
 
   userInfo = {

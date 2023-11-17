@@ -8,6 +8,11 @@ h3 {
 
 .userCard{
     margin-bottom: 30px;
+    text-align: center;
+}
+
+.header1 {
+    display: block;
 }
 
 .prodTitle{
@@ -32,4 +37,25 @@ table {
 .cardTableTitle {
     box-shadow: none;
     padding-bottom: 0;
+}
+
+.tableHeaders {
+    padding-left: 14px;
+}
+
+.subTitle {
+    color: gray;
+    font-size: 14px;
+}
+
+.prodData {
+    font-size: 14px;
+}
+
+.success {
+    color: rgb(23, 196, 23);
+}
+
+.danger {
+    color: red
 }

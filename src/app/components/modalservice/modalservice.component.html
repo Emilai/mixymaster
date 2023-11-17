@@ -12,6 +12,8 @@
     <p> - {{card.text2}}</p>
     <p> - {{card.text3}}</p>
     <mat-divider></mat-divider>
+    <p *ngIf="card.pistas">Pistas incluidas sin costo adicional: {{card.pistas}}</p>
+    <p *ngIf="card.pistas">Hasta 3 minutos de duración sin costo adicional</p>
   </mat-card-content>
   <mat-card-actions class="footer">
 <button mat-raised-button color="accent" (click)="cotizar()">Cotizar Servicio</button>

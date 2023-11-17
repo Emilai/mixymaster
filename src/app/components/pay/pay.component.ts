@@ -8,6 +8,7 @@ import { WrongpayComponent } from '../wrongpay/wrongpay.component';
 import { PreprodService } from 'src/app/services/preprod.service';
 import { ContactComponent } from '../contact/contact.component';
 import { DatePipe } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 declare var paypal:any ;
 
@@ -26,7 +27,7 @@ export class PayComponent implements OnInit {
     servicio: '',
     precioServicio: 0,
     duracion: 0,
-    pistas: 0,
+    pistas: 1,
     obsesivo: false,
     noVox: false,
     capella: false,
@@ -56,6 +57,15 @@ export class PayComponent implements OnInit {
     precio: 0,
     mje: ''
   }
+
+  existsName: any;
+
+  mixym2 = {
+    tipo: '',
+    precio: 0,
+    pistas: 1
+  }
+
 
   price = {
     servicio: 0,
@@ -103,18 +113,23 @@ export class PayComponent implements OnInit {
   produccion = {
     nombre: '',
     descripcion: '',
+    id: '',
     data: {},
     fecha: '',
     precio: 0,
     estado: '',
     validDate: {},
+    archivosUrl: [],
+    archivosName: [],
   }
 
   constructor( private dialog: MatDialog,
     private auth: Auth,
     private router: Router,
     private preprod: PreprodService,
-    public datePipe: DatePipe ) {
+    public datePipe: DatePipe,
+    private firestore: AngularFirestore
+    ) {
     this.fecha = this.datePipe.transform(this.myDate, 'yyyy/MM/dd, HH:mm')
      }
 
@@ -137,7 +152,8 @@ export class PayComponent implements OnInit {
   }
 
   volver() {
-    window.location.reload();
+    this.cotiCard = false;
+    this.preCoti = true;
   }
 
   paypalFunc() {
@@ -177,7 +193,7 @@ export class PayComponent implements OnInit {
 
     if(this.cotizacion.servicio === 'premium') {
       this.price.servicio = 99;
-      if (this.cotizacion.pistas < 21) {
+      if (this.cotizacion.pistas < 25) {
         this.price.pistas = 0;
         console.log('menos de 25 pistas')
       } else {
@@ -227,7 +243,7 @@ export class PayComponent implements OnInit {
       this.price.servicio = 250;
       if (this.cotizacion.pistas < 101) {
         this.price.pistas = 0;
-        console.log('menos de 120 pistas')
+        console.log('menos de 100 pistas')
       } else {
         const pistasExtra = this.cotizacion.pistas - 100;
         console.log('pistas extra =', pistasExtra);
@@ -384,10 +400,51 @@ export class PayComponent implements OnInit {
     this.paypalFunc();
   }
 
-  mm2() {
-    console.log('pago de mm2')
-  }
+  async mm2() {
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
 
+    await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+      if (this.existsName === undefined) {
+        if (this.mixym2.tipo === '1' || this.mixym2.tipo === '2') {
+          this.mixym2.precio = 35 * this.mixym2.pistas;
+        };
+        if (this.mixym2.tipo === '3') {
+          this.mixym2.precio = 400;
+        };
+        if (this.mixym2.tipo === '4') {
+          this.mixym2.precio = 300;
+        };
+        if (this.mixym2.tipo === '5') {
+          this.mixym2.precio = 250;
+        };
+        console.log(this.mixym2.precio);
+        this.orden.precio = this.mixym2.precio;
+        this.orden.descripcion = this.cotizacion.servicio;
+        this.cotiCard = true;
+        this.preCoti = false;
+        this.paypalFunc();
+      } else {
+        console.log('Nombre YA EXISTE, debemos avisarle que lo cambie por uno nuevo')
+      }
+    });
+
+  }
+  //   Para Plataformas o CD
+
+  //   35 USD por tema de hasta 5min con 1 revision
+  // Cada Revisión extra 10 USD
+  //   10 tracks de hasta 5 min - 250 USD, 1 revision por tema.Revisión extra por tema 10 USD
+  // Tema más largo, consultar
+
+  // Para Vinilo
+
+  // LP 400
+  // 12 EP 300
+  // 7 EP 250
+
+  // Idea: Cuenta corriente de Créditos ?
 
 
 
@@ -407,8 +464,10 @@ export class PayComponent implements OnInit {
     this.produccion.validDate = await this.addDate(this.myDate, 7);
     this.produccion.estado = 'Cotizado';
     const userId = this.auth.currentUser?.uid
+    const prodID = this.produccion.nombre.split(' ').join('-')
+    this.produccion.id = prodID;
 
-    await this.preprod.setPreProductions(userId, this.produccion);
+    await this.preprod.setPreProductions(userId, this.produccion, prodID);
     this.router.navigateByUrl('/logged');
   }
 
@@ -416,10 +475,13 @@ export class PayComponent implements OnInit {
     this.cotizacion.servicio = this.cotizacion.servicio.toUpperCase();
     this.produccion.data = this.cotizacion;
     this.produccion.precio = this.orden.precio;
-    this.produccion.estado = 'Inicial';
+    this.produccion.estado = 'Preproducción';
     const userId = this.auth.currentUser?.uid
 
-    await this.preprod.setProductions(userId, this.produccion);
+    const prodID = this.produccion.nombre.split(' ').join('-')
+    this.produccion.id = prodID;
+
+    await this.preprod.setProductions(userId, this.produccion, prodID);
     this.router.navigateByUrl('/logged');
   }
 
@@ -437,4 +499,14 @@ export class PayComponent implements OnInit {
     probar() {
       this.addDate(this.myDate, 7)
     }
+
+  async checkName(){
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
+
+      await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+        console.log('name: ', this.existsName);
+    });
+  }
 }

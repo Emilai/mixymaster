@@ -11,6 +11,8 @@ export class CardsService {
   serviceInfo: any;
   productions: any;
   preProductions: any;
+  production: any;
+  payPreProduction: any;
 
   constructor( private firestore: AngularFirestore) { }
 

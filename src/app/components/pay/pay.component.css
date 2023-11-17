@@ -58,9 +58,9 @@ margin: 30px;
 }
 
 .cotiCard {
-    text-align: center;
     margin: 30px;
     margin-top: 30px;
+    text-align: left;
 }
 
 mat-card-header{
@@ -121,4 +121,31 @@ mat-card-header{
 
 .preCotiTxt {
   margin-top: 50px;
+}
+
+.logoCoti {
+  height: auto;
+  width: 200px;
+  margin: 55px;
+}
+
+.centerLogo {
+  text-align: center;
+  align-items: center;
+}
+
+.centerLeft{
+  text-align: left;
+}
+
+.cotiServiceTitle{
+  margin-top: 20px;
+  margin-bottom: 40px !important;
+}
+
+.imgAudio {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  margin: 0 !important;
 }

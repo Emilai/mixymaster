@@ -109,38 +109,43 @@
                 </label></p>
 
               <mat-divider></mat-divider>
+              <div class="toCenter">
+                <h6 class="h6">Para producir mi música uso:</h6>
+                <!-- <img class="equipoImg">{{equipoImg[equipoValue -1]}}</img> -->
+                <img src="{{equipoImg[equipoValue -1]}}" alt="" class="equipoImg">
+                <p>
+                  <label class="labelMargin" > <span *ngIf="equipoValue === 3">De igual manera</span>
+                    <span *ngIf="equipoValue === 2">Mucho mas</span>
+                    <span *ngIf="equipoValue === 1">Solamente</span>
+                    <span *ngIf="equipoValue === 4">Mucho menos</span>
+                    <span *ngIf="equipoValue === 5">No uso</span> Monitores </label>
+                  <mat-slider min='1' max='5' step="1" formControlName="equipo" [(ngModel)]="equipoValue">
+                    <input matSliderThum>
+                  </mat-slider>
+                  <label class="labelMargin" > <span *ngIf="equipoValue === 3 ||equipoValue === 2 ||equipoValue === 4">que</span>
+                    <span *ngIf="equipoValue === 1">y no</span>
+                    <span *ngIf="equipoValue === 5">solo uso</span> Auriculares</label>
+                </p>
 
-              <h6 class="h6">Para producir mi música uso:</h6>
-              <!-- <img class="equipoImg">{{equipoImg[equipoValue -1]}}</img> -->
-              <img src="{{equipoImg[equipoValue -1]}}" alt="" class="equipoImg">
-              <p>
-                <label> <span *ngIf="equipoValue === 3">De igual manera</span>
-                  <span *ngIf="equipoValue === 2">Mucho mas</span>
-                  <span *ngIf="equipoValue === 1">Solamente</span>
-                  <span *ngIf="equipoValue === 4">Mucho menos</span>
-                  <span *ngIf="equipoValue === 5">No uso</span> Monitores </label>
-                <mat-slider min='1' max='5' step="1" formControlName="equipo" [(ngModel)]="equipoValue">
-                  <input matSliderThum>
-                </mat-slider>
-                <label> <span *ngIf="equipoValue === 3 ||equipoValue === 2 ||equipoValue === 4">que</span>
-                  <span *ngIf="equipoValue === 1">y no</span>
-                  <span *ngIf="equipoValue === 5">solo uso</span> Auriculares</label>
-              </p>
+                <img src="{{platformImg[platformValue -1]}}" alt="" class="equipoImg">
+                <p>
+                  <label class="labelMargin" > <span *ngIf="platformValue === 3">De igual manera</span>
+                    <span *ngIf="platformValue === 2">Mucho mas</span>
+                    <span *ngIf="platformValue === 1">Solamente</span>
+                    <span *ngIf="platformValue === 4">Mucho menos</span>
+                    <span *ngIf="platformValue === 5">No uso</span> Windows </label>
+                  <mat-slider min='1' max='5' step="1" formControlName="platform" [(ngModel)]="platformValue">
+                    <input matSliderThum>
+                  </mat-slider>
+                  <label class="labelMargin" > <span *ngIf="platformValue === 3 ||platformValue === 2 ||platformValue === 4">que</span>
+                    <span *ngIf="platformValue === 1">y no</span>
+                    <span *ngIf="platformValue === 5">solo uso</span> MacOS</label>
+                </p>
 
-              <img src="{{platformImg[platformValue -1]}}" alt="" class="equipoImg">
-              <p>
-                <label> <span *ngIf="platformValue === 3">De igual manera</span>
-                  <span *ngIf="platformValue === 2">Mucho mas</span>
-                  <span *ngIf="platformValue === 1">Solamente</span>
-                  <span *ngIf="platformValue === 4">Mucho menos</span>
-                  <span *ngIf="platformValue === 5">No uso</span> Windows </label>
-                <mat-slider min='1' max='5' step="1" formControlName="platform" [(ngModel)]="platformValue">
-                  <input matSliderThum>
-                </mat-slider>
-                <label> <span *ngIf="platformValue === 3 ||platformValue === 2 ||platformValue === 4">que</span>
-                  <span *ngIf="platformValue === 1">y no</span>
-                  <span *ngIf="platformValue === 5">solo uso</span> MacOS</label>
-              </p>
+
+              </div>
+
+
 
               <!-- <p>
                 <mat-form-field appearance="fill">
@@ -171,11 +176,12 @@
 
               <p>
 
-                  <mat-label>Que DAWs utilizas?</mat-label>
-                  <br>
-                    <mat-checkbox formControlName="daw" class="example-radio-button" *ngFor="let sel of dawList" [value]="sel">
-                      {{sel}}
-                    </mat-checkbox>
+                <mat-label>Que DAWs utilizas?</mat-label>
+                <br>
+                <mat-checkbox formControlName="daw" class="example-radio-button" *ngFor="let sel of dawList"
+                  [value]="sel">
+                  {{sel}}
+                </mat-checkbox>
 
               </p>
 

@@ -1,0 +1,83 @@
+<div class="divGral">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>
+        <span>
+          Información de la Pre Producción
+        </span></mat-card-subtitle>
+      <mat-card-title>Titulo: {{production.nombre}}</mat-card-title>
+      <mat-card-subtitle>Descripción: {{production.descripcion}}</mat-card-subtitle>
+      <mat-card-subtitle>Precio Cotizado: USD {{production.precio}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+        <div class="paypalcontent">
+      <div #paypal class="paypalBtnContainer"></div>
+    </div>
+
+
+    <mat-card-content *ngIf="data">
+
+        <div *ngIf="production.data">
+            <mat-card-subtitle>Servicios Incluidos</mat-card-subtitle>
+            <p>Cantidad de Pistas: {{production.data.pistas}}</p>
+            <p>Tipo de Servicio: {{production.data.servicio}}</p>
+            <p>Duración: {{production.data.duracion}} minutos</p>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-subtitle>Extras</mat-card-subtitle>
+            <p *ngIf="production.data.atmos">Mexcla Inmersiva (Dolby Atmos)</p>
+            <p *ngIf="production.data.capella">Solo vocales</p>
+            <p *ngIf="production.data.noMaster">Sin Masterizar</p>
+            <p *ngIf="production.data.noVox">Sin Voces</p>
+            <p *ngIf="production.data.obsesivo">ModoObsesivo</p>
+            <div *ngIf="production.data.stems">
+                <mat-divider></mat-divider>
+                <mat-card-subtitle>STEMS:</mat-card-subtitle>
+                <p *ngIf="production.data.stemsDetail.bass">Bajo</p>
+                <p *ngIf="production.data.stemsDetail.bkgVoice">Coros</p>
+                <p *ngIf="production.data.stemsDetail.bronces">Bronces</p>
+                <p *ngIf="production.data.stemsDetail.drums">Batería</p>
+                <p *ngIf="production.data.stemsDetail.guit">Guitarras</p>
+                <p *ngIf="production.data.stemsDetail.keys">Teclados</p>
+                <p *ngIf="production.data.stemsDetail.mainVoice">Voz Principal</p>
+                <p *ngIf="production.data.stemsDetail.perc">Percusión</p>
+                <p *ngIf="production.data.stemsDetail.other">Otros</p>
+            </div>
+            <mat-divider></mat-divider>
+
+            <button mat-raised-button color="accent" class="cotiBtn" (click)="pay()" [disabled]="!production.precio">
+          <mat-icon>payments</mat-icon>
+          Deseo Contratar el servicio
+        </button>
+
+        </div>
+
+
+
+
+      <!-- <div>
+        <p>Aqui vamos a inyectar los detalles de la produccion</p>
+        
+      </div>
+
+      <div>
+        <p>Aqui se mostrar[an los archivos que han sido subidos</p>
+        <p *ngFor="let doc of production.archivosName">{{doc}}</p>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div>
+        <button mat-raised-button class="cardBtn">Subir Archivos</button> 
+        <mat-icon class="icon" (click)="openSnackBar(wavInfo, 'OK')">info</mat-icon>
+      </div>
+      <input type="file" accept=".wav" (change)="onFileChange($event)" multiple required>
+
+      <button mat-raised-button class="cardBtn" (click)="updateProduction()">Guardar cambios y enviar a Producción</button> -->
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

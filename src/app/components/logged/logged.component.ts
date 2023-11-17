@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CardsService } from 'src/app/services/cards.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PayComponent } from '../pay/pay.component';
+import { ModalproductionComponent } from '../modalproduction/modalproduction.component';
+import { ModalpaypreprodComponent } from '../modalpaypreprod/modalpaypreprod.component';
+import { PreprodService } from 'src/app/services/preprod.service';
 
 @Component({
   selector: 'app-logged',
@@ -18,7 +21,7 @@ export class LoggedComponent implements OnInit {
   productions: any = [];
   preProductions: any = [];
   displayedColumns: string[] = ['fecha', 'nombre', 'servicio', 'precio', 'pagar'];
-  displayedProductionColumns: string[] = ['fecha', 'nombre', 'servicio', 'estado'];
+  displayedProductionColumns: string[] = ['fecha', 'nombre', 'servicio', 'estado', 'ver', 'cargar'];
 
   constructor(
     public authService: AuthService,
@@ -26,7 +29,8 @@ export class LoggedComponent implements OnInit {
     private cardService: CardsService,
     private router: Router,
     private orderPipe: OrderPipe,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private preprod: PreprodService
   ) { }
 
   async ngOnInit() {
@@ -38,7 +42,6 @@ export class LoggedComponent implements OnInit {
         cards?.subscribe(card => {
           this.productions = card.map(cardRef => {
             const data = cardRef.payload.doc.data();
-            console.log('prods: ',this.productions);
             return data;
           });
           this.productions = this.orderPipe.transform(this.productions, 'fecha', true);
@@ -74,5 +77,22 @@ export class LoggedComponent implements OnInit {
   test(coti: any) {
     console.log(coti);
     this.dialog.open(PayComponent);
+  }
+
+
+  openProd(data: any) {
+    console.log(data);
+    this.cardService.production = data;
+    this.dialog.open(ModalproductionComponent);
+  }
+
+  contratar(prod: any) {
+    console.log(prod);
+    this.cardService.payPreProduction = prod;
+    this.dialog.open(ModalpaypreprodComponent);
+  }
+
+  async del(prod: any) {
+    await this.preprod.deletePreProduction(this.auth.currentUser?.uid, prod.id);
   }
 }

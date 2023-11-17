@@ -3,14 +3,13 @@
     Panel de Usuario
   </mat-card-title>
 
-  <mat-card-header>
+  <mat-card-header class="header1">
     <mat-card-title>Hola {{userInfo.nombre}}</mat-card-title>
     <mat-card-subtitle class="email">E-mail: {{userInfo.email}}</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    <p *ngIf="productions.length === 0">No tienes Producciones Activas</p>
-    <p *ngIf="preProductions.length === 0">No tienes Cotizaciones Guardadas/p>
+    <p *ngIf="preProductions.length === 0">No tienes Cotizaciones Guardadas </p>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>
@@ -18,100 +17,63 @@
   </mat-card-actions>
 </mat-card>
 
+
 <mat-card *ngIf="productions.length > 0" class="cardTableTitle">
-    <mat-card-header>
-    <mat-card-title>Producciones</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Producciones en curso</mat-card-title>
   </mat-card-header>
+
+  <mat-grid-list cols="5" rowHeight="30px">
+    <mat-grid-tile class="subTitle">Fecha</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Nombre</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Servicio</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Estado</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Detalles</mat-grid-tile>
+  </mat-grid-list>
+    <mat-divider></mat-divider>
+      <mat-grid-list *ngFor="let prod of productions" cols="5" rowHeight="35px">
+    <mat-grid-tile class="prodData">{{prod.fecha}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.nombre}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.data.servicio}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.estado}}</mat-grid-tile>
+    <mat-grid-tile (click)="openProd(prod)"><mat-icon>remove_red_eye</mat-icon></mat-grid-tile>
+  </mat-grid-list>
 </mat-card>
-<table *ngIf="productions.length > 0" mat-table [dataSource]="productions" class="mat-elevation-z8 prodTable">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-  <!-- Position Column -->
-  <ng-container matColumnDef="fecha">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="servicio">
-    <th mat-header-cell *matHeaderCellDef> Servicio </th>
-    <td mat-cell *matCellDef="let element"> {{element.data.servicio}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="estado">
-    <th mat-header-cell *matHeaderCellDef> Estado </th>
-    <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedProductionColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedProductionColumns;"></tr>
-</table>
-
 
 <mat-card *ngIf="preProductions.length > 0" class="cardTableTitle">
-    <mat-card-header>
-    <mat-card-title>Cotizaciones Guardadas</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Pre producciones en curso</mat-card-title>
+  </mat-card-header>
+
+  <mat-grid-list cols="7" rowHeight="30px">
+    <mat-grid-tile class="subTitle">Fecha</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Nombre</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Servicio</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Estado</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Precio USD</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Contratar</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Eliminar</mat-grid-tile>
+  </mat-grid-list>
+    <mat-divider></mat-divider>
+      <mat-grid-list *ngFor="let prod of preProductions" cols="7" rowHeight="35px">
+    <mat-grid-tile class="prodData">{{prod.fecha}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.nombre}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.data.servicio}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.estado}}</mat-grid-tile>
+    <mat-grid-tile class="prodData">{{prod.precio}}</mat-grid-tile>
+    <mat-grid-tile class="success" (click)="contratar(prod)"><mat-icon>payments</mat-icon></mat-grid-tile>
+    <mat-grid-tile class="danger" (click)="del(prod)"><mat-icon>delete</mat-icon></mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
+<mat-card *ngIf="productions.length == 0" class="cardTableTitle">
+  <mat-card-header>
+    <mat-card-title>No tienes Producciones Activas</mat-card-title>
   </mat-card-header>
 </mat-card>
-<table *ngIf="preProductions.length > 0" mat-table [dataSource]="preProductions" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="fecha">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="servicio">
-    <th mat-header-cell *matHeaderCellDef> Servicio </th>
-    <td mat-cell *matCellDef="let element"> {{element.data.servicio}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="precio">
-    <th mat-header-cell *matHeaderCellDef> Cotización </th>
-    <td mat-cell *matCellDef="let element"> USD {{element.precio}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="pagar" >
-    <th mat-header-cell *matHeaderCellDef> Pagar </th>
-    <td mat-cell *matCellDef="let element" (click)="test(element)">
-      <button mat-button color="accent">Pagar</button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<!-- <h3 *ngIf="productions[0]" class="prodTitle">Producciones</h3>
-
-<mat-card *ngFor="let prod of productions" class="prods">
-
+<mat-card *ngIf="preProductions.length == 0" class="cardTableTitle">
   <mat-card-header>
-    <mat-card-subtitle class="prodSubtitle">{{prod.titulo}}</mat-card-subtitle>
-        <mat-card-subtitle>Estado: {{prod.estado}}</mat-card-subtitle>
+    <mat-card-title>No tienes Cotizaciones Guardadas</mat-card-title>
   </mat-card-header>
-
-  <mat-card-content>
-    <p>{{prod.desc}}</p>
-  </mat-card-content>
-</mat-card> -->
+</mat-card>

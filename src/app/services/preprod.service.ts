@@ -11,9 +11,9 @@ export class PreprodService {
 
 
 
-  async setPreProductions(id: string | undefined, data: firebase.firestore.DocumentData) {
+  async setPreProductions(id: string | undefined, data: firebase.firestore.DocumentData, idProd: string) {
     try {
-      let datos = await this.firestore.collection('usuarios').doc(id).collection('preProductions').doc().set(data);
+      let datos = await this.firestore.collection('usuarios').doc(id).collection('preProductions').doc(idProd).set(data);
       console.log('setPreProduccion ejecutado con exito');
       return datos
 
@@ -22,9 +22,9 @@ export class PreprodService {
     }
   };
 
-  async setProductions(id: string | undefined, data: firebase.firestore.DocumentData) {
+  async setProductions(id: string | undefined, data: firebase.firestore.DocumentData, idProd: string) {
     try {
-      let datos = await this.firestore.collection('usuarios').doc(id).collection('productions').doc().set(data);
+      let datos = await this.firestore.collection('usuarios').doc(id).collection('productions').doc(idProd).set(data);
       console.log('setProduccion ejecutado con exito');
       return datos
 
@@ -32,4 +32,8 @@ export class PreprodService {
       console.log(error);
     }
   };
+
+  async deletePreProduction(id: string | undefined, idProd: string | undefined) {
+    this.firestore.collection('usuarios').doc(id).collection('preProductions').doc(idProd).delete();
+  }
 }
