@@ -98,4 +98,11 @@ export class AuthService {
   errorRegister(): void {
     this.dialog.open(RegistererrorComponent);
   }
+  async codes() {
+    try {
+      return await this.firestore.collection('codigos').doc('codigo').get();
+    } catch (error) {
+      console.log('error en codes ', error);
+    }
+  }
 }

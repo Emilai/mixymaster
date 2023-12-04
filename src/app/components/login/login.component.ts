@@ -170,6 +170,7 @@ export class LoginComponent implements OnInit {
         grupos: ['General'],
         wip: false,
         drop: '',
+        creditos: 0,
         soy: this.formReg.value.soy,
         redes: this.formReg.value.redes,
         platform: this.formReg.value.platform,

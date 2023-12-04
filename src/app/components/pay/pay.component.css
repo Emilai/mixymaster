@@ -30,6 +30,9 @@
 
 .radioGroup {
  text-align: center;
+     max-width: 350px;
+     left: 50% !important; 
+     /* Ver por que no tira al centro */
 }
 
 .cotiBtn{

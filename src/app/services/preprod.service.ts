@@ -36,4 +36,26 @@ export class PreprodService {
   async deletePreProduction(id: string | undefined, idProd: string | undefined) {
     this.firestore.collection('usuarios').doc(id).collection('preProductions').doc(idProd).delete();
   }
+
+  async buyedCreditsHistory(data: firebase.firestore.DocumentData, userID: string | undefined) {
+    try {
+      let datos = await this.firestore.collection('usuarios').doc(userID).collection('buyedTransactions').doc().set(data);
+      console.log('buyedCreditsHistory ejecutado con exito');
+      return datos
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async usedCreditsHistory(data: firebase.firestore.DocumentData, userID: string | undefined) {
+    try {
+      let datos = await this.firestore.collection('usuarios').doc(userID).collection('usedTransactions').doc().set(data);
+      console.log('usedCreditsHistory ejecutado con exito');
+      return datos
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

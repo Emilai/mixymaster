@@ -1,4 +1,4 @@
-<div class="divGral">
+<div class="divGral" *ngIf="production">
   <mat-spinner *ngIf="loading" color="primary" class="spinner"></mat-spinner>
   <mat-card *ngIf="!loading">
     <mat-card-header>
@@ -19,19 +19,19 @@
         
       </div>
 
-      <div>
+      <!-- <div>
         <p>Aqui se mostrar[an los archivos que han sido subidos</p>
         <p *ngFor="let doc of production.archivosName">{{doc}}</p>
-      </div>
+      </div> -->
 
       <mat-divider></mat-divider>
-      <div>
-        <button mat-raised-button class="cardBtn">Subir Archivos</button> 
-        <mat-icon class="icon" (click)="openSnackBar(wavInfo, 'OK')">info</mat-icon>
+      <div class="btnDiv" *ngIf="userInfo">
+        <button mat-raised-button class="" *ngIf="production.drop">Subir Archivos</button> 
+        <mat-icon class="icon" *ngIf="production.drop" (click)="openSnackBar(wavInfo, 'OK')">info</mat-icon>
+        <button mat-raised-button class="cardBtn" (click)="updateProduction()">Guardar cambios y enviar a Producción</button>
       </div>
-      <input type="file" accept=".wav" (change)="onFileChange($event)" multiple required>
+      <!-- <input type="file" accept=".wav" (change)="onFileChange($event)" multiple required> -->
 
-      <button mat-raised-button class="cardBtn" (click)="updateProduction()">Guardar cambios y enviar a Producción</button>
     </mat-card-content>
 
   </mat-card>

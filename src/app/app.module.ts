@@ -64,6 +64,7 @@ import { ModalproductionComponent } from './components/modalproduction/modalprod
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ModalpaypreprodComponent } from './components/modalpaypreprod/modalpaypreprod.component';
+import { CreditsComponent } from './components/credits/credits.component';
 
 
 
@@ -75,6 +76,7 @@ import { ModalpaypreprodComponent } from './components/modalpaypreprod/modalpayp
     NavbarComponent,
     CardsComponent,
     JumbotronComponent,
+    CreditsComponent,
     AboutComponent,
     HowitworksComponent,
     ModalComponent,

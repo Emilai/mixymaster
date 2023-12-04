@@ -3,7 +3,14 @@
     margin-left: 20px;
 }
 
+.cardBtn {
+    float: right;
+}
 
+.btnDiv {
+    margin-top: 25px;
+    min-height: 30px;
+}
 .spinner {
     margin: auto;
 }

@@ -6,6 +6,8 @@
   <mat-card-header class="header1">
     <mat-card-title>Hola {{userInfo.nombre}}</mat-card-title>
     <mat-card-subtitle class="email">E-mail: {{userInfo.email}}</mat-card-subtitle>
+    <mat-card-subtitle class="email">Creditos: {{userInfo.creditos}} <button class="payBtn"><mat-icon class="iconPay">payments</mat-icon></button></mat-card-subtitle>
+    <div class="hide">I am shown when someone hovers over the div above.</div>
   </mat-card-header>
 
   <mat-card-content>
@@ -42,7 +44,7 @@
 
 <mat-card *ngIf="preProductions.length > 0" class="cardTableTitle">
   <mat-card-header>
-    <mat-card-title>Pre producciones en curso</mat-card-title>
+    <mat-card-title>Pre producciones cotizadas</mat-card-title>
   </mat-card-header>
 
   <mat-grid-list cols="7" rowHeight="30px">

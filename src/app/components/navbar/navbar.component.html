@@ -10,7 +10,7 @@
   </ul>
   </div> -->
 
-<mat-toolbar>
+<mat-toolbar [ngClass]="authService.userInfox === undefined ? 'toolbar' : 'toolbar2'">
   <button mat-icon-button color="white" extended aria-label="menu" (click)="sidenav.toggle()" class="menuBtn">
     <mat-icon>menu</mat-icon>
     Menú
@@ -19,22 +19,35 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav class="sideNav mat-elevation-z8">
+  <mat-sidenav [ngClass]="authService.userInfox === undefined ? 'sideNav mat-elevation-z8' : 'sideNav2'">
 
     <img mat-card-image src="../../../assets/img/logowhite.png" alt="MixyMaster Logo" class="logo">
 
     <div>
-      <p *ngIf="authService.userInfox">Hola <strong>{{authService.userInfox.nombre}}</strong></p>
+      <p class="pTitle" *ngIf="authService.userInfox">Hola <strong>{{authService.userInfox.nombre}}</strong></p>
+      <p class="paraLitt" *ngIf="authService.userInfox">Tienes {{authService.userInfox.creditos}} créditos</p>
       <!-- <button mat-button class="menu-button" (click)="testing()">
         <mat-icon>home</mat-icon>
         <span>Test</span>
       </button> -->
 
+            <mat-divider class="divider"></mat-divider>
+
       <button mat-button class="menu-button" (click)="main()">
         <mat-icon>home</mat-icon>
         <span>Inicio</span>
       </button>
+      <button mat-button class="menu-button" (click)="servicios()">
+        <mat-icon>sort</mat-icon>
+        <span>Servicios</span>
+      </button>
+      <button mat-button class="menu-button" (click)="ingenieros()">
+        <mat-icon>groups</mat-icon>
+        <span>Ingenieros</span>
+      </button>
 
+      <mat-divider class="divider"></mat-divider>
+      
       <button mat-button class="menu-button" (click)="logged()" *ngIf="authService.userInfox">
         <mat-icon>person</mat-icon>
         <span>Panel de Usuario</span>
@@ -46,11 +59,21 @@
       </button> -->
 
       <button mat-button class="menu-button" (click)="pay()" *ngIf="authService.userInfox">
-        <mat-icon>payments</mat-icon>
+        <mat-icon>storefront</mat-icon>
         <span>Cotizar Producción</span>
       </button>
 
+      <button mat-button class="menu-button" (click)="credits()" *ngIf="authService.userInfox">
+        <mat-icon>payments</mat-icon>
+        <span>Comprar Creditos</span>
+      </button>
+
       <mat-divider class="divider"></mat-divider>
+
+       <button mat-button class="menu-button" (click)="logged()">
+        <mat-icon>support_agent</mat-icon>
+        <span>Contacto</span>
+      </button>
 
       <button mat-button class="menu-button" (click)="faq()">
         <mat-icon>info</mat-icon>

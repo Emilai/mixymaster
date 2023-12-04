@@ -6,6 +6,7 @@ import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate, emailVerified 
 import { PayComponent } from './components/pay/pay.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
+import { CreditsComponent } from './components/credits/credits.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['logged']);
@@ -17,6 +18,10 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin) },
   {
     path: 'pay', component: PayComponent,
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'credits', component: CreditsComponent,
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {

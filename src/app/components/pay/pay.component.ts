@@ -9,6 +9,7 @@ import { PreprodService } from 'src/app/services/preprod.service';
 import { ContactComponent } from '../contact/contact.component';
 import { DatePipe } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var paypal:any ;
 
@@ -123,17 +124,20 @@ export class PayComponent implements OnInit {
     archivosName: [],
   }
 
+  userInfo: any;
+
   constructor( private dialog: MatDialog,
     private auth: Auth,
     private router: Router,
     private preprod: PreprodService,
     public datePipe: DatePipe,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private authService: AuthService
     ) {
     this.fecha = this.datePipe.transform(this.myDate, 'yyyy/MM/dd, HH:mm')
      }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.auth.currentUser?.emailVerified) {
       console.log('El usuario ESTA VERIFICADO')
       this.produccion.fecha = this.fecha;
@@ -142,262 +146,337 @@ export class PayComponent implements OnInit {
       console.log('El usuario NOOO ESTA VERIFICADO')
       this.router.navigateByUrl('/verificacion');
     }
+
+    (await this.authService.userData())?.subscribe((async userData => {
+      const userInfo = userData.data();
+      this.userInfo = userInfo;
+      console.log('Usuario: ', this.userInfo);
+    }));
   }
 
-  coti() {
-    this.priceCalculator();
-    this.cotiCard = true;
-    this.preCoti = false;
-    this.paypalFunc();
+  async coti() {
+
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
+
+    await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+      if (this.existsName === undefined) {
+        this.priceCalculator();
+        this.cotiCard = true;
+        this.preCoti = false;
+
+      } else {
+        this.nameExists();
+      }
+    });
+    // this.paypalFunc();
   }
 
   volver() {
     this.cotiCard = false;
     this.preCoti = true;
+    this.conforme = false;
   }
 
-  paypalFunc() {
+  // paypalFunc() {
 
-    const price = this.orden.precio;
+  //   const price = this.orden.precio;
 
-    paypal.Buttons({
+  //   paypal.Buttons({
 
-      createOrder: (data: any, actions: any) => {
+  //     createOrder: (data: any, actions: any) => {
         
-        return actions.order.create({
-          purchase_units: [
-            {
-              description: this.orden.descripcion,
-              amount: {
-                currency_code: 'USD',
-                value: price
-              }
-            }
-          ]
-        })
-      },
-      onApprove: async (data: any, actions: any) => {
-        const order = await actions.order.capture();
-        this.successPay();
-      },
-      onError: (err: any) => {
-        console.log(err);
-      },
-      onCancel: () => {
-        this.wrongPay();
-      }
-    })
-      .render(this.paypalElement.nativeElement);
-  }
-  priceCalculator(){
+  //       return actions.order.create({
+  //         purchase_units: [
+  //           {
+  //             description: this.orden.descripcion,
+  //             amount: {
+  //               currency_code: 'USD',
+  //               value: price
+  //             }
+  //           }
+  //         ]
+  //       })
+  //     },
+  //     onApprove: async (data: any, actions: any) => {
+  //       const order = await actions.order.capture();
+  //       this.successPay();
+  //     },
+  //     onError: (err: any) => {
+  //       console.log(err);
+  //     },
+  //     onCancel: () => {
+  //       this.wrongPay();
+  //     }
+  //   })
+  //     .render(this.paypalElement.nativeElement);
+  // }
 
-    if(this.cotizacion.servicio === 'premium') {
-      this.price.servicio = 99;
-      if (this.cotizacion.pistas < 25) {
-        this.price.pistas = 0;
-        console.log('menos de 25 pistas')
-      } else {
-        const pistasExtra = this.cotizacion.pistas - 24;
-        console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 4.25;
-        console.log( 'precio de las pistas $', this.price.pistas);
-      }
-      if (this.cotizacion.duracion < 3.6) {
-        this.price.duracion = 0;
-        console.log('duracion menor a 3 minutos, sin costo extra');
-      } else if (this.cotizacion.duracion > 5) {
-        console.log('duracion mayor a 5 minutos, cotizar manualmente');
-      } else {
-        const duracionExtra = this.cotizacion.duracion - 3;
-        console.log('duracion extra = ', duracionExtra);
-        this.price.duracion = duracionExtra * 30;
-        console.log('precio duracion $', this.price.duracion);
-      };
-    };
+  async paypalFunc() {
+    const price = this.orden.precio;
+    const credits = this.userInfo.creditos;
+    const path = 'usuarios';
+    const id = this.userInfo.id;
+    console.log('Aca vamos a pagar con creditos: ', price, 'Crs');
 
-    if (this.cotizacion.servicio === 'gold') {
-      this.price.servicio = 180;
-      if (this.cotizacion.pistas < 41) {
-        this.price.pistas = 0;
-        console.log('menos de 40 pistas')
-      } else {
-        const pistasExtra = this.cotizacion.pistas - 40;
-        console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 6.25;
-        console.log('precio de las pistas $', this.price.pistas);
-      }
-      if (this.cotizacion.duracion < 3.6) {
-        this.price.duracion = 0;
-        console.log('duracion menor a 3 minutos, sin costo extra');
-      } else if (this.cotizacion.duracion > 5) {
-        console.log('duracion mayor a 5 minutos, cotizar manualmente');
-      } else {
-        const duracionExtra = this.cotizacion.duracion - 3;
-        console.log('duracion extra = ', duracionExtra);
-        this.price.duracion = duracionExtra * 35;
-        console.log('precio duracion $', this.price.duracion);
-      };
-    };
-
-    if (this.cotizacion.servicio === 'platinum') {
-      this.price.servicio = 250;
-      if (this.cotizacion.pistas < 101) {
-        this.price.pistas = 0;
-        console.log('menos de 100 pistas')
-      } else {
-        const pistasExtra = this.cotizacion.pistas - 100;
-        console.log('pistas extra =', pistasExtra);
-        this.price.pistas = pistasExtra * 6.25;
-        console.log('precio de las pistas $', this.price.pistas);
-      }
-      if (this.cotizacion.duracion < 3.6) {
-        this.price.duracion = 0;
-        console.log('duracion menor a 3 minutos, sin costo extra');
-      } else if (this.cotizacion.duracion > 5) {
-        console.log('duracion mayor a 5 minutos, cotizar manualmente');
-      } else {
-        const duracionExtra = this.cotizacion.duracion - 3;
-        console.log('duracion extra = ', duracionExtra);
-        this.price.duracion = duracionExtra * 40;
-        console.log('precio duracion $', this.price.duracion);
-      };
-
-    };
-
-    if (this.cotizacion.noVox) {
-      this.price.noVox = 10;
-    };
-
-    if (this.cotizacion.capella) {
-      this.price.capella = 10;
-    };
-
-    if (this.cotizacion.noMaster) {
-      this.price.noMaster = 50;
-    };
-
-    if (this.cotizacion.atmos) {
-      this.price.atmos = 250;
-    };
-
-    if (this.cotizacion.stemsDetail.drums) {
-      this.price.stemsDetail.drums = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.perc) {
-      this.price.stemsDetail.perc = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.guit) {
-      this.price.stemsDetail.guit = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.bass) {
-      this.price.stemsDetail.bass = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.keys) {
-      this.price.stemsDetail.keys = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.bronces) {
-      this.price.stemsDetail.bronces = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.bkgVoice) {
-      this.price.stemsDetail.bkgVoice = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.mainVoice) {
-      this.price.stemsDetail.mainVoice = 10;
-    };
-
-    if (this.cotizacion.stemsDetail.others) {
-      this.price.stemsDetail.others = 10;
-    };
-
-    this.price.stems =
-      this.price.stemsDetail.drums +
-      this.price.stemsDetail.perc +
-      this.price.stemsDetail.guit +
-      this.price.stemsDetail.bass +
-      this.price.stemsDetail.keys +
-      this.price.stemsDetail.bkgVoice +
-      this.price.stemsDetail.bronces +
-      this.price.stemsDetail.mainVoice +
-      this.price.stemsDetail.others;
-
-    this.price.total = 
-    this.price.servicio +
-    this.price.duracion +
-    this.price.pistas +
-    this.price.obsesivo +
-    this.price.noVox +
-    this.price.capella +
-    this.price.stems +
-    this.price.noMaster +
-    this.price.atmos;
-
-    if (this.cotizacion.obsesivo) {
-      this.precioObsesivo = this.price.total * 0.5;
-      this.price.total = this.price.total *1.5;
-    };
-
-    console.log('el precio final es $', this.price.total);
-    this.orden.precio = Math.floor(this.price.total);
-    this.orden.descripcion = this.cotizacion.servicio;
-
+    if (price > credits) {
+      console.log('No hay suficientes creditos para pagar');
+    } else {
+      // Debemos poner una opcionde confirmacion
+      // Sebemos poner una Progress Bar que indique el proceso y luego Alert de Confirmacion
+      console.log('Se puede pagar con creditos');
+      this.userInfo.creditos = this.userInfo.creditos - price;
+      console.log('Nuevo credito: ', this.userInfo.creditos, 'Crs');
+      await this.authService.createUser(this.userInfo, path, id);
+      await this.successPay();
+    }
   }
 
-  coaching() {
-    const precio = this.coachingId.duracion * 30;
-    console.log('pago de coaching es de $', precio);
-    this.coachingId.precio = precio;
-    this.orden.precio = Math.floor(precio);
-    this.orden.descripcion = this.cotizacion.servicio;
-    this.cotiCard = true;
-    this.preCoti = false;
-    this.paypalFunc();
+
+  async priceCalculator(){
+
+        if (this.cotizacion.servicio === 'premium') {
+          this.price.servicio = 99;
+          if (this.cotizacion.pistas < 25) {
+            this.price.pistas = 0;
+            console.log('menos de 25 pistas')
+          } else {
+            const pistasExtra = this.cotizacion.pistas - 24;
+            console.log('pistas extra =', pistasExtra);
+            this.price.pistas = pistasExtra * 4.25;
+            console.log('precio de las pistas $', this.price.pistas);
+          }
+          if (this.cotizacion.duracion < 3.6) {
+            this.price.duracion = 0;
+            console.log('duracion menor a 3 minutos, sin costo extra');
+          } else if (this.cotizacion.duracion > 5) {
+            console.log('duracion mayor a 5 minutos, cotizar manualmente');
+          } else {
+            const duracionExtra = this.cotizacion.duracion - 3;
+            console.log('duracion extra = ', duracionExtra);
+            this.price.duracion = duracionExtra * 30;
+            console.log('precio duracion $', this.price.duracion);
+          };
+        };
+
+        if (this.cotizacion.servicio === 'gold') {
+          this.price.servicio = 180;
+          if (this.cotizacion.pistas < 41) {
+            this.price.pistas = 0;
+            console.log('menos de 40 pistas')
+          } else {
+            const pistasExtra = this.cotizacion.pistas - 40;
+            console.log('pistas extra =', pistasExtra);
+            this.price.pistas = pistasExtra * 6.25;
+            console.log('precio de las pistas $', this.price.pistas);
+          }
+          if (this.cotizacion.duracion < 3.6) {
+            this.price.duracion = 0;
+            console.log('duracion menor a 3 minutos, sin costo extra');
+          } else if (this.cotizacion.duracion > 5) {
+            console.log('duracion mayor a 5 minutos, cotizar manualmente');
+          } else {
+            const duracionExtra = this.cotizacion.duracion - 3;
+            console.log('duracion extra = ', duracionExtra);
+            this.price.duracion = duracionExtra * 35;
+            console.log('precio duracion $', this.price.duracion);
+          };
+        };
+
+        if (this.cotizacion.servicio === 'platinum') {
+          this.price.servicio = 250;
+          if (this.cotizacion.pistas < 101) {
+            this.price.pistas = 0;
+            console.log('menos de 100 pistas')
+          } else {
+            const pistasExtra = this.cotizacion.pistas - 100;
+            console.log('pistas extra =', pistasExtra);
+            this.price.pistas = pistasExtra * 6.25;
+            console.log('precio de las pistas $', this.price.pistas);
+          }
+          if (this.cotizacion.duracion < 3.6) {
+            this.price.duracion = 0;
+            console.log('duracion menor a 3 minutos, sin costo extra');
+          } else if (this.cotizacion.duracion > 5) {
+            console.log('duracion mayor a 5 minutos, cotizar manualmente');
+          } else {
+            const duracionExtra = this.cotizacion.duracion - 3;
+            console.log('duracion extra = ', duracionExtra);
+            this.price.duracion = duracionExtra * 40;
+            console.log('precio duracion $', this.price.duracion);
+          };
+
+        };
+
+        if (this.cotizacion.noVox) {
+          this.price.noVox = 10;
+        };
+
+        if (this.cotizacion.capella) {
+          this.price.capella = 10;
+        };
+
+        if (this.cotizacion.noMaster) {
+          this.price.noMaster = 50;
+        };
+
+        if (this.cotizacion.atmos) {
+          this.price.atmos = 250;
+        };
+
+        if (this.cotizacion.stemsDetail.drums) {
+          this.price.stemsDetail.drums = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.perc) {
+          this.price.stemsDetail.perc = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.guit) {
+          this.price.stemsDetail.guit = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.bass) {
+          this.price.stemsDetail.bass = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.keys) {
+          this.price.stemsDetail.keys = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.bronces) {
+          this.price.stemsDetail.bronces = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.bkgVoice) {
+          this.price.stemsDetail.bkgVoice = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.mainVoice) {
+          this.price.stemsDetail.mainVoice = 10;
+        };
+
+        if (this.cotizacion.stemsDetail.others) {
+          this.price.stemsDetail.others = 10;
+        };
+
+        this.price.stems =
+          this.price.stemsDetail.drums +
+          this.price.stemsDetail.perc +
+          this.price.stemsDetail.guit +
+          this.price.stemsDetail.bass +
+          this.price.stemsDetail.keys +
+          this.price.stemsDetail.bkgVoice +
+          this.price.stemsDetail.bronces +
+          this.price.stemsDetail.mainVoice +
+          this.price.stemsDetail.others;
+
+        this.price.total =
+          this.price.servicio +
+          this.price.duracion +
+          this.price.pistas +
+          this.price.obsesivo +
+          this.price.noVox +
+          this.price.capella +
+          this.price.stems +
+          this.price.noMaster +
+          this.price.atmos;
+
+        if (this.cotizacion.obsesivo) {
+          this.precioObsesivo = this.price.total * 0.5;
+          this.price.total = this.price.total * 1.5;
+        };
+
+        console.log('el precio final es $', this.price.total);
+        this.orden.precio = Math.floor(this.price.total);
+        this.orden.descripcion = this.cotizacion.servicio;
+
+
   }
 
-  inmersivo() {
-    if (this.inmersiv.tipo === '1') {
-      this.inmersiv.precio = 40;
-      this.inmersiv.mje = `u$s ${this.inmersiv.precio}`;
-      this.orden.descripcion = this.cotizacion.servicio;
-      this.orden.precio = this.inmersiv.precio;
-      this.cotiCard = true;
-      this.preCoti = false;
-      this.paypalFunc();
-    };
-    if (this.inmersiv.tipo === '2') {
-      this.inmersiv.precio = 80;
-      this.inmersiv.mje = `u$s ${this.inmersiv.precio}`;
-      this.orden.descripcion = this.cotizacion.servicio;
-      this.orden.precio = this.inmersiv.precio;
-      this.cotiCard = true;
-      this.preCoti = false;
-      this.paypalFunc();
-    };
-    if (this.inmersiv.tipo === '3') {
-      this.inmersiv.mje = 'Solicitar cotización personalizada';
-    };
-    if (this.inmersiv.tipo === '') {
-      console.log('Debe seleccionarse una opcion');
-    };
+  async coaching() {
+
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
+
+    await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+      if (this.existsName === undefined) {
+
+        const precio = this.coachingId.duracion * 30;
+        console.log('pago de coaching es de $', precio);
+        this.coachingId.precio = precio;
+        this.orden.precio = Math.floor(precio);
+        this.orden.descripcion = this.cotizacion.servicio;
+        this.cotiCard = true;
+        this.preCoti = false;
+      } else {
+        this.nameExists();
+      }
+    });
     
   }
 
-  asisst(){
-    const pricePistas = this.asisstant.pistas * 3;
-    const priceDuration = this.asisstant.tiempo * 5;
-    this.asisstant.precio = pricePistas + priceDuration;
-    console.log('Precio final ', this.asisstant.precio);
-    this.orden.precio = Math.floor(this.asisstant.precio);
-    this.orden.descripcion = this.cotizacion.servicio;
-    this.cotiCard = true;
-    this.preCoti = false;
-    this.paypalFunc();
+  async inmersivo() {
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
+
+    await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+      if (this.existsName === undefined) {
+
+        if (this.inmersiv.tipo === '1') {
+          this.inmersiv.precio = 40;
+          this.inmersiv.mje = `u$s ${this.inmersiv.precio}`;
+          this.orden.descripcion = this.cotizacion.servicio;
+          this.orden.precio = this.inmersiv.precio;
+          this.cotiCard = true;
+          this.preCoti = false;
+        };
+        if (this.inmersiv.tipo === '2') {
+          this.inmersiv.precio = 80;
+          this.inmersiv.mje = `u$s ${this.inmersiv.precio}`;
+          this.orden.descripcion = this.cotizacion.servicio;
+          this.orden.precio = this.inmersiv.precio;
+          this.cotiCard = true;
+          this.preCoti = false;
+        };
+        if (this.inmersiv.tipo === '3') {
+          this.inmersiv.mje = 'Solicitar cotización personalizada';
+        };
+        if (this.inmersiv.tipo === '') {
+          console.log('Debe seleccionarse una opcion');
+        };
+      } else {
+        this.nameExists();
+      }
+    });
+    
+  }
+
+  async asisst(){
+
+    const prodID = this.produccion.nombre.split(' ').join('-');
+    const userId = this.auth.currentUser?.uid;
+
+    await this.firestore.collection('usuarios').doc(userId).collection('productions').doc(prodID).get().subscribe(name => {
+      this.existsName = name.data();
+      if (this.existsName === undefined) {
+
+        const pricePistas = this.asisstant.pistas * 3;
+        const priceDuration = this.asisstant.tiempo * 5;
+        this.asisstant.precio = pricePistas + priceDuration;
+        console.log('Precio final ', this.asisstant.precio);
+        this.orden.precio = Math.floor(this.asisstant.precio);
+        this.orden.descripcion = this.cotizacion.servicio;
+        this.cotiCard = true;
+        this.preCoti = false;
+      } else {
+        this.nameExists();
+      }
+    });
+
   }
 
   async mm2() {
@@ -408,7 +487,16 @@ export class PayComponent implements OnInit {
       this.existsName = name.data();
       if (this.existsName === undefined) {
         if (this.mixym2.tipo === '1' || this.mixym2.tipo === '2') {
-          this.mixym2.precio = 35 * this.mixym2.pistas;
+          if (this.mixym2.pistas < 6) {
+            this.mixym2.precio = 40 * this.mixym2.pistas;
+          };
+          if (this.mixym2.pistas > 5 && this.mixym2.pistas < 10) {
+            this.mixym2.precio = 35 * this.mixym2.pistas;
+          };
+          if (this.mixym2.pistas > 9) {
+            this.mixym2.precio = 30 * this.mixym2.pistas;
+          };
+          
         };
         if (this.mixym2.tipo === '3') {
           this.mixym2.precio = 400;
@@ -424,27 +512,16 @@ export class PayComponent implements OnInit {
         this.orden.descripcion = this.cotizacion.servicio;
         this.cotiCard = true;
         this.preCoti = false;
-        this.paypalFunc();
       } else {
-        console.log('Nombre YA EXISTE, debemos avisarle que lo cambie por uno nuevo')
+        this.nameExists();
       }
     });
 
   }
-  //   Para Plataformas o CD
 
-  //   35 USD por tema de hasta 5min con 1 revision
-  // Cada Revisión extra 10 USD
-  //   10 tracks de hasta 5 min - 250 USD, 1 revision por tema.Revisión extra por tema 10 USD
-  // Tema más largo, consultar
-
-  // Para Vinilo
-
-  // LP 400
-  // 12 EP 300
-  // 7 EP 250
-
-  // Idea: Cuenta corriente de Créditos ?
+  nameExists() {
+    console.log('Nombre YA EXISTE, debemos avisarle que lo cambie por uno nuevo')
+  }
 
 
 
@@ -482,6 +559,7 @@ export class PayComponent implements OnInit {
     this.produccion.id = prodID;
 
     await this.preprod.setProductions(userId, this.produccion, prodID);
+    await this.preprod.usedCreditsHistory(this.produccion, userId);
     this.router.navigateByUrl('/logged');
   }
 

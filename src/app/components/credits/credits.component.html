@@ -1,0 +1,70 @@
+<mat-card *ngIf="userInfo">
+  <mat-card-header class="header">
+    <mat-card-title>Usuario: {{userInfo.nombre}} {{userInfo.apellido}}</mat-card-title>
+    <mat-card-subtitle>Saldo disponible: {{userInfo.creditos}} créditos.</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+
+<mat-divider></mat-divider>
+<mat-spinner *ngIf="spinner"></mat-spinner>
+
+<mat-card *ngIf="userInfo && !paypalVar">
+
+  <mat-card-subtitle>Creditos a Comprar:</mat-card-subtitle>
+  <br>
+  <mat-radio-group [(ngModel)]="creditsToBuy">
+    <mat-radio-button class="margin" value="50">50 Creditos</mat-radio-button>
+    <mat-radio-button class="margin" value="100">100 Creditos</mat-radio-button>
+    <mat-radio-button class="margin" value="200">200 Creditos</mat-radio-button>
+    <mat-radio-button class="margin" value="300">300 Creditos</mat-radio-button>
+  </mat-radio-group>
+
+  <!-- <mat-form-field class="example-full-width">
+    <mat-select class="radioGroup" [(ngModel)]="creditsToBuy">
+      <mat-option class="slideBtn radios colorBtn" value="50">50 Creditos</mat-option>
+      <mat-option class="slideBtn radios colorBtn2" value="100">100 Creditos</mat-option>
+      <mat-option class="slideBtn radios colorBtn3" value="200">200 Creditos</mat-option>
+      <mat-option class="slideBtn radios colorBtn4" value="300">300 Creditos</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+</mat-card>
+
+<mat-card *ngIf="userInfo && !paypalVar">
+  <mat-form-field class="example-full-width">
+    <mat-label>Otro monto:</mat-label>
+    <input matInput [(ngModel)]="creditsToBuy" maxlength="5" placeholder="Ex. 250" value="{{creditsToBuy}}">
+    <mat-hint align="end">Ingrese un valor en USD - Cada credito equivale a 1 USD</mat-hint>
+  </mat-form-field>
+</mat-card>
+
+
+<mat-card *ngIf="userInfo && !paypalVar" class="header">
+  <button mat-raised-button color="accent" class="cotiBtn" (click)="pay()" [disabled]="creditsToBuy === undefined">
+    <mat-icon>payments</mat-icon>
+    Comprar
+  </button>
+</mat-card>
+
+<mat-card *ngIf="paypalVar" class="header">
+
+  <button mat-raised-button color="warn" class="cotiBtn" (click)="volver()">
+    <mat-icon>payments</mat-icon>
+    volver
+  </button>
+</mat-card>
+
+<div class="paypalcontent">
+  <div #paypal class="paypalBtnContainer"></div>
+</div>
+
+<mat-card *ngIf="userInfo && !paypalVar">
+  <mat-form-field class="example-full-width">
+    <mat-label>Ingrese Código Promocional:</mat-label>
+    <input matInput [(ngModel)]="promoCode" maxlength="10" placeholder="PROMOCODE" value="{{promoCode}}">
+    <mat-hint align="end">Ingrese su código promocional</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button color="warn" class="cotiBtn" (click)="promo(promoCode)">
+    <mat-icon>payments</mat-icon>
+    Canjear
+  </button>
+</mat-card>

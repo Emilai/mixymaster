@@ -81,11 +81,11 @@
       <div *ngIf="cotizacion.servicio ==='mixymaster2'">
         <h4>Especificación del Servicio</h4>
         <mat-radio-group class="radioGroup" [(ngModel)]="mixym2.tipo">
-          <mat-radio-button class="slideBtn radios" value="1">Plataformas Digitales</mat-radio-button>
+          <mat-radio-button class="slideBtn radios" value="1">Plataformas Digitales (Logos plataformas)</mat-radio-button>
           <mat-radio-button class="slideBtn radios" value="2">CD</mat-radio-button>
-          <mat-radio-button class="slideBtn radios" value="3">Vinilo LP</mat-radio-button>
-          <mat-radio-button class="slideBtn radios" value="4">Vinilo 12 EP</mat-radio-button>
-          <mat-radio-button class="slideBtn radios" value="5">Vinilo 7 EP</mat-radio-button>
+          <mat-radio-button class="slideBtn radios" value="3">LP Vinilo</mat-radio-button>
+          <mat-radio-button class="slideBtn radios" value="4">EP Vinilo 12"</mat-radio-button>
+          <mat-radio-button class="slideBtn radios" value="5">Single Vinilo 7"</mat-radio-button>
         </mat-radio-group>
 
         <h4>Cual es la cantidad de canciones de tu proyecto?</h4>
@@ -361,9 +361,11 @@
    'payDinamic2': conforme === true
   }">
     <h4 *ngIf="cotiCard">Contratar Servicio</h4>
-    <div class="paypalcontent">
+    <!-- <div class="paypalcontent">
       <div #paypal class="paypalBtnContainer"></div>
-    </div>
+    </div> -->
+
+    <button (click)="paypalFunc()">Debitar Creditos</button>
 
     <h4 class="preCotiTxt">Necesito pensarlo mejor...</h4>
     <button mat-raised-button color="accent" (click)="setPreProduction()" class="preCotibtn">Guardar Cotización</button>

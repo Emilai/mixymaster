@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
         this.userInfo = userInf.data()!;
         console.log(this.userInfo);
       } else {
-        console.log("El usuario aun no se ha cargado");
+        console.log(this.userInfo);
       }
     } catch (error) {
       console.log(error);
@@ -77,6 +77,18 @@ export class NavbarComponent implements OnInit {
     window.location.reload();
   }
 
+  servicios() {
+    this.router.navigateByUrl('main', {
+      replaceUrl: true
+    });
+  }
+
+  ingenieros() {
+    this.router.navigateByUrl('main', {
+      replaceUrl: true
+    });
+  }
+
   main() {
     this.router.navigateByUrl('main', {
       replaceUrl: true
@@ -95,6 +107,12 @@ export class NavbarComponent implements OnInit {
 
   pay() {
     this.router.navigateByUrl('pay', {
+      replaceUrl: true
+    });
+  }
+
+  credits() {
+    this.router.navigateByUrl('credits', {
       replaceUrl: true
     });
   }

@@ -7,6 +7,10 @@ li {
   display: inline;
 }
 
+.pTitle {
+  margin-bottom: 5px;
+}
+
 .navBarLogo {
   position: relative;
   width: 150px;
@@ -47,18 +51,35 @@ li {
   position: relative;
   display: block;
   width: 100%;
-  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); }
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); 
+}
 
-  mat-toolbar {
+  .toolbar {
     background: #333;
     color: white;
 }
 
-mat-sidenav {
+  .toolbar2 {
+    background: #0174BE;
+    color: white;
+}
+
+.sideNav {
     margin: 16px;
     width: 200px;
     border-right: none;
     background: #333;
+    color: white;
+    border-radius: 10px;
+    padding: 0;
+    text-align: center;
+}
+
+.sideNav2 {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #0174BE;
     color: white;
     border-radius: 10px;
     padding: 0;
@@ -83,6 +104,7 @@ mat-icon {
 
 .divider{
   height: 40px;
+  opacity: 0;
 }
 
 .logo {
@@ -99,3 +121,6 @@ mat-icon {
   margin: 10px;
 }
 
+.paraLitt {
+  font-size: 12px;
+}
