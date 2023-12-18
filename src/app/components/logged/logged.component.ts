@@ -74,6 +74,10 @@ export class LoggedComponent implements OnInit {
     this.router.navigateByUrl('/pay');
   }
 
+  toCredits() {
+    this.router.navigateByUrl('/credits');
+  }
+
   test(coti: any) {
     console.log(coti);
     this.dialog.open(PayComponent);

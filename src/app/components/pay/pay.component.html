@@ -258,50 +258,50 @@
         <span *ngIf="cotizacion.servicio ==='premium'">Premium</span>
         <span *ngIf="cotizacion.servicio ==='gold'">Gold</span>
         <span *ngIf="cotizacion.servicio ==='platinum'">Platinum</span>
-        : <span>.....................................</span> USD {{price.servicio}}
+        : <span>.....................................</span> Créditos {{price.servicio}}
       </mat-card-subtitle>
 
       <mat-card-subtitle
         *ngIf="cotizacion.servicio ==='coaching' || cotizacion.servicio ==='inmersivo' || cotizacion.servicio ==='asisstant' || cotizacion.servicio ==='mixymaster2'">
-        <span *ngIf="cotizacion.servicio ==='coaching'">Coaching: <span>.....................................</span> USD
+        <span *ngIf="cotizacion.servicio ==='coaching'">Coaching: <span>.....................................</span> Créditos
           {{coachingId.precio}}</span>
         <span *ngIf="cotizacion.servicio ==='inmersivo'">Inmersivo: <span>.....................................</span>
           {{inmersiv.mje}}</span>
         <span *ngIf="cotizacion.servicio ==='asisstant'">Asisstant: <span>.....................................</span>
-          USD {{asisstant.precio}}</span>
-        <span *ngIf="cotizacion.servicio ==='mixymaster2'">MixyMaster<sup>2</sup>.............................. USD
+          Créditos {{asisstant.precio}}</span>
+        <span *ngIf="cotizacion.servicio ==='mixymaster2'">MixyMaster<sup>2</sup>.............................. Créditos
           {{mixym2.precio}}</span>
       </mat-card-subtitle>
 
       <mat-card-subtitle *ngIf="price.duracion">Adicional por duración (hasta 3 minutos sin costo extra):
-        <span>...............</span> + USD {{price.duracion}}
+        <span>...............</span> + Créditos {{price.duracion}}
       </mat-card-subtitle>
       <mat-card-subtitle *ngIf="!price.duracion">Adicional por duración (hasta 3 minutos sin costo extra):
-        <span>...............</span> + USD 0
+        <span>...............</span> + Créditos 0
       </mat-card-subtitle>
 
       <mat-card-subtitle *ngIf="cotizacion.pistas">Adicional por cantidad de Pistas
         <span *ngIf="cotizacion.servicio ==='premium'">(hasta 24 sin costo extra)</span>
         <span *ngIf="cotizacion.servicio ==='gold'">(hasta 40 sin costo extra)</span>
         <span *ngIf="cotizacion.servicio ==='platinum'">(hasta 100 sin costo extra)</span>
-        : <span>.....................................</span> + USD {{price.pistas}}
+        : <span>.....................................</span> + Créditos {{price.pistas}}
       </mat-card-subtitle>
       <mat-card-subtitle *ngIf="cotizacion.obsesivo">Modo Obsesivo ON:
-        <span>.....................................</span> + USD {{precioObsesivo}}</mat-card-subtitle>
+        <span>.....................................</span> + Créditos {{precioObsesivo}}</mat-card-subtitle>
 
       <mat-card-header>
         <mat-card-subtitle
           *ngIf="cotizacion.noVox || cotizacion.capella || cotizacion.stems|| cotizacion.noMaster || cotizacion.atmos">
           Adicionales</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.noVox">No Vocals: <span>.....................................</span> + USD
+        <mat-card-subtitle *ngIf="cotizacion.noVox">No Vocals: <span>.....................................</span> + Créditos
           {{price.noVox}}</mat-card-subtitle>
         <mat-card-subtitle *ngIf="cotizacion.capella">A Capella: <span>.....................................</span> +
-          USD {{price.capella}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.stems">Stems: <span>.....................................</span> + USD
+          Créditos {{price.capella}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.stems">Stems: <span>.....................................</span> + Créditos
           {{price.stems}}</mat-card-subtitle>
         <mat-card-subtitle *ngIf="cotizacion.noMaster">No Mastering: <span>.....................................</span>
-          + USD {{price.noMaster}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="cotizacion.atmos">Atmos: <span>.....................................</span> + USD
+          + Créditos {{price.noMaster}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="cotizacion.atmos">Atmos: <span>.....................................</span> + Créditos
           {{price.atmos}}</mat-card-subtitle>
       </mat-card-header>
 
@@ -313,11 +313,11 @@
     <mat-card-header class="centerLeft">
       <mat-card-title
         *ngIf="cotizacion.servicio ==='premium' || cotizacion.servicio ==='gold' || cotizacion.servicio ==='platinum'">
-        Precio final: <span>.....................................</span> USD {{price.total}}
+        Precio final: <span>.....................................</span> Créditos {{price.total}}
       </mat-card-title>
 
       <mat-card-title *ngIf="cotizacion.servicio ==='coaching'">
-        Precio final: <span>.....................................</span> USD {{coachingId.precio}}
+        Precio final: <span>.....................................</span> Créditos {{coachingId.precio}}
       </mat-card-title>
 
       <mat-card-title *ngIf="cotizacion.servicio ==='inmersivo'">
@@ -325,10 +325,10 @@
       </mat-card-title>
 
       <mat-card-title *ngIf="cotizacion.servicio ==='asisstant'">
-        Precio final: <span>.....................................</span> USD {{asisstant.precio}}
+        Precio final: <span>.....................................</span> Créditos {{asisstant.precio}}
       </mat-card-title>
       <mat-card-title *ngIf="cotizacion.servicio ==='mixymaster2'">
-        Precio final: <span>.....................................</span> USD {{mixym2.precio}}
+        Precio final: <span>.....................................</span> Créditos {{mixym2.precio}}
       </mat-card-title>
     </mat-card-header>
 
@@ -365,7 +365,7 @@
       <div #paypal class="paypalBtnContainer"></div>
     </div> -->
 
-    <button (click)="paypalFunc()">Debitar Creditos</button>
+    <button mat-raised-button color="accent" class="preCotibtn" (click)="paypalFunc()">Debitar Creditos</button>
 
     <h4 class="preCotiTxt">Necesito pensarlo mejor...</h4>
     <button mat-raised-button color="accent" (click)="setPreProduction()" class="preCotibtn">Guardar Cotización</button>

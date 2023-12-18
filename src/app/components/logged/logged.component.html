@@ -6,7 +6,7 @@
   <mat-card-header class="header1">
     <mat-card-title>Hola {{userInfo.nombre}}</mat-card-title>
     <mat-card-subtitle class="email">E-mail: {{userInfo.email}}</mat-card-subtitle>
-    <mat-card-subtitle class="email">Creditos: {{userInfo.creditos}} <button class="payBtn"><mat-icon class="iconPay">payments</mat-icon></button></mat-card-subtitle>
+    <mat-card-subtitle class="email">Creditos: {{userInfo.creditos}} <button class="payBtn" (click)="toCredits()"><mat-icon class="iconPay">payments</mat-icon></button></mat-card-subtitle>
     <div class="hide">I am shown when someone hovers over the div above.</div>
   </mat-card-header>
 
@@ -52,7 +52,7 @@
     <mat-grid-tile class="subTitle">Nombre</mat-grid-tile>
     <mat-grid-tile class="subTitle">Servicio</mat-grid-tile>
     <mat-grid-tile class="subTitle">Estado</mat-grid-tile>
-    <mat-grid-tile class="subTitle">Precio USD</mat-grid-tile>
+    <mat-grid-tile class="subTitle">Precio Créditos</mat-grid-tile>
     <mat-grid-tile class="subTitle">Contratar</mat-grid-tile>
     <mat-grid-tile class="subTitle">Eliminar</mat-grid-tile>
   </mat-grid-list>

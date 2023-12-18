@@ -77,26 +77,45 @@ export class NavbarComponent implements OnInit {
     window.location.reload();
   }
 
-  servicios() {
-    this.router.navigateByUrl('main', {
+  async servicios(elem: any) {
+    await this.router.navigateByUrl('main', {
       replaceUrl: true
     });
+    document.querySelector(elem).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  ingenieros() {
-    this.router.navigateByUrl('main', {
+  async ingenieros(elem: any) {
+    await this.router.navigateByUrl('main', {
       replaceUrl: true
     });
+    document.querySelector(elem).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  main() {
-    this.router.navigateByUrl('main', {
+  async main(elem: any) {
+    await this.router.navigateByUrl('main', {
       replaceUrl: true
     });
+    document.querySelector(elem).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  async contact(elem: any) {
+    await this.router.navigateByUrl('main', {
+      replaceUrl: true
+    });
+    document.querySelector(elem).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   logged() {
     this.router.navigateByUrl('logged', {
+      replaceUrl: true
+    });
+  }
+  hits() {
+    this.router.navigateByUrl('hits', {
+      replaceUrl: true
+    });
+  }
+  tutorials() {
+    this.router.navigateByUrl('tutorials', {
       replaceUrl: true
     });
   }

@@ -25,29 +25,30 @@
 
     <div>
       <p class="pTitle" *ngIf="authService.userInfox">Hola <strong>{{authService.userInfox.nombre}}</strong></p>
-      <p class="paraLitt" *ngIf="authService.userInfox">Tienes {{authService.userInfox.creditos}} créditos</p>
+      <p class="paraLitt" *ngIf="authService.userInfox">Tienes <strong>{{authService.userInfox.creditos}}</strong> Créditos</p>
+      <p class="paraLitt" *ngIf="authService.userInfox">Tienes <strong>{{authService.userInfox.hits}}</strong> Hits</p>
       <!-- <button mat-button class="menu-button" (click)="testing()">
         <mat-icon>home</mat-icon>
         <span>Test</span>
       </button> -->
 
-            <mat-divider class="divider"></mat-divider>
+      <mat-divider class="divider"></mat-divider>
 
-      <button mat-button class="menu-button" (click)="main()">
+      <button mat-button class="menu-button" (click)="main('#main')">
         <mat-icon>home</mat-icon>
         <span>Inicio</span>
       </button>
-      <button mat-button class="menu-button" (click)="servicios()">
+      <button mat-button class="menu-button" (click)="servicios('#servicios')">
         <mat-icon>sort</mat-icon>
         <span>Servicios</span>
       </button>
-      <button mat-button class="menu-button" (click)="ingenieros()">
+      <button mat-button class="menu-button" (click)="ingenieros('#ingenieros')">
         <mat-icon>groups</mat-icon>
         <span>Ingenieros</span>
       </button>
 
       <mat-divider class="divider"></mat-divider>
-      
+
       <button mat-button class="menu-button" (click)="logged()" *ngIf="authService.userInfox">
         <mat-icon>person</mat-icon>
         <span>Panel de Usuario</span>
@@ -67,10 +68,19 @@
         <mat-icon>payments</mat-icon>
         <span>Comprar Creditos</span>
       </button>
+      <button mat-button class="menu-button" (click)="hits()" *ngIf="authService.userInfox">
+        <mat-icon>stars</mat-icon>
+        <span>Carrera a la Fama</span>
+      </button>
 
       <mat-divider class="divider"></mat-divider>
 
-       <button mat-button class="menu-button" (click)="logged()">
+      <button mat-button class="menu-button" (click)="tutorials()">
+        <mat-icon>play_circle</mat-icon>
+        <span>Tutoriales</span>
+      </button>
+
+      <button mat-button class="menu-button" (click)="contact('#contact')">
         <mat-icon>support_agent</mat-icon>
         <span>Contacto</span>
       </button>

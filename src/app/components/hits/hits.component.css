@@ -1,0 +1,35 @@
+.example-card {
+    margin: 5px;
+    text-align: center;
+}
+
+.desbloqueado {
+    background-color: green;
+}
+
+.bloqueado {
+    background-color: grey;
+}
+
+.titleDiv {
+    padding: 30px;
+}
+
+.img {
+    object-fit: scale-down
+}
+
+mat-slider {
+  width: 100%;
+}
+
+.imgAudio {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  margin: 0 !important;
+}
+
+.titleCard {
+    text-align: center;
+}

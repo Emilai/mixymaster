@@ -60,7 +60,7 @@ li {
 }
 
   .toolbar2 {
-    background: #0174BE;
+    background: #57afe6;
     color: white;
 }
 
@@ -123,4 +123,5 @@ mat-icon {
 
 .paraLitt {
   font-size: 12px;
+  margin-bottom: 5px
 }

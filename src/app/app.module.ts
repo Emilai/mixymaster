@@ -65,6 +65,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ModalpaypreprodComponent } from './components/modalpaypreprod/modalpaypreprod.component';
 import { CreditsComponent } from './components/credits/credits.component';
+import { HitsComponent } from './components/hits/hits.component';
+import { TutorialsComponent } from './components/tutorials/tutorials.component';
 
 
 
@@ -87,6 +89,8 @@ import { CreditsComponent } from './components/credits/credits.component';
     RegistererrorComponent,
     RegistererrormailComponent,
     RegisterduplicatedmailComponent,
+    HitsComponent,
+    TutorialsComponent,
     RegistersuccessComponent,
     VerificacionComponent,
     LoggedComponent,

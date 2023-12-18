@@ -227,6 +227,7 @@ export class PayComponent implements OnInit {
       // Sebemos poner una Progress Bar que indique el proceso y luego Alert de Confirmacion
       console.log('Se puede pagar con creditos');
       this.userInfo.creditos = this.userInfo.creditos - price;
+      this.userInfo.hits = this.userInfo.hits + (price / 10);
       console.log('Nuevo credito: ', this.userInfo.creditos, 'Crs');
       await this.authService.createUser(this.userInfo, path, id);
       await this.successPay();

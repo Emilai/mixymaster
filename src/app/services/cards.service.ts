@@ -13,6 +13,7 @@ export class CardsService {
   preProductions: any;
   production: any;
   payPreProduction: any;
+  tutorials: any;
 
   constructor( private firestore: AngularFirestore) { }
 
@@ -36,6 +37,20 @@ export class CardsService {
       const services = await this.firestore.collection('servicios').snapshotChanges();
       this.servicios = services;
       return services;
+
+
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
+  async getTutorials() {
+    // console.log(this.code);
+    try {
+      const tutorials = await this.firestore.collection('tutoriales').snapshotChanges();
+      this.tutorials = tutorials;
+      return tutorials;
 
 
     } catch (error) {
