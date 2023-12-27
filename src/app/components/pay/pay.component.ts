@@ -10,6 +10,7 @@ import { ContactComponent } from '../contact/contact.component';
 import { DatePipe } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { MailnotificationService } from 'src/app/services/mailnotification.service';
 
 declare var paypal:any ;
 
@@ -132,7 +133,8 @@ export class PayComponent implements OnInit {
     private preprod: PreprodService,
     public datePipe: DatePipe,
     private firestore: AngularFirestore,
-    private authService: AuthService
+    private authService: AuthService,
+    private mailNS: MailnotificationService
     ) {
     this.fecha = this.datePipe.transform(this.myDate, 'yyyy/MM/dd, HH:mm')
      }
@@ -587,5 +589,13 @@ export class PayComponent implements OnInit {
       this.existsName = name.data();
         console.log('name: ', this.existsName);
     });
+  }
+
+  async mail() {
+
+    const user = this.userInfo.nombre;
+
+    const response = await this.mailNS.mailToUser(user);
+    console.log(response);
   }
 }

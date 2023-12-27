@@ -8,6 +8,7 @@
         </span></mat-card-subtitle>
       <mat-card-title>Titulo: {{production.nombre}}</mat-card-title>
       <mat-card-subtitle>Descripción: {{production.descripcion}}</mat-card-subtitle>
+      <mat-card-subtitle>Estado: {{production.estado}}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-divider></mat-divider>
@@ -15,18 +16,21 @@
 
     <mat-card-content>
       <div>
-        <p>Aqui vamos a inyectar los detalles de la produccion</p>
-        
+        <mat-card-subtitle>Servicios Incluidos</mat-card-subtitle>
+        <p *ngIf="production.data.servicio"> Servicio: {{production.data.servicio}}</p>
+        <p *ngIf="production.data.duracion">Duración: {{production.data.duracion}} minutos</p>
+        <p *ngIf="production.data.pistas">Pistas: {{production.data.pistas}}</p>
+        <p *ngIf="production.data.atmos">Audio Espacial ATMOS</p>
+        <p *ngIf="production.data.capella">Mezcla a Capela</p>
+        <p *ngIf="production.data.noMaster">Mezcla Sin Masterizar</p>
+        <p *ngIf="production.data.noVox">Mezcla sin Voz</p>
+        <p *ngIf="production.data.obsesivo">Modo Obsesivo</p>
+        <p *ngIf="production.data.stems">Incluye Stems: SI</p>
       </div>
-
-      <!-- <div>
-        <p>Aqui se mostrar[an los archivos que han sido subidos</p>
-        <p *ngFor="let doc of production.archivosName">{{doc}}</p>
-      </div> -->
 
       <mat-divider></mat-divider>
       <div class="btnDiv" *ngIf="userInfo">
-        <button mat-raised-button class="" *ngIf="production.drop">Subir Archivos</button> 
+        <button mat-raised-button class="" *ngIf="production.drop" (click)="carpeta(production.drop)" >Subir Archivos</button> 
         <mat-icon class="icon" *ngIf="production.drop" (click)="openSnackBar(wavInfo, 'OK')">info</mat-icon>
         <button mat-raised-button class="cardBtn" (click)="updateProduction()">Guardar cambios y enviar a Producción</button>
       </div>

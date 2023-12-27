@@ -2,6 +2,8 @@
   background: -webkit-linear-gradient(to right, #ebaf0a, #dea508fd);
 
   background: linear-gradient(to right, #fabb0e, #dfa609fd);
+  margin-top: 100px;
+  padding-bottom: 50px;
 }
 
 .rectangle-1 {
@@ -65,7 +67,7 @@
 }
 
 .title {
-  display: inline-flex;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   padding-top: 50px;
@@ -76,10 +78,11 @@
 }
 
 .parag {
-  display: inline-flex;
+  display: block;
   background-color: #fafafaa8;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   padding: 25px;
   border-radius: 5px;
 }
@@ -104,6 +107,7 @@
 
 .alink {
     text-decoration: none;
+    display: contents;
 }
 .card{
   transition: transform .2s;

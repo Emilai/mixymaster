@@ -95,7 +95,8 @@ export class AuthService {
     }
   };
 
-  errorRegister(): void {
+  async errorRegister(): Promise<void> {
+   await this.dialog.closeAll();
     this.dialog.open(RegistererrorComponent);
   }
   async codes() {

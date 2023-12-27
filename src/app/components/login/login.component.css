@@ -89,3 +89,32 @@ mat-card-content {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.imgSelect {
+  height: 50px;
+  width: 50px;
+    margin-left: 5px;
+}
+
+.selDiv {
+display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.blockDiv {
+  display: flex;
+  flex-wrap: wrap;
+}
+.hr {
+  display: block;
+}
+
+.mat-label {
+  width: 100%; 
+  text-align: left; 
+  margin-bottom: 10px; 
+}
+
+
+/* Ahora vamo a probar ocultar el chheckbox */
+

@@ -35,8 +35,7 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
-    path: 'tutorials', component: TutorialsComponent,
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: 'tutorials', component: TutorialsComponent
   },
   { path: '**', component: MainComponent,
     ...canActivate(redirectUnauthorizedToLogin) }

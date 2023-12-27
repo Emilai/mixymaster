@@ -13,24 +13,23 @@
 
 				<div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".1s">
 
-					<form action="https://formsubmit.co/emilaino.it@gmail.com" method="POST">
+					<form (ngSubmit)="onSubmit(contactForm.value)" #contactForm="ngForm">
 							<div class="form-group wow fadeInUp animated">
-								<label for="c_name" class="sr-only">Nombre</label>
-								<input type="text" placeholder="Nombre" name="name" class="form-control" id="c_name" required>
+								<label for="name" class="sr-only">Nombre</label>
+								<input type="text" placeholder="Nombre" name="name" class="form-control" id="name" ngModel required>
 							</div>
 
 							<div data-wow-delay=".1s" class="form-group wow fadeInUp animated">
-								<label for="c_email" class="sr-only">Email</label>
-								<input type="email" placeholder="E-mail" name="email" class="form-control" id="c_email" required>
+								<label for="email" class="sr-only">Email</label>
+								<input type="email" placeholder="E-mail" name="email" class="form-control" id="email" ngModel required>
 							</div>
 
 							<div data-wow-delay=".2s" class="form-group wow fadeInUp animated">
-								<textarea placeholder="Mensaje" rows="7" name="message" id="c_message" class="form-control" required></textarea>
+								<textarea placeholder="Mensaje" rows="7" name="message" id="message" class="form-control" ngModel required></textarea>
 							</div>
 
 							<button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated mjeBtn" type="submit">Enviar Mensaje</button>
-                            <input type="hidden" name="_subject" value="Nuevo contacto MixyMaster!">
-                            <input type="hidden" name="_captcha" value="false">                                                      
+                                                                           
 					</form>
 
 				</div>
@@ -39,9 +38,9 @@
 
 					  <section id="text-15" class="widget widget_text">
 					<div class="textwidget">
-                        <p>Tel: +598 92 490 548<br>
-                        E-mail: <a href="mailto:hola@mixymaster.com">hola@mixymaster</a></p>
-                        <a href="https://wa.me/59892490548" target="_blank"><button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" >Enviar Whatsapp</button></a>
+                        <p>Tel: +598 96 101 340<br>
+                        E-mail: <a href="mailto:hola@mixymaster.com" target="_blank">hola@mixymaster</a></p>
+                        <a href="https://wa.me/59896101340" target="_blank"><button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" >Enviar Whatsapp</button></a>
                         </div>
                     </section>
 

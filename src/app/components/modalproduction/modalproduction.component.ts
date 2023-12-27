@@ -96,4 +96,8 @@ export class ModalproductionComponent implements OnInit {
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
+
+  carpeta(ref: any) {
+    window.open(ref, "_blank");
+  }
 }

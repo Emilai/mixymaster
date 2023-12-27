@@ -58,18 +58,17 @@ export class LoginComponent implements OnInit {
   ];
 
   platformImg = [
-    '../../../assets/100monitores.png',
-    '../../../assets/100monitores.png',
-    '../../../assets/100monitores.png',
-    '../../../assets/100monitores.png',
-    '../../../assets/100monitores.png'
+    '../../../assets/100pc.png',
+    '../../../assets/70pc.png',
+    '../../../assets/50mac.png',
+    '../../../assets/70mac.png',
+    '../../../assets/100mac.png'
   ]
 
   userInfo = {
     nombre: '',
     apellido: ''
   };
-
 
   forgot = false;
 
@@ -230,6 +229,29 @@ export class LoginComponent implements OnInit {
 
   errorRegisterRepeated() {
     this.dialog.open(RegisterduplicatedmailComponent);
+  }
+
+  login2() {
+  const usuario = {
+    id: this.user.user.uid,
+    nombre: this.formReg.value.nombre,
+    apellido: this.formReg.value.apellido,
+    email: this.user.user.email,
+    grupos: ['General'],
+    wip: false,
+    drop: '',
+    creditos: 0,
+    hits: 0,
+    soy: this.formReg.value.soy,
+    redes: this.formReg.value.redes,
+    platform: this.formReg.value.platform,
+    daw: this.formReg.value.daw,
+    otherDaws: this.formReg.value.otherDaws,
+    equipo: this.formReg.value.equipo,
+    conforme: this.formReg.value.conforme,
+
+  };
+console.log(usuario);
   }
 
 }
