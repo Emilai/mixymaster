@@ -254,4 +254,9 @@ export class LoginComponent implements OnInit {
 console.log(usuario);
   }
 
+  terms() {
+      this.router.navigateByUrl('terms', {
+        replaceUrl: true
+      });
+  }
 }

@@ -27,6 +27,14 @@
   display: none;
 }
 
+.spanHidden {
+  display: none;
+}
+
+.matDiv:hover .spanHidden {
+  display: block;
+}
+
 .matDiv {
   text-align: center;
   margin: 30px 0 30px 0;

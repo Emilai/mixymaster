@@ -1,4 +1,10 @@
-<img mat-card-image src="https://i.ibb.co/LQwqkg1/red-Carpet.jpg" alt="Consola de audio" class="imgAudio">
+
+
+<div class="centerDiv">
+  <img mat-card-image src="https://i.ibb.co/xLJ1FgD/videosstutoss.jpg" alt="Consola de audio" class="imgAudio">
+<mat-card-title>En esta sección encontrarás Tutoriales, Links y Videos de interés general</mat-card-title>
+</div>
+
 
 <div class="container responsive-grid">
   <mat-card *ngFor="let card of cards">
@@ -6,13 +12,26 @@
       <mat-card-title>{{ card.titulo }} </mat-card-title>
     </mat-card-header>
     <br />
-    <img mat-card-image [src]="card.imageUrl" />
+    <iframe *ngIf="card.linkvideo" width="257" height="150" [src]="card.linkvideo | safe: 'resourceUrl'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <img *ngIf="card.img" mat-card-image [src]="card.img" />
     <mat-card-content>
       <br />
       <p>{{ card.descripcion }}</p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="video(card.link)">Ver Video</button>
+    <mat-card-actions *ngIf="card.link">
+      <button mat-button (click)="video(card.link)">Ir al contenido</button>
     </mat-card-actions>
   </mat-card>
+
+  <!-- <mat-card>
+    <mat-card-header>
+      <mat-card-title>Este es el titulo </mat-card-title>
+    </mat-card-header>
+<iframe width="257" height="150" src="https://www.youtube.com/embed/QFA1eMPlvb8?si=xrNSFZpH96krHdcC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <mat-card-content>
+      <br />
+      <p>Esto es la descripción</p>
+    </mat-card-content>
+</mat-card> -->
 </div>
+<app-sponsors></app-sponsors>

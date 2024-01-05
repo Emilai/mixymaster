@@ -6,6 +6,7 @@ import { WrongpayComponent } from '../wrongpay/wrongpay.component';
 import { Auth } from '@angular/fire/auth';
 import { PreprodService } from 'src/app/services/preprod.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var paypal: any;
 
@@ -19,6 +20,7 @@ export class ModalpaypreprodComponent implements OnInit {
   @ViewChild('paypal', { static: true })
   paypalElement!: ElementRef;
   production: any;
+  userInfo: any;
 
   data = true;
 
@@ -27,50 +29,78 @@ export class ModalpaypreprodComponent implements OnInit {
     private dialog: MatDialog,
     private auth: Auth,
     private preprod: PreprodService,
+    private authService: AuthService,
     private router: Router,
     public dialogRef: MatDialogRef<ModalpaypreprodComponent>
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.production = this.cardService.payPreProduction;
+    (await this.authService.userData())?.subscribe((async userData => {
+      const userInfo = userData.data();
+      this.userInfo = userInfo;
+      console.log('Usuario: ', this.userInfo);
+    }));
   }
 
   pay() {
     this.data = false;
-    this.paypalFunc();
+    // this.paypalFunc();
+    this.payWithCredits();
   }
 
-  paypalFunc() {
-
+  async payWithCredits() {
     const price = this.production.precio;
-    paypal.Buttons({
-      createOrder: (data: any, actions: any) => {
+    const credits = this.userInfo.creditos;
+    const path = 'usuarios';
+    const id = this.userInfo.id;
 
-        return actions.order.create({
-          purchase_units: [
-            {
-              description: this.production.descripcion,
-              amount: {
-                currency_code: 'USD',
-                value: price
-              }
-            }
-          ]
-        })
-      },
-      onApprove: async (data: any, actions: any) => {
-        const order = await actions.order.capture();
-        this.successPay();
-      },
-      onError: (err: any) => {
-        console.log(err);
-      },
-      onCancel: () => {
-        this.wrongPay();
-      }
-    })
-      .render(this.paypalElement.nativeElement);
+    if (price > credits) {
+      console.log('No hay suficientes creditos para pagar');
+      this.wrongPay();
+    } else {
+      // Debemos poner una opcionde confirmacion
+      // Sebemos poner una Progress Bar que indique el proceso y luego Alert de Confirmacion
+      console.log('Se puede pagar con creditos');
+      this.userInfo.creditos = this.userInfo.creditos - price;
+      this.userInfo.hits = this.userInfo.hits + (price / 10);
+      console.log('Nuevo credito: ', this.userInfo.creditos, 'Crs');
+      await this.authService.createUser(this.userInfo, path, id);
+      await this.successPay();
+    }
   }
+
+  // paypalFunc() {
+
+  //   const price = this.production.precio;
+  //   paypal.Buttons({
+  //     createOrder: (data: any, actions: any) => {
+
+  //       return actions.order.create({
+  //         purchase_units: [
+  //           {
+  //             description: this.production.descripcion,
+  //             amount: {
+  //               currency_code: 'USD',
+  //               value: price
+  //             }
+  //           }
+  //         ]
+  //       })
+  //     },
+  //     onApprove: async (data: any, actions: any) => {
+  //       const order = await actions.order.capture();
+  //       this.successPay();
+  //     },
+  //     onError: (err: any) => {
+  //       console.log(err);
+  //     },
+  //     onCancel: () => {
+  //       this.wrongPay();
+  //     }
+  //   })
+  //     .render(this.paypalElement.nativeElement);
+  // }
 
   async successPay(): Promise<void> {
     await this.setProduction();
@@ -96,5 +126,6 @@ export class ModalpaypreprodComponent implements OnInit {
     await this.preprod.setProductions(userId, this.production, prodID);
     this.router.navigateByUrl('/logged');
   }
+
 
 }

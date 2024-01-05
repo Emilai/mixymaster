@@ -22,3 +22,8 @@
 mat-card-header{
     flex-direction: column!important;
 }
+
+.serviceImg {
+    height: 150px;
+    width: 150px;
+}

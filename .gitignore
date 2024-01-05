@@ -45,3 +45,7 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+#servicios por claves
+src/app/services
+src/app/services/mailnotification.service.ts

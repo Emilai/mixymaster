@@ -1,0 +1,5 @@
+<div *ngIf="terminos" class="mainDiv">
+    <h2>Términos y Condiciones</h2>
+    <mat-divider></mat-divider>
+    <p *ngFor="let termino of terminos">{{termino.texto}}</p>
+</div>

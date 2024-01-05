@@ -115,6 +115,9 @@ display: flex;
   margin-bottom: 10px; 
 }
 
-
+.terms {
+  color: blue;
+  cursor:pointer;
+}
 /* Ahora vamo a probar ocultar el chheckbox */
 

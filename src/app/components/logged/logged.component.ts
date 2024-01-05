@@ -9,6 +9,7 @@ import { PayComponent } from '../pay/pay.component';
 import { ModalproductionComponent } from '../modalproduction/modalproduction.component';
 import { ModalpaypreprodComponent } from '../modalpaypreprod/modalpaypreprod.component';
 import { PreprodService } from 'src/app/services/preprod.service';
+import { MailnotificationService } from 'src/app/services/mailnotification.service';
 
 @Component({
   selector: 'app-logged',
@@ -30,7 +31,8 @@ export class LoggedComponent implements OnInit {
     private router: Router,
     private orderPipe: OrderPipe,
     private dialog: MatDialog,
-    private preprod: PreprodService
+    private preprod: PreprodService,
+    private mns: MailnotificationService
   ) { }
 
   async ngOnInit() {
@@ -98,5 +100,9 @@ export class LoggedComponent implements OnInit {
 
   async del(prod: any) {
     await this.preprod.deletePreProduction(this.auth.currentUser?.uid, prod.id);
+  }
+
+  mail() {
+    this.mns.mailToUser(this.userInfo.email);
   }
 }

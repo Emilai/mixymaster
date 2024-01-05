@@ -1,6 +1,8 @@
 .title {
     padding: 30px;
     text-align: center;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 .panelTitle {

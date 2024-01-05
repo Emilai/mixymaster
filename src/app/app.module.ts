@@ -67,6 +67,8 @@ import { ModalpaypreprodComponent } from './components/modalpaypreprod/modalpayp
 import { CreditsComponent } from './components/credits/credits.component';
 import { HitsComponent } from './components/hits/hits.component';
 import { TutorialsComponent } from './components/tutorials/tutorials.component';
+import { SponsorsComponent } from './components/sponsors/sponsors.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 
 
@@ -91,6 +93,7 @@ import { TutorialsComponent } from './components/tutorials/tutorials.component';
     RegisterduplicatedmailComponent,
     HitsComponent,
     TutorialsComponent,
+    TermsComponent,
     RegistersuccessComponent,
     VerificacionComponent,
     LoggedComponent,
@@ -101,6 +104,7 @@ import { TutorialsComponent } from './components/tutorials/tutorials.component';
     MainComponent,
     ModalserviceComponent,
     ModalpaypreprodComponent,
+    SponsorsComponent,
     SafePipe
   ],
   imports: [

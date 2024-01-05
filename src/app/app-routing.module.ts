@@ -9,6 +9,7 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
 import { CreditsComponent } from './components/credits/credits.component';
 import { HitsComponent } from './components/hits/hits.component';
 import { TutorialsComponent } from './components/tutorials/tutorials.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['logged']);
@@ -36,6 +37,9 @@ const routes: Routes = [
   },
   {
     path: 'tutorials', component: TutorialsComponent
+  },
+  {
+    path: 'terms', component: TermsComponent
   },
   { path: '**', component: MainComponent,
     ...canActivate(redirectUnauthorizedToLogin) }

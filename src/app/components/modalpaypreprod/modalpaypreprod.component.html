@@ -11,10 +11,10 @@
     </mat-card-header>
 
     <mat-divider></mat-divider>
-
+<!-- 
         <div class="paypalcontent">
       <div #paypal class="paypalBtnContainer"></div>
-    </div>
+    </div> -->
 
 
     <mat-card-content *ngIf="data">
@@ -48,10 +48,11 @@
             </div>
             <mat-divider></mat-divider>
 
-            <button mat-raised-button color="accent" class="cotiBtn" (click)="pay()" [disabled]="!production.precio">
+            <button class="payBtn" mat-raised-button color="accent" (click)="pay()" [disabled]="!production.precio">
           <mat-icon>payments</mat-icon>
           Deseo Contratar el servicio
         </button>
+        <p>Al aceptar la contratación del servicio, se descontarán los créditos correspondientes de su cuenta</p>
 
         </div>
 

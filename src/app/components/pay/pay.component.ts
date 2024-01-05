@@ -220,10 +220,10 @@ export class PayComponent implements OnInit {
     const credits = this.userInfo.creditos;
     const path = 'usuarios';
     const id = this.userInfo.id;
-    console.log('Aca vamos a pagar con creditos: ', price, 'Crs');
 
     if (price > credits) {
       console.log('No hay suficientes creditos para pagar');
+      this.wrongPay();
     } else {
       // Debemos poner una opcionde confirmacion
       // Sebemos poner una Progress Bar que indique el proceso y luego Alert de Confirmacion

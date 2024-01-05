@@ -1,0 +1,17 @@
+<div class="centerDiv">
+  <h3>Mixymaster confía en</h3>
+</div>
+
+<div class="container responsive-grid">
+  <mat-card *ngFor="let card of cards">
+
+    <mat-card-header>
+        <img [src]="card.img" alt="" (click)="link(card.link)">
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card-subtitle>{{card.titulo}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+
+
+</div>

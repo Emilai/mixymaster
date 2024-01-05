@@ -5,68 +5,68 @@
   <mat-card class="titleCard">
     <mat-card-title><strong>Carrera a la Fama!</strong></mat-card-title>
     <mat-card-title *ngIf="userInfo">Tienes {{userInfo.hits}} Hits</mat-card-title>
+    <mat-card-subtitle>Carrera a la Fama aún está en desarrollo. Los beneficios estarán disponibles en un futuro
+      próximo. De todas maneras ya puedes ir cosechando Hits.</mat-card-subtitle>
 
   </mat-card>
-  <!-- <mat-grid-list cols="4" rowHeight="100px">
-    <mat-grid-tile colspan="1" rowspan="1">
-      <h2>Carrera a la Fama!</h2>
-    </mat-grid-tile>
 
-    <mat-grid-tile *ngIf="userInfo" colspan="1" rowspan="1">
-      <h4>Tienes {{userInfo.hits}} Hits</h4>
-    </mat-grid-tile>
-  </mat-grid-list> -->
 </div>
 
-<!-- <mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile colspan="1" rowspan="3"> -->
-<mat-card [ngClass]="hits >= 0 ? 'example-card desbloqueado' : 'example-card bloqueado'">
-  <mat-card-title>PUB</mat-card-title>
-  <mat-card-subtitle *ngIf="hits >= 0">DESBLOQUEADO</mat-card-subtitle>
-  <mat-card-subtitle *ngIf="hits < 0">BLOQUEADO</mat-card-subtitle>
-  <mat-card-content>
-    <p>Te estás iniciando en el mundo de la producción. Empiezas a experimentar ese gusto por el sonido.</p>
-    <p>Otro texto motivador a ver con Cesar</p>
-  </mat-card-content>
-</mat-card>
-<!-- </mat-grid-tile> -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <mat-card class="example-card">
+        <mat-card-title>PUB</mat-card-title>
+        <mat-card-subtitle *ngIf="hits >= 0">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 0">BLOQUEADO</mat-card-subtitle>
+        <mat-card-content *ngIf="hits">
+          <img class="premio" *ngIf="hits >= 0" src="../../assets/1g.png" alt="">
+          <img class="premio" *ngIf="hits < 0" src="../../assets/1p.png" alt="">
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-3 col-sm-12 cardDiv">
+      <mat-card class="example-card">
+        <mat-card-title>CLUB</mat-card-title>
+        <mat-card-subtitle *ngIf="hits >= 5">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 5">BLOQUEADO</mat-card-subtitle>
+        <mat-card-content *ngIf="hits">
+          <img class="premio" *ngIf="hits >= 5" src="../../assets/2g.png" alt="">
+          <img class="premio" *ngIf="hits < 5" src="../../assets/2p.png" alt="">
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-<!-- <mat-grid-tile colspan="1" rowspan="3"> -->
-<mat-card [ngClass]="hits >= 5 ? 'example-card desbloqueado' : 'example-card bloqueado'">
-  <mat-card-title>CLUB</mat-card-title>
-  <mat-card-subtitle *ngIf="hits >= 5">DESBLOQUEADO</mat-card-subtitle>
-  <mat-card-subtitle *ngIf="hits < 5">BLOQUEADO</mat-card-subtitle>
-  <mat-card-content>
-    <p>Ya tienes tus primeras herramientas, tu oido se va amigando con los detalles. Sigue asi!</p>
-    <p>Otro texto motivador a ver con Cesar</p>
-  </mat-card-content>
-</mat-card>
-<!-- </mat-grid-tile> -->
+    <div class="col-md-3 col-sm-12 cardDiv">
+      <mat-card class="example-card">
+        <mat-card-title>TEATRO</mat-card-title>
+        <mat-card-subtitle *ngIf="hits >= 10">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 10">BLOQUEADO</mat-card-subtitle>
+        <mat-card-content *ngIf="hits">
+          <img class="premio" *ngIf="hits >= 10" src="../../assets/3g.png" alt="">
+          <img class="premio" *ngIf="hits < 10" src="../../assets/3p.png" alt="">
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-<!-- <mat-grid-tile colspan="1" rowspan="3"> -->
-<mat-card [ngClass]="hits >= 10 ? 'example-card desbloqueado' : 'example-card bloqueado'">
-  <mat-card-title>TEATRO</mat-card-title>
-  <mat-card-subtitle *ngIf="hits >= 10">DESBLOQUEADO</mat-card-subtitle>
-  <mat-card-subtitle *ngIf="hits < 10">BLOQUEADO</mat-card-subtitle>
-  <mat-card-content>
-    <p>Te estás convirtiendo en un productor experiente. Ya hasta discutes con propiedad.</p>
-    <p>Otro texto motivador a ver con Cesar</p>
-  </mat-card-content>
-</mat-card>
-<!-- </mat-grid-tile> -->
+    <div class="col-md-3 col-sm-12 cardDiv">
+      <mat-card class="example-card">
+        <mat-card-title>ARENA</mat-card-title>
+        <mat-card-subtitle *ngIf="hits >= 20">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 20">BLOQUEADO</mat-card-subtitle>
+        <mat-card-content *ngIf="hits">
+          <img class="premio" *ngIf="hits >= 20" src="../../assets/4g.png" alt="">
+          <img class="premio" *ngIf="hits < 20" src="../../assets/4p.png" alt="">
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-<!-- <mat-grid-tile colspan="1" rowspan="3"> -->
-<mat-card [ngClass]="hits >= 20 ? 'example-card desbloqueado' : 'example-card bloqueado'">
-  <mat-card-title>ARENA</mat-card-title>
-  <mat-card-subtitle *ngIf="hits >= 20">DESBLOQUEADO</mat-card-subtitle>
-  <mat-card-subtitle *ngIf="hits < 20">BLOQUEADO</mat-card-subtitle>
-  <mat-card-content>
-    <p>Nadie puede negar que eres un profesional, y en MixyMaster queremos reconocerlo</p>
-    <p>Otro texto motivador a ver con Cesar</p>
-  </mat-card-content>
-</mat-card>
-<!-- </mat-grid-tile>
-</mat-grid-list> -->
+    <div>
+
+    </div>
+  </div>
+</div>
+
 
 
 <mat-card>
@@ -139,3 +139,5 @@
   </mat-accordion>
 
 </mat-card>
+
+<app-sponsors></app-sponsors>
