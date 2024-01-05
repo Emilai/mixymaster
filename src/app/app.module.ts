@@ -69,6 +69,9 @@ import { HitsComponent } from './components/hits/hits.component';
 import { TutorialsComponent } from './components/tutorials/tutorials.component';
 import { SponsorsComponent } from './components/sponsors/sponsors.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminModalComponent } from './components/admin-modal/admin-modal.component';
+import { FiltroPipe } from './pipes/filtro.pipe';
 
 
 
@@ -94,6 +97,8 @@ import { TermsComponent } from './components/terms/terms.component';
     HitsComponent,
     TutorialsComponent,
     TermsComponent,
+    AdminComponent,
+    AdminModalComponent,
     RegistersuccessComponent,
     VerificacionComponent,
     LoggedComponent,
@@ -105,7 +110,8 @@ import { TermsComponent } from './components/terms/terms.component';
     ModalserviceComponent,
     ModalpaypreprodComponent,
     SponsorsComponent,
-    SafePipe
+    SafePipe,
+    FiltroPipe
   ],
   imports: [
     BrowserModule,

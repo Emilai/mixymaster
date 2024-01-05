@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-header>
+    <mat-form-field appearance="fill">
+      <mat-label>type="Nombre"</mat-label>
+      <input matInput [(ngModel)]="userToAdmin.nombre">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>type="Apellido"</mat-label>
+      <input matInput [(ngModel)]="userToAdmin.apellido">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Creditos</mat-label>
+      <input type="number" matInput [(ngModel)]="userToAdmin.creditos">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Hits</mat-label>
+      <input type="number" matInput [(ngModel)]="userToAdmin.hits">
+    </mat-form-field>
+  </mat-card-header>
+  <mat-card-header>
+    <button mat-raised-button color="accent" (click)="guardarCambios()">
+      <mat-icon>save</mat-icon>
+      Guardar Cambios en el Usuario
+    </button>
+  </mat-card-header>
+  <mat-card-content *ngIf=" productions.length > 0">
+
+    <mat-panel-title class="title">
+      Producciones
+    </mat-panel-title>
+
+    <mat-expansion-panel *ngFor="let prod of productions">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title class="panelTitle">
+          {{prod.nombre}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      {{prod | json}}
+    </mat-expansion-panel>
+  </mat-card-content>
+
+</mat-card>

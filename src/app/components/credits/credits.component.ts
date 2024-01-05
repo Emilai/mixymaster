@@ -5,6 +5,7 @@ import { SuccesspayComponent } from '../successpay/successpay.component';
 import { WrongpayComponent } from '../wrongpay/wrongpay.component';
 import { PreprodService } from 'src/app/services/preprod.service';
 import firebase from 'firebase/compat';
+import { MailnotificationService } from 'src/app/services/mailnotification.service';
 
 declare var paypal: any;
 
@@ -27,7 +28,8 @@ export class CreditsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dialog: MatDialog,
-    private preprodService: PreprodService
+    private preprodService: PreprodService,
+    private mns: MailnotificationService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -84,6 +86,7 @@ export class CreditsComponent implements OnInit {
         await this.authService.createUser(this.userInfo, path, id);
         await this.preprodService.buyedCreditsHistory(order, this.userInfo.id);
         await this.successPay();
+        await this.mailCreditsBuyed(this.userInfo.nombre, this.userInfo.email, price);
         // await this.volver();
       },
       onError: (err: any) => {
@@ -133,6 +136,18 @@ export class CreditsComponent implements OnInit {
       this.spinner = false;
       alert('Codigo erroneo. Por favor intente denuevo');
     }
+  }
+
+  test() {
+    const price = 120;
+    const user = 'emi';
+    const email = 'lainoseguros@gmail.com';
+
+    this.mailCreditsBuyed(user, email, price);
+  }
+
+  mailCreditsBuyed(usuario: any, mail: any, creditos: any) {
+      this.mns.mailCreditsBuyed(usuario, mail, creditos);
   }
 
 }

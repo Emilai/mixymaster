@@ -1,0 +1,9 @@
+.subTitle {
+    color: gray;
+    font-size: 14px;
+}
+
+.example-form{
+    display: flex;
+    justify-content: flex-end;
+}

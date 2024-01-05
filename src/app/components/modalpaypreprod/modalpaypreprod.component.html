@@ -7,7 +7,7 @@
         </span></mat-card-subtitle>
       <mat-card-title>Titulo: {{production.nombre}}</mat-card-title>
       <mat-card-subtitle>Descripción: {{production.descripcion}}</mat-card-subtitle>
-      <mat-card-subtitle>Precio Cotizado: USD {{production.precio}}</mat-card-subtitle>
+      <mat-card-subtitle>Precio Cotizado: {{production.precio}} Créditos</mat-card-subtitle>
     </mat-card-header>
 
     <mat-divider></mat-divider>
@@ -28,7 +28,7 @@
             <mat-divider></mat-divider>
 
             <mat-card-subtitle>Extras</mat-card-subtitle>
-            <p *ngIf="production.data.atmos">Mexcla Inmersiva (Dolby Atmos)</p>
+            <p *ngIf="production.data.atmos">Mezcla Inmersiva (Dolby Atmos)</p>
             <p *ngIf="production.data.capella">Solo vocales</p>
             <p *ngIf="production.data.noMaster">Sin Masterizar</p>
             <p *ngIf="production.data.noVox">Sin Voces</p>

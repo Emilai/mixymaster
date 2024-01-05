@@ -27,6 +27,7 @@ import { RegistererrormailComponent } from '../registererrormail/registererrorma
 import { RegisterduplicatedmailComponent } from '../registerduplicatedmail/registerduplicatedmail.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSliderModule } from '@angular/material/slider';
+import { MailnotificationService } from 'src/app/services/mailnotification.service';
 
 @Component({
   selector: 'app-login',
@@ -83,7 +84,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private mns: MailnotificationService
   ) {
     this.formReg = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -167,6 +169,7 @@ export class LoginComponent implements OnInit {
         apellido: this.formReg.value.apellido,
         email: this.user.user.email,
         grupos: ['General'],
+        admin: false,
         wip: false,
         drop: '',
         creditos: 0,
@@ -188,6 +191,7 @@ export class LoginComponent implements OnInit {
       if (this.user) {
         await this.authService.createUser(usuario, path, id);
         await this.authService.emailVerification();
+        await this.mns.mailToRegisteredUser(usuario.nombre, usuario.email);
         this.router.navigateByUrl('logged', {
           replaceUrl: true
         });

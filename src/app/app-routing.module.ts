@@ -10,6 +10,7 @@ import { CreditsComponent } from './components/credits/credits.component';
 import { HitsComponent } from './components/hits/hits.component';
 import { TutorialsComponent } from './components/tutorials/tutorials.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['logged']);
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'hits', component: HitsComponent,
+    ...canActivate(redirectUnauthorizedToLogin)
+  }, {
+    path: 'admin', component: AdminComponent,
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {

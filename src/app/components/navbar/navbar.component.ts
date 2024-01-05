@@ -141,6 +141,11 @@ export class NavbarComponent implements OnInit {
       replaceUrl: true
     });
   }
+  admin() {
+    this.router.navigateByUrl('admin', {
+      replaceUrl: true
+    });
+  }
 
   test() {
     console.log(this.userInfox);

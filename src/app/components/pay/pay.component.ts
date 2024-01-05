@@ -134,7 +134,7 @@ export class PayComponent implements OnInit {
     public datePipe: DatePipe,
     private firestore: AngularFirestore,
     private authService: AuthService,
-    private mailNS: MailnotificationService
+    private mns: MailnotificationService
     ) {
     this.fecha = this.datePipe.transform(this.myDate, 'yyyy/MM/dd, HH:mm')
      }
@@ -561,6 +561,8 @@ export class PayComponent implements OnInit {
     const prodID = this.produccion.nombre.split(' ').join('-')
     this.produccion.id = prodID;
 
+    await this.mns.mailProduction(this.userInfo.nombre, this.userInfo.email, this.cotizacion.servicio, prodID);
+    await this.mns.mailToMixyProduction(this.userInfo.nombre, this.userInfo.email, this.cotizacion.servicio, prodID, this.produccion.precio);
     await this.preprod.setProductions(userId, this.produccion, prodID);
     await this.preprod.usedCreditsHistory(this.produccion, userId);
     this.router.navigateByUrl('/logged');
@@ -591,11 +593,4 @@ export class PayComponent implements OnInit {
     });
   }
 
-  async mail() {
-
-    const user = this.userInfo.nombre;
-
-    const response = await this.mailNS.mailToUser(user);
-    console.log(response);
-  }
 }

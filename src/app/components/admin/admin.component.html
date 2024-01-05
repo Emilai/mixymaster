@@ -1,0 +1,29 @@
+<mat-card>
+<form class="example-form">
+<mat-form-field class="example-full-width">
+<span matPrefix> </span>
+<input type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "search" >
+<button matSuffix mat-button><mat-icon >search</mat-icon></button>
+</mat-form-field>
+</form>
+</mat-card>
+
+
+
+<mat-grid-list cols="4" rowHeight="30px">
+  <mat-grid-tile class="subTitle">Usuario</mat-grid-tile>
+  <mat-grid-tile class="subTitle">Creditos</mat-grid-tile>
+  <mat-grid-tile class="subTitle">Hits</mat-grid-tile>
+  <mat-grid-tile class="subTitle">Administrar</mat-grid-tile>
+</mat-grid-list>
+
+<mat-divider></mat-divider>
+<mat-grid-list *ngFor="let user of users | filtro:search" cols="4" rowHeight="35px">
+  <mat-grid-tile class="prodData">{{user.email}}</mat-grid-tile>
+  <mat-grid-tile class="prodData">{{user.creditos}}</mat-grid-tile>
+  <mat-grid-tile class="prodData">{{user.hits}}</mat-grid-tile>
+  <!-- <mat-grid-tile class="prodData">{{user.productions}}</mat-grid-tile> -->
+  <mat-grid-tile (click)="openUser(user)">
+    <mat-icon>add_circle</mat-icon>
+  </mat-grid-tile>
+</mat-grid-list>

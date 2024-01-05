@@ -7,6 +7,7 @@ import { Auth } from '@angular/fire/auth';
 import { PreprodService } from 'src/app/services/preprod.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { MailnotificationService } from 'src/app/services/mailnotification.service';
 
 declare var paypal: any;
 
@@ -31,6 +32,7 @@ export class ModalpaypreprodComponent implements OnInit {
     private preprod: PreprodService,
     private authService: AuthService,
     private router: Router,
+    private mns: MailnotificationService,
     public dialogRef: MatDialogRef<ModalpaypreprodComponent>
   ) { }
 
@@ -124,6 +126,8 @@ export class ModalpaypreprodComponent implements OnInit {
     this.production.id = prodID;
 
     await this.preprod.setProductions(userId, this.production, prodID);
+    await this.mns.mailProduction(this.userInfo.nombre, this.userInfo.email, this.production.data.servicio, prodID);
+    await this.mns.mailToMixyProduction(this.userInfo.nombre, this.userInfo.email, this.production.data.servicio, prodID, this.production.precio);
     this.router.navigateByUrl('/logged');
   }
 

@@ -102,7 +102,4 @@ export class LoggedComponent implements OnInit {
     await this.preprod.deletePreProduction(this.auth.currentUser?.uid, prod.id);
   }
 
-  mail() {
-    this.mns.mailToUser(this.userInfo.email);
-  }
 }

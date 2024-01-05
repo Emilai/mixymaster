@@ -25,12 +25,16 @@
 
     <div>
       <p class="pTitle" *ngIf="authService.userInfox">Hola <strong>{{authService.userInfox.nombre}}</strong></p>
-      <p class="paraLitt" *ngIf="authService.userInfox">Tienes <strong>{{authService.userInfox.creditos}}</strong> Créditos</p>
+      <p class="paraLitt" *ngIf="authService.userInfox">Tienes <strong>{{authService.userInfox.creditos}}</strong>
+        Créditos</p>
       <p class="paraLitt" *ngIf="authService.userInfox">Tienes <strong>{{authService.userInfox.hits}}</strong> Hits</p>
-      <!-- <button mat-button class="menu-button" (click)="testing()">
-        <mat-icon>home</mat-icon>
-        <span>Test</span>
-      </button> -->
+
+      <div *ngIf="authService.userInfox">
+        <button *ngIf="authService.userInfox.admin === true" mat-button class="menu-button" (click)="admin()">
+          <mat-icon>settings</mat-icon>
+          <span>Admin Panel</span>
+        </button>
+      </div>
 
       <mat-divider class="divider"></mat-divider>
 
