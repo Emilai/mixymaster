@@ -72,6 +72,7 @@ import { TermsComponent } from './components/terms/terms.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminModalComponent } from './components/admin-modal/admin-modal.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
+import { ModalContactComponent } from './components/modal-contact/modal-contact.component';
 
 
 
@@ -106,6 +107,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     LoginerrorComponent,
     PayComponent,
     ModalproductionComponent,
+    ModalContactComponent,
     MainComponent,
     ModalserviceComponent,
     ModalpaypreprodComponent,

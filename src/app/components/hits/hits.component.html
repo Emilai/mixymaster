@@ -17,22 +17,22 @@
     <div class="col-md-3 col-sm-12">
       <mat-card class="example-card">
         <mat-card-title>PUB</mat-card-title>
-        <mat-card-subtitle *ngIf="hits >= 0">DESBLOQUEADO</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="hits < 0">BLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits >= 1000">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 1000">BLOQUEADO</mat-card-subtitle>
         <mat-card-content *ngIf="hits">
-          <img class="premio" *ngIf="hits >= 0" src="../../assets/1g.png" alt="">
-          <img class="premio" *ngIf="hits < 0" src="../../assets/1p.png" alt="">
+          <img class="premio" *ngIf="hits >= 1000" src="../../assets/1g.png" alt="">
+          <img class="premio" *ngIf="hits < 1000" src="../../assets/1p.png" alt="">
         </mat-card-content>
       </mat-card>
     </div>
     <div class="col-md-3 col-sm-12 cardDiv">
       <mat-card class="example-card">
         <mat-card-title>CLUB</mat-card-title>
-        <mat-card-subtitle *ngIf="hits >= 5">DESBLOQUEADO</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="hits < 5">BLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits >= 2000">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 2000">BLOQUEADO</mat-card-subtitle>
         <mat-card-content *ngIf="hits">
-          <img class="premio" *ngIf="hits >= 5" src="../../assets/2g.png" alt="">
-          <img class="premio" *ngIf="hits < 5" src="../../assets/2p.png" alt="">
+          <img class="premio" *ngIf="hits >= 2000" src="../../assets/2g.png" alt="">
+          <img class="premio" *ngIf="hits < 2000" src="../../assets/2p.png" alt="">
         </mat-card-content>
       </mat-card>
     </div>
@@ -40,11 +40,11 @@
     <div class="col-md-3 col-sm-12 cardDiv">
       <mat-card class="example-card">
         <mat-card-title>TEATRO</mat-card-title>
-        <mat-card-subtitle *ngIf="hits >= 10">DESBLOQUEADO</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="hits < 10">BLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits >= 3000">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 3000">BLOQUEADO</mat-card-subtitle>
         <mat-card-content *ngIf="hits">
-          <img class="premio" *ngIf="hits >= 10" src="../../assets/3g.png" alt="">
-          <img class="premio" *ngIf="hits < 10" src="../../assets/3p.png" alt="">
+          <img class="premio" *ngIf="hits >= 3000" src="../../assets/3g.png" alt="">
+          <img class="premio" *ngIf="hits < 3000" src="../../assets/3p.png" alt="">
         </mat-card-content>
       </mat-card>
     </div>
@@ -52,11 +52,11 @@
     <div class="col-md-3 col-sm-12 cardDiv">
       <mat-card class="example-card">
         <mat-card-title>ARENA</mat-card-title>
-        <mat-card-subtitle *ngIf="hits >= 20">DESBLOQUEADO</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="hits < 20">BLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits >= 4000">DESBLOQUEADO</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="hits < 4000">BLOQUEADO</mat-card-subtitle>
         <mat-card-content *ngIf="hits">
-          <img class="premio" *ngIf="hits >= 20" src="../../assets/4g.png" alt="">
-          <img class="premio" *ngIf="hits < 20" src="../../assets/4p.png" alt="">
+          <img class="premio" *ngIf="hits >= 4000" src="../../assets/4g.png" alt="">
+          <img class="premio" *ngIf="hits < 4000" src="../../assets/4p.png" alt="">
         </mat-card-content>
       </mat-card>
     </div>

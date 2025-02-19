@@ -1,0 +1,14 @@
+.containerGral {
+  text-align: center;
+  padding: 20px;
+}
+
+.btnDiv {
+  text-align: center;
+  display: inline-block;
+}
+
+.btn {
+  margin: auto;
+  width: 13rem;
+}

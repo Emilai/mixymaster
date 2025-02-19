@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -17,11 +19,19 @@ export class HowitworksComponent implements OnInit {
   });
   isLinear = false;
 
-  constructor(private formBuilder: FormBuilder) {  }
+  constructor(private formBuilder: FormBuilder,
+    private dialog: MatDialog) {  }
 
-  ngOnInit(): void {
-
+  ngOnInit(
+    
+  ): void {
 
   }
 
+  loginModal(): void {
+    this.dialog.open(LoginComponent, {
+      height: '800px',
+      width: '600px',
+    });
+  }
 }
